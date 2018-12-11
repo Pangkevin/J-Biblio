@@ -1,2 +1,11 @@
 # J-Biblio
 Logiciel d’amélioration collaborative de notices bibliographiques
+== Contexte
+Une notice bibliographique fournit des données sur un ouvrage ou une publication (livre, article scientifique, etc.) telles que ses auteurs, son éditeur, etc.
+Les auteurs scientifiques ont besoin de méta-données correctes pour citer adéquatement leurs sources. Exemples http://proceedings.mlr.press/v70/[ici].
+
+Ces informations sont souvent entachées d’erreurs ou difficilement exploitables : nom et prénom de l’auteur inversés ou mal orthographiés, problème des homonymes, etc. Les informations fournies par Amazon et par Google books, par exemple, peuvent ne pas correspondre. Les bibliothécaires fournissent un travail souvent de meilleure qualité, mais néanmoins imparfait et inévitablement incomplet.
+
+Bien que de nombreuses bases de données accessibles publiquement existent pour récupérer les méta-données, leur qualité nécessairement imparfaite conduit les chercheurs à passer du temps à se constituer une base de données (à peu près) à jour après vérification des données. Ce travail est dupliqué par chacun. L’objectif de ce projet est de fournir une plate-forme permettant de partager ce travail, et d’améliorer les méta-données, en distinguant les homonymes par exemple.
+
+== User stories : 

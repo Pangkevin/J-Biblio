@@ -2,7 +2,7 @@
 
 Logiciel d’amélioration collaborative de notices bibliographiques
 
-== Contexte :
+== Contexte
 Une notice bibliographique fournit des données sur un ouvrage ou une publication (livre, article scientifique, etc.) telles que ses auteurs, son éditeur, etc.
 Les auteurs scientifiques ont besoin de méta-données correctes pour citer adéquatement leurs sources. Exemples http://proceedings.mlr.press/v70/[ici].
 
@@ -10,7 +10,7 @@ Ces informations sont souvent entachées d’erreurs ou difficilement exploitabl
 
 Bien que de nombreuses bases de données accessibles publiquement existent pour récupérer les méta-données, leur qualité nécessairement imparfaite conduit les chercheurs à passer du temps à se constituer une base de données (à peu près) à jour après vérification des données. Ce travail est dupliqué par chacun. L’objectif de ce projet est de fournir une plate-forme permettant de partager ce travail, et d’améliorer les méta-données, en distinguant les homonymes par exemple.
 
-== Projet : 
+== Projet
 
 Le projet a pour but de développer une application orientée WEB afin de partager/récupérer des notices bibliographiques de qualité. Cette application a également pour de but de permettre aux scientifiques de travailler ensemble.
 
@@ -24,8 +24,8 @@ Ce modèle est composé de trois groupe d’entités qui identifient une oeuvre.
 
 image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-entities-and-relations.svg/1024px-FRBR-Group-2-entities-and-relations.svg.png[scaledwidth="50%",align="center",width=320,height=240]
 
-== User stories backlog : 
-=== Epic 1: Implémenter la structure du modèle FRBR
+== User stories backlog 
+==== Epic 1: Implémenter la structure du modèle FRBR
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
@@ -34,7 +34,7 @@ image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-en
 |US1.003  |Implémentation de la structure Personne  |3  |1
 |======================
 
-=== Epic 2: Récupération de données (Import)
+==== Epic 2: Récupération de données (Import)
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
@@ -43,14 +43,14 @@ image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-en
 |US2.003  |Importer les objets du modèle à partir de format MARC21  |  |
 |======================
 
-=== Epic 3: Représentation de données (Export)
+==== Epic 3: Représentation de données (Export)
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
 |US3.001  |Exporter des objets sous format JSON  |6  |1
 |======================
 
-=== Epic 4: Implémentation des servlets
+==== Epic 4: Implémentation des servlets
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
@@ -62,7 +62,7 @@ image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-en
 |US4.006  |Transformer certains servlets pour en faire des services SOAP |  |
 |======================
 
-=== Epic 5: Implémentation des clients
+==== Epic 5: Implémentation des clients
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
@@ -70,7 +70,7 @@ image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-en
 |US5.002  |Transformer les clients pour en faire des clients SOAP |  |
 |======================
 
-=== Epic 6: Base de données
+==== Epic 6: Base de données
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
@@ -78,14 +78,14 @@ image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-en
 |US6.002  |Implémenter des entités JPA et les méthodes permettant d’écrire et de lire depuis la BD les Manifestation, Item et Person |  |
 |======================
 
-=== Epic 7: Déploiement du serveur en-ligne
+==== Epic 7: Déploiement du serveur en-ligne
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
 |US7.001  |Faire tourner le serveur en ligne grâce au service d’IBM  |  |
 |======================
 
-=== Epic 8: Refactoring
+==== Epic 8: Refactoring
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point

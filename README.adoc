@@ -10,4 +10,17 @@ Ces informations sont souvent entachées d’erreurs ou difficilement exploitabl
 
 Bien que de nombreuses bases de données accessibles publiquement existent pour récupérer les méta-données, leur qualité nécessairement imparfaite conduit les chercheurs à passer du temps à se constituer une base de données (à peu près) à jour après vérification des données. Ce travail est dupliqué par chacun. L’objectif de ce projet est de fournir une plate-forme permettant de partager ce travail, et d’améliorer les méta-données, en distinguant les homonymes par exemple.
 
+== Projet : 
+
+Le projet a pour but de développer une application orientée WEB afin de partager/récupérer des notices bibliographiques de qualité. Cette application a également pour de but de permettre aux scientifiques de travailler ensemble.
+
+Le travails des scientifiques permettra d’éviter que d’autres scientifiques fassent le même travail de recherche d’information, de contrôle qualité de l’information et de mise en forme de la notice.
+
+== Le modèle FRBR 
+
+FRBR est une modélisation conceptuelle standardisée des informations contenues dans les notices bibliographiques. 
+
+Ce modèle est composé de trois groupe d’entités qui identifient une oeuvre. On s'intéresse dans le cadre de ce projet de fournir une application client-serveur qui contient une implémentation des entités de deux premiers groupes (voir la figure ci-dessus) avec les fonctionnalités de la base qui permettent de créer des données de notices, importer et exporter ces données sous des différents formats et stocker les données dans une BD.
+
+
 == User stories : 

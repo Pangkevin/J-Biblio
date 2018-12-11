@@ -1,6 +1,8 @@
 # J-Biblio
+
 Logiciel d’amélioration collaborative de notices bibliographiques
-== Contexte
+
+== Contexte :
 Une notice bibliographique fournit des données sur un ouvrage ou une publication (livre, article scientifique, etc.) telles que ses auteurs, son éditeur, etc.
 Les auteurs scientifiques ont besoin de méta-données correctes pour citer adéquatement leurs sources. Exemples http://proceedings.mlr.press/v70/[ici].
 

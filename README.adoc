@@ -1,6 +1,6 @@
 # J-Biblio
 
-Logiciel d’amélioration collaborative de notices bibliographiques
+Logiciel d’amélioration collaborative de notices bibliographiques 
 
 == Contexte
 Une notice bibliographique fournit des données sur un ouvrage ou une publication (livre, article scientifique, etc.) telles que ses auteurs, son éditeur, etc.

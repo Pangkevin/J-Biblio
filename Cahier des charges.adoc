@@ -1,8 +1,10 @@
 # J-Biblio
-
-Logiciel d’amélioration collaborative de notices bibliographiques 
+:toc:
+:sectanchors:
 
 == Contexte
+Logiciel d’amélioration collaborative de notices bibliographiques 
+
 Une notice bibliographique fournit des données sur un ouvrage ou une publication (livre, article scientifique, etc.) telles que ses auteurs, son éditeur, etc.
 Les auteurs scientifiques ont besoin de méta-données correctes pour citer adéquatement leurs sources. Exemples http://proceedings.mlr.press/v70/[ici].
 
@@ -94,4 +96,21 @@ Isolation des parties du projet (client/serveur)  |  |
 |======================
 
 * La capacité de l’équipe dans chaque itération est 5 SPs.
-* A la fin de la première itération les stories suivantes seront livrées: (US1.001, US1.002, US1,003, US4.001, US4.002, US3.001)
+
+== Les Itérations
+=== Itération 1
+A la fin de la première itération les stories suivantes seront livrées: 
+
+US0.001: [tout le groupe] Une phase d'analyse du modèle FRBR 
+
+US1.001: [assigné à Caroline - 1 SP] Implémentation des classes de la partie abstraite du modèle FRBR (Work, Expression).
+
+US1.002: [assigné à Vima - 1 SP] Implémentation des classes de la partie concrete du modèle FRBR (Manifestation, Item).
+
+US1.003: [assigné à Kévin - 1 SP] Implémentation des classes de la partie Person du modèle FRBR.
+
+US4.001: [assigné à Guillaume - 0.5 SP] Servlet Get pour récupérer les objets du modèle à travers les requêtes HTTP
+
+US4.002: [assigné à Guillaume - 0.5 SP] Servlet Set pour assigner des valeurs aux attributs des objets du modèle à travers les requêtes HTTP
+
+US3.001: [assigné à Juan - 1 SP] Exporter les objets du modèle sous format JSON

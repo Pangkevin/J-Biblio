@@ -45,6 +45,14 @@
 			<artifactId>ical4j</artifactId>
 			<version>3.0.2</version>
 		</dependency>
+
+		<!-- It allows to transform JSON to Object and Object to Json -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.8</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>myapp</finalName>

@@ -1,8 +1,9 @@
-package BasicEntitiesTest;
+package basicEntitiesTest;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.BasicEntities.Item;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Item;
 
 public class ItemTest {
 	@Test

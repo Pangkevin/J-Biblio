@@ -53,5 +53,32 @@ public class ItemJsonServlet extends HttpServlet {
 			resp.setStatus(404);
 		}
 }
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idItem = request.getParameter("412");
+        String itemIdentifier = request.getParameter("A12S3");
+        String fingerprint = request.getParameter("DS21T47DT");
+        
 
-}
+        try {
+        	Item item = new Item(Integer.parseInt(idItem), itemIdentifier, fingerprint);
+        	LOGGER.info("Item idItem : " + idItem);
+        	LOGGER.info("Item itemIdentifier : " + itemIdentifier);
+        	LOGGER.info("Item fingerprint : " + fingerprint);
+        	
+			response.setStatus(200);
+			response.getWriter().println("The object is successfully insert");
+        }
+        
+        catch (NumberFormatException e) {
+
+			LOGGER.warning("The insert failed");
+			response.setStatus(400);
+			response.getWriter().println("The insert failed");
+			
+      
+    }
+
+
+	}
+	}

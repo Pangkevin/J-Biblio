@@ -44,7 +44,7 @@ public class ItemJsonServlet extends HttpServlet {
 		 * Affichage dans les logs de la console
 		 */
 
-		LOGGER.info("Affichage sur l'écran : this.sayHello() ");
+		LOGGER.info(" Display object in JSON format ");
 		
 		}catch(JsonGenerationException  e) {
 			/**

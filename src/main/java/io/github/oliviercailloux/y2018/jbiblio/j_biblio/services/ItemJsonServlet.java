@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Item;
+
 @SuppressWarnings("serial")
 @WebServlet("json/get")
 public class ItemJsonServlet extends HttpServlet {
@@ -27,31 +28,41 @@ public class ItemJsonServlet extends HttpServlet {
 		resp.setContentType("application/json");
 		resp.setLocale(Locale.ENGLISH);
 		try {
+			/**
+			 * This mapper provides functionality for converting between Java objects and
+			 * matching JSON constructs
+			 */
 			ObjectMapper mapper = new ObjectMapper();
 			Item item = new Item(412, "A12S3", "DS21T47DT");
+			/**
+			 * transform a object item to a Json format in string format
+			 */
 			String jsonItem = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(item);
 			/**
-			 * Page traité avec succès
+			 * Page successfully processed
 			 */
 
-		resp.setStatus(200);
-		/**
-		 * 
-		 * Envoie message au client
-		 */
-		resp.getWriter().println(jsonItem);
-		/**
-		 * Affichage dans les logs de la console
-		 */
-
-		LOGGER.info(" Display object in JSON format ");
-		
-		}catch(JsonGenerationException  e) {
+			resp.setStatus(200);
 			/**
-			 * Page traité avec succès
+			 * 
+			 * Send message to custumer
 			 */
+			resp.getWriter().println(jsonItem);
+			/**
+			 * display logs in console
+			 */
+
+			LOGGER.info(" Display object in JSON format " + jsonItem);
+
+		} catch (JsonGenerationException e) {
+			/**
+			 * Send error status
+			 */
+			LOGGER.warning(" Display object in JSON format " + e.toString());
+
 			resp.setStatus(404);
 		}
+
 }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,6 +70,8 @@ public class ItemJsonServlet extends HttpServlet {
         String itemIdentifier = request.getParameter("A12S3");
         String fingerprint = request.getParameter("DS21T47DT");
         
+
+
 
         try {
         	Item item = new Item(Integer.parseInt(idItem), itemIdentifier, fingerprint);

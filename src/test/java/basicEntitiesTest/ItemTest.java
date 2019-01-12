@@ -10,7 +10,6 @@ public class ItemTest {
 	void createItem() {
 		// Testing Item Constructor
 		Item item = new Item(412, "A12S3", "DS21T47DT");
-
 		assertEquals(item.getIdItem(), 412);
 		assertEquals(item.getItemIdentifier(), "A12S3");
 		assertEquals(item.getFingerprint(), "DS21T47DT");

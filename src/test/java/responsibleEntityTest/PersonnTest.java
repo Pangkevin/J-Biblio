@@ -51,6 +51,7 @@ class PersonnTest {
 			assertEquals(dateFormat.format(person.getDeathdate().getDate()), "1616-04-23");
 		} catch (ParseException e) {
 
+			e.printStackTrace();
 			assertFalse(true);
 		}
 

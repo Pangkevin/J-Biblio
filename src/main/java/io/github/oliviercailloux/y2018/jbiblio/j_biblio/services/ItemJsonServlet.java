@@ -76,6 +76,8 @@ public class ItemJsonServlet extends HttpServlet {
 
 			}
 	}
+	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)  throws ServletException, IOException
 	{
 		String idItem = req.getParameter("idItem");
@@ -93,8 +95,9 @@ public class ItemJsonServlet extends HttpServlet {
 		}
 
 		catch (NumberFormatException e) {
-
+			
 			LOGGER.warning("The insert failed");
+			LOGGER.warning(" Error  " + e.toString());
 			resp.setStatus(400);
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "insert failed.");
 		}

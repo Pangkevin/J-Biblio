@@ -24,7 +24,7 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Item;
 class ItemJsonServletTest extends Mockito {
 
 	@Test
-	public void testServlet() {
+	public void testDoGet() {
 		try {
 			/*
 			 * Create the mock object of HttpServletRequest and HttpServletResponse
@@ -62,7 +62,6 @@ class ItemJsonServletTest extends Mockito {
 
 	@Test
 	public void testDoPost() throws Exception {
-		try {
 			/*
 			 * Create the mock object of HttpServletRequest and HttpServletResponse
 			 */
@@ -78,7 +77,7 @@ class ItemJsonServletTest extends Mockito {
 			when(request.getParameter("idItem")).thenReturn("412");
 			when(request.getParameter("itemIdentifier")).thenReturn("A12S3");
 			when(request.getParameter("fingerprint")).thenReturn("DS21T47DT");
-
+		
 			when(response.getWriter()).thenReturn(writer);
 
 			new ItemJsonServlet().doPost(request, response);
@@ -87,10 +86,6 @@ class ItemJsonServletTest extends Mockito {
 			 * Last step to test if the output of message error is correct
 			 */
 			assertTrue(stringWriter.toString().contains("The object is successfully insert"));
-		} catch (IOException e) {
-			e.getStackTrace();
-		} catch (ServletException e) {
-			e.printStackTrace();
-		}
+
 	}
 }

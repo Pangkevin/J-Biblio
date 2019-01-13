@@ -78,9 +78,9 @@ public class ItemJsonServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)  throws ServletException, IOException
 	{
-		String idItem = req.getParameter("412");
-		String itemIdentifier = req.getParameter("A12S3");
-		String fingerprint = req.getParameter("DS21T47DT");
+		String idItem = req.getParameter("idItem");
+		String itemIdentifier = req.getParameter("itemIdentifier");
+		String fingerprint = req.getParameter("fingerprint");
 
 		try {
 			Item item = new Item(Integer.parseInt(idItem), itemIdentifier, fingerprint);
@@ -96,8 +96,7 @@ public class ItemJsonServlet extends HttpServlet {
 
 			LOGGER.warning("The insert failed");
 			resp.setStatus(400);
-			resp.getWriter().println("The insert failed");
-
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "insert failed.");
 		}
 
 	}

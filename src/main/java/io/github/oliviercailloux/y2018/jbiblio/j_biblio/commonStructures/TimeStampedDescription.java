@@ -1,14 +1,15 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures;
 
+import java.time.Instant;
 import java.util.Date;
 
-public class DateStructure {
+public class TimeStampedDescription {
 
 	private String description;
-	private Date date;
+	private Instant date;
 
-	public DateStructure(String description, Date date) {
-		super();
+	public TimeStampedDescription(String description, Instant date) {
+
 		this.description = description;
 		this.date = date;
 	}
@@ -21,11 +22,11 @@ public class DateStructure {
 		this.description = description;
 	}
 
-	public Date getDate() {
+	public Instant getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Instant date) {
 		this.date = date;
 	}
 

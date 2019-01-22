@@ -3,7 +3,7 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.SubType_E
 import java.util.Collection;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Expression;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.DateStructure;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.TimeStampedDescription;
 /**
  * Specific class of Expression
  *
@@ -15,7 +15,7 @@ public class SerialExpression extends Expression {
 	private String expectedFrequencyOfIssue; 
 
 	public SerialExpression(int idWork, int idExpression, String formOfExpression,
-			Collection<DateStructure> dateOfExpression, String languageOfExpression) {
+			Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression) {
 		super(idWork, idExpression, formOfExpression, dateOfExpression, languageOfExpression);
 
 	}

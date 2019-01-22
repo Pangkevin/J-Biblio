@@ -1,7 +1,7 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities;
 
 import java.util.Collection;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.DateStructure;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.TimeStampedDescription;
 /**
  * 
  * @see CartographicWork, MusicalWork
@@ -13,7 +13,7 @@ public class Work {
 	
 	private Collection<String> titleOfWork;
 	private String formOfWork; //class to which the work belongs (novel play etc.)
-	private Collection<DateStructure> dateOfWork; //normally the year
+	private Collection<TimeStampedDescription> dateOfWork; //normally the year
 	private Collection<String> otherDistinguishingCharacteristic;
 	private boolean intendedTermination; 
 	private Collection<String> intendedAudience;
@@ -50,10 +50,10 @@ public class Work {
 	public void setFormOfWork(String formOfWork) {
 		this.formOfWork = formOfWork;
 	}
-	public Collection<DateStructure> getDateOfWork() {
+	public Collection<TimeStampedDescription> getDateOfWork() {
 		return dateOfWork;
 	}
-	public void setDateOfWork(Collection<DateStructure> dateOfWork) {
+	public void setDateOfWork(Collection<TimeStampedDescription> dateOfWork) {
 		this.dateOfWork = dateOfWork;
 	}
 	public Collection<String> getOtherDistinguishingCharacteristic() {

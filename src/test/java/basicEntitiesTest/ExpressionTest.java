@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Work;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.DateStructure;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.TimeStampedDescription;
 
 
 public class ExpressionTest {
@@ -20,9 +20,9 @@ public class ExpressionTest {
 		titleOfWork.add("Romeo and Juliet");
 		String formOfWork = "play";
 		
-		Collection<DateStructure> collectionDateStructure = new ArrayList<DateStructure>();
+		Collection<TimeStampedDescription> collectionDateStructure = new ArrayList<TimeStampedDescription>();
 		Date date = new Date(1598,1,1);
-		DateStructure dateStructure = new DateStructure("1598",date);
+		TimeStampedDescription dateStructure = new TimeStampedDescription("1598",date);
 		collectionDateStructure.add(dateStructure);
 		Work work = new Work(123,titleOfWork, formOfWork);
 		

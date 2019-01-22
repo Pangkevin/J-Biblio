@@ -1,6 +1,6 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleEntity;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.DateStructure;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.TimeStampedDescription;
 
 /**
  * data transfer object or DTO of Person
@@ -12,11 +12,11 @@ public class Person extends AbstractResponsibleEntity {
 	private String middleName;
 	private String lastName;
 	private String personTitle;
-	private DateStructure birthdate;
-	private DateStructure deathdate;
+	private TimeStampedDescription birthdate;
+	private TimeStampedDescription deathdate;
 
 	public Person(String nameAuthority, String firstName, String middleName, String lastName, String personTitle,
-			DateStructure birthdate, DateStructure deathdate) {
+			TimeStampedDescription birthdate, TimeStampedDescription deathdate) {
 
 		this.nameAuthority = nameAuthority;
 		this.firstName = firstName;
@@ -60,19 +60,19 @@ public class Person extends AbstractResponsibleEntity {
 		this.personTitle = personTitle;
 	}
 
-	public DateStructure getBirthdate() {
+	public TimeStampedDescription getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(DateStructure birthdate) {
+	public void setBirthdate(TimeStampedDescription birthdate) {
 		this.birthdate = birthdate;
 	}
 
-	public DateStructure getDeathdate() {
+	public TimeStampedDescription getDeathdate() {
 		return deathdate;
 	}
 
-	public void setDeathdate(DateStructure deathdate) {
+	public void setDeathdate(TimeStampedDescription deathdate) {
 		this.deathdate = deathdate;
 	}
 

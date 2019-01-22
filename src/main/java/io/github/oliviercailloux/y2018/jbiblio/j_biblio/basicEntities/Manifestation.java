@@ -2,7 +2,7 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities;
 
 import java.util.Collection;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.DateStructure;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.TimeStampedDescription;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleEntity.*;
 
 public class Manifestation {
@@ -13,7 +13,7 @@ public class Manifestation {
 	private String editionDesignation;
 	private Collection<Integer> placeOfPublicationDistribution;
 	private Collection<IResponsibleEntity> publisherDistributer;
-	private Collection<DateStructure> dateOfPublicationDistribution;
+	private Collection<TimeStampedDescription> dateOfPublicationDistribution;
 	private Collection<IResponsibleEntity> fabricatorManufacturer;
 	private Collection<String> seriesStatement;
 	private Collection<String> formOfCarrier;
@@ -109,11 +109,11 @@ public class Manifestation {
 		this.publisherDistributer = publisherDistributer;
 	}
 
-	public Collection<DateStructure> getDateOfPublicationDistribution() {
+	public Collection<TimeStampedDescription> getDateOfPublicationDistribution() {
 		return dateOfPublicationDistribution;
 	}
 
-	public void setDateOfPublicationDistribution(Collection<DateStructure> dateOfPublicationDistribution) {
+	public void setDateOfPublicationDistribution(Collection<TimeStampedDescription> dateOfPublicationDistribution) {
 		this.dateOfPublicationDistribution = dateOfPublicationDistribution;
 	}
 

@@ -1,4 +1,4 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.BasicEntities;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities;
 
 public class Item {
 	private int idItem;

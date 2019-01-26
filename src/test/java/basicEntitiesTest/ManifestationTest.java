@@ -1,8 +1,10 @@
-package BasicEntitiesTest;
+package basicEntitiesTest;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.BasicEntities.Manifestation;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Manifestation;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;

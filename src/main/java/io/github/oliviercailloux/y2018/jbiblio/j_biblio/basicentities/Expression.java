@@ -1,8 +1,8 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
 import java.util.Collection;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.TimeStampedDescription;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 /**
  * 
  * @see ImageExpression, MusicalExpression, SerialExpresison

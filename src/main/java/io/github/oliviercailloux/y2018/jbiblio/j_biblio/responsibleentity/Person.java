@@ -1,6 +1,6 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.TimeStampedDescription;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 
 /**
  * data transfer object or DTO of Person

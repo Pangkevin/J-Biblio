@@ -1,7 +1,6 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures;
 
 import java.time.Instant;
-import java.util.Date;
 
 public class TimeStampedDescription {
 

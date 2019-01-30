@@ -2,16 +2,13 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentitytest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.TimeStampedDescription;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person;
 
 class PersonnTest {

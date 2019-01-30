@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.logging.Logger;
-import java.util.ArrayList;
-import java.util.Collection;
 import javax.json.stream.JsonGenerationException;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Item;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
 
 @SuppressWarnings("serial")
 @WebServlet("json/get")
@@ -31,7 +28,7 @@ public class ItemJsonServlet extends HttpServlet {
 		resp.setContentType("application/json");
 		resp.setLocale(Locale.ENGLISH);
 
-		Item item = new Item(412, "A12S3", "DS21T47DT");
+		Item item = new Item(412, 412, "A12S3", "DS21T47DT", "RES");
 
 		try {
 			Jsonb jsonb = JsonbBuilder.create();
@@ -58,14 +55,19 @@ public class ItemJsonServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String idItem = req.getParameter("idItem");
+		String idManifestation = req.getParameter("idManifestation");
 		String itemIdentifier = req.getParameter("itemIdentifier");
 		String fingerprint = req.getParameter("fingerprint");
+		String provenanceOfTheItem = req.getParameter("provenanceOfTheItem");
 
 		try {
-			Item item = new Item(Integer.parseInt(idItem), itemIdentifier, fingerprint);
+			Item item = new Item(Integer.parseInt(idItem), Integer.parseInt(idManifestation), itemIdentifier,
+					fingerprint, provenanceOfTheItem);
 			LOGGER.info("Item idItem : " + item.getIdItem());
+			LOGGER.info("Item idManifestation : " + item.getIdManifestation());
 			LOGGER.info("Item itemIdentifier : " + item.getItemIdentifier());
 			LOGGER.info("Item fingerprint : " + item.getFingerprint());
+			LOGGER.info("Item provenanceOfTheItem : " + item.getProvenanceOfTheItem());
 
 			resp.setStatus(200);
 			resp.getWriter().println("The object is successfully insert");

@@ -1,6 +1,6 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleEntity;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 
-public class AbstractResponsibleEntity implements IResponsibleEntity {
+public class AbstractResponsibleEntity {
 
 	/**
 	 * nameAuthory allows to uniquely identify a responsibleEntity

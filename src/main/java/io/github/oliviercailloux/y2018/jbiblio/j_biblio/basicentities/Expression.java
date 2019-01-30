@@ -1,8 +1,8 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
 import java.util.Collection;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonStructures.DateStructure;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 /**
  * 
  * @see ImageExpression, MusicalExpression, SerialExpresison
@@ -15,7 +15,7 @@ public class Expression {
 	
 	private Collection<String> titleOfExpression;
 	private String formOfExpression;
-	private Collection<DateStructure> dateOfExpression;
+	private Collection<TimeStampedDescription> dateOfExpression;
 	private String languageOfExpression;
 	private Collection<String> otherDistinguishingCharacteristic;
 	private String extensibilityOfExpression;
@@ -26,7 +26,7 @@ public class Expression {
 	private String criticalResponseToTheExpression;
 	private String useRestrictionsOnTheExpression;
 	
-	public Expression(int idWork, int idExpression, String formOfExpression, Collection<DateStructure> dateOfExpression, String languageOfExpression){
+	public Expression(int idWork, int idExpression, String formOfExpression, Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression){
 		this.setIdWork(idWork);
 		this.idExpression = idExpression;
 		this.formOfExpression = formOfExpression;
@@ -66,10 +66,10 @@ public class Expression {
 	public void setFormOfExpression(String formOfExpression) {
 		this.formOfExpression = formOfExpression;
 	}
-	public Collection<DateStructure> getDateOfExpression() {
+	public Collection<TimeStampedDescription> getDateOfExpression() {
 		return dateOfExpression;
 	}
-	public void setDateOfExpression(Collection<DateStructure> dateOfExpression) {
+	public void setDateOfExpression(Collection<TimeStampedDescription> dateOfExpression) {
 		this.dateOfExpression = dateOfExpression;
 	}
 	public String getLanguageOfExpression() {

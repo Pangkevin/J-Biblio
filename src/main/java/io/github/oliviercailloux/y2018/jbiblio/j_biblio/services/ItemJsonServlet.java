@@ -16,11 +16,10 @@ import javax.json.bind.JsonbBuilder;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
 
 @SuppressWarnings("serial")
-@WebServlet("json/get")
+@WebServlet("item/get")
 public class ItemJsonServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger.getLogger(ItemJsonServlet.class.getCanonicalName());
 
-	@SuppressWarnings("static-access")
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -36,7 +35,7 @@ public class ItemJsonServlet extends HttpServlet {
 
 			String jsonItem = jsonb.toJson(item);
 			// Page successfully processed
-			resp.setStatus(200);
+			resp.setStatus(HttpServletResponse.SC_OK);
 			// Send message to customer
 			resp.getWriter().println(jsonItem);
 			// display logs in console
@@ -69,7 +68,7 @@ public class ItemJsonServlet extends HttpServlet {
 			LOGGER.info("Item fingerprint : " + item.getFingerprint());
 			LOGGER.info("Item provenanceOfTheItem : " + item.getProvenanceOfTheItem());
 
-			resp.setStatus(200);
+			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println("The object is successfully insert");
 		}
 
@@ -77,7 +76,7 @@ public class ItemJsonServlet extends HttpServlet {
 
 			LOGGER.warning("The insert failed");
 			LOGGER.warning(" Error  " + e.toString());
-			resp.setStatus(400);
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "insert failed.");
 		}
 

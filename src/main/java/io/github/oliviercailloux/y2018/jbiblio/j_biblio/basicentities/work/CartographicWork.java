@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.Collection;
 /**
  * Type of work
+ * Abandoned - Will not be developped
  *
  */
 public class CartographicWork extends Work {

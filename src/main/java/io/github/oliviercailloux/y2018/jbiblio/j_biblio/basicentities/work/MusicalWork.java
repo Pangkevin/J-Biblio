@@ -3,7 +3,7 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 import java.util.Collection;
 /**
  * Type of Work
- *
+ * Abandoned - Will not be developped
  */
 public class MusicalWork extends Work {
 	

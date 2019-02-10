@@ -5,7 +5,7 @@ import java.util.Collection;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 /**
  * Specific class of Expression
- * 
+ * Abandoned - Will not be developped
  *
  */
 public class ImageExpression extends Expression{

@@ -1,30 +1,60 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
 import java.util.Collection;
+import java.util.Objects;
+
+import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
+
 /**
  * 
- * @see ImageExpression, MusicalExpression, SerialExpresison
  */
 public class Expression {
 	
+	/**
+	 * Not <code>null</code>.
+	 */
 	private int idWork;
+	/**
+	 * Not <code>null</code>.
+	 */
 	private int idExpression;
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<Integer> idManifestations;
-	
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<String> titleOfExpression;
+	/**
+	 * Not <code>null</code>.
+	 */
 	private String formOfExpression;
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<TimeStampedDescription> dateOfExpression;
+	/**
+	 * Not <code>null</code>.
+	 */
 	private String languageOfExpression;
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<String> otherDistinguishingCharacteristic;
+	
+	/*
+	 * Attributs qui ne seront pas développés
 	private String extensibilityOfExpression;
 	private String revisabilityOfExpression;
 	private Integer extentOfTheExpression;
 	private String summarizationOfContent;
 	private String contextForTheExpression;
 	private String criticalResponseToTheExpression;
-	private String useRestrictionsOnTheExpression;
+	private String useRestrictionsOnTheExpression;*/
+	
 	
 	public Expression(int idWork, int idExpression, String formOfExpression, Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression){
 		this.setIdWork(idWork);
@@ -33,103 +63,106 @@ public class Expression {
 		this.dateOfExpression = dateOfExpression;
 		this.languageOfExpression = languageOfExpression;
 	}
-	
+
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public int getIdWork() {
 		return idWork;
 	}
+
 
 	public void setIdWork(int idWork) {
 		this.idWork = idWork;
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public int getIdExpression() {
 		return idExpression;
 	}
+
+
 	public void setIdExpression(int idExpression) {
 		this.idExpression = idExpression;
 	}
+
+
 	public Collection<Integer> getIdManifestations() {
 		return idManifestations;
 	}
+
+
 	public void setIdManifestations(Collection<Integer> idManifestations) {
 		this.idManifestations = idManifestations;
 	}
+
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<String> getTitleOfExpression() {
 		return titleOfExpression;
 	}
+
+
 	public void setTitleOfExpression(Collection<String> titleOfExpression) {
 		this.titleOfExpression = titleOfExpression;
 	}
+
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public String getFormOfExpression() {
 		return formOfExpression;
 	}
+
+
 	public void setFormOfExpression(String formOfExpression) {
 		this.formOfExpression = formOfExpression;
 	}
+
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<TimeStampedDescription> getDateOfExpression() {
 		return dateOfExpression;
 	}
+
+
 	public void setDateOfExpression(Collection<TimeStampedDescription> dateOfExpression) {
 		this.dateOfExpression = dateOfExpression;
 	}
+
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public String getLanguageOfExpression() {
 		return languageOfExpression;
 	}
+
+	 /** 
+	 * @param languageOfExpression
+	 *            if <code>null</code>, will be converted to an empty string.
+	 */
 	public void setLanguageOfExpression(String languageOfExpression) {
-		this.languageOfExpression = languageOfExpression;
+		this.languageOfExpression =  Strings.nullToEmpty(languageOfExpression);
 	}
+
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<String> getOtherDistinguishingCharacteristic() {
 		return otherDistinguishingCharacteristic;
 	}
+	/**
+	 * @param otherDistinguishingCharacteristic
+	 *            not <code>null</code>.
+	 */
 	public void setOtherDistinguishingCharacteristic(Collection<String> otherDistinguishingCharacteristic) {
-		this.otherDistinguishingCharacteristic = otherDistinguishingCharacteristic;
-	}
-	public String getExtensibilityOfExpression() {
-		return extensibilityOfExpression;
-	}
-	public void setExtensibilityOfExpression(String extensibilityOfExpression) {
-		this.extensibilityOfExpression = extensibilityOfExpression;
-	}
-	public String getRevisabilityOfExpression() {
-		return revisabilityOfExpression;
-	}
-	public void setRevisabilityOfExpression(String revisabilityOfExpression) {
-		this.revisabilityOfExpression = revisabilityOfExpression;
-	}
-	public Integer getExtentOfTheExpression() {
-		return extentOfTheExpression;
-	}
-	public void setExtentOfTheExpression(Integer extentOfTheExpression) {
-		this.extentOfTheExpression = extentOfTheExpression;
-	}
-	public String getSummarizationOfContent() {
-		return summarizationOfContent;
-	}
-	public void setSummarizationOfContent(String summarizationOfContent) {
-		this.summarizationOfContent = summarizationOfContent;
-	}
-	public String getContextForTheExpression() {
-		return contextForTheExpression;
-	}
-	public void setContextForTheExpression(String contextForTheExpression) {
-		this.contextForTheExpression = contextForTheExpression;
-	}
-	public String getCriticalResponseToTheExpression() {
-		return criticalResponseToTheExpression;
-	}
-	public void setCriticalResponseToTheExpression(String criticalResponseToTheExpression) {
-		this.criticalResponseToTheExpression = criticalResponseToTheExpression;
-	}
-	public String getUseRestrictionsOnTheExpression() {
-		return useRestrictionsOnTheExpression;
-	}
-	public void setUseRestrictionsOnTheExpression(String useRestrictionsOnTheExpression) {
-		this.useRestrictionsOnTheExpression = useRestrictionsOnTheExpression;
+		this.otherDistinguishingCharacteristic = Objects.requireNonNull(otherDistinguishingCharacteristic);
 	}
 	
-	
-	
-
 	
 	
 	

@@ -9,7 +9,9 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.ResponsibleEntity;
 
 class ResponsibleEntityTest {
-
+	/**
+	 * tests throws IllegalStateException
+	 */
 	@Test
 	void addPersonResponsibleEntityTest() {
 
@@ -44,6 +46,10 @@ class ResponsibleEntityTest {
 		}
 
 	}
+
+	/**
+	 * Tests if a CorporateBody and a Personn is initialize correctly and properly
+	 */
 
 	@Test
 	void PersonResponsibleEntityTest() {
@@ -84,6 +90,9 @@ class ResponsibleEntityTest {
 
 	}
 
+	/**
+	 * Test throws NullPointerException
+	 */
 	@Test
 	void addPersonResponsibleEntityNullTest() {
 

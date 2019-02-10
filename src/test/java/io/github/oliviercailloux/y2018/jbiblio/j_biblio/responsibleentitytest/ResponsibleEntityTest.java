@@ -84,4 +84,37 @@ class ResponsibleEntityTest {
 
 	}
 
+	@Test
+	void addPersonResponsibleEntityNullTest() {
+
+		try {
+
+			Person person = null;
+
+			@SuppressWarnings("unused")
+			ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
+
+		} catch (NullPointerException e) {
+
+			e.printStackTrace();
+			assertTrue(true);
+		}
+
+	}
+
+	@Test
+	void addCorporateBodyResponsibleEntityNullTest() {
+		try {
+			CorporateBody cb = null;
+
+			@SuppressWarnings("unused")
+			ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
+
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			assertTrue(true);
+		}
+
+	}
+
 }

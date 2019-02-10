@@ -1,8 +1,7 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.SubType_Expression;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
 import java.util.Collection;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 /**
  * Specific class of Expression

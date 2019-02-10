@@ -1,4 +1,4 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 
 import java.util.Collection;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;

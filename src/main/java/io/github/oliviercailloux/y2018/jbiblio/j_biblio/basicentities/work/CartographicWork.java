@@ -1,9 +1,7 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.SubType_Work;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 
 import java.awt.Point;
 import java.util.Collection;
-
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Work;
 /**
  * Type of work
  *

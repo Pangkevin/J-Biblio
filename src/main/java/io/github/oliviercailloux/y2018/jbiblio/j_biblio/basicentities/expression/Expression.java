@@ -1,4 +1,4 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
 import java.util.Collection;
 

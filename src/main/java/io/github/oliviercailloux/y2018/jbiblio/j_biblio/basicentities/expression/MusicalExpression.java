@@ -2,6 +2,7 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expressio
 
 import java.util.Collection;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 /**
  * Specific class of Expression
@@ -15,9 +16,9 @@ public class MusicalExpression extends Expression {
 	private String typeOfScore;
 	private Collection<String> mediumOfPerformance;
 	
-	public MusicalExpression(int idWork, int idExpression, String formOfExpression,
+	public MusicalExpression(Work work, int idExpression, String formOfExpression,
 			Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression) {
-		super(idWork, idExpression, formOfExpression, dateOfExpression, languageOfExpression);
+		super(work, idExpression, formOfExpression, dateOfExpression, languageOfExpression);
 
 	}
 	

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.google.common.base.Strings;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 
 /**
@@ -15,7 +16,7 @@ public class Expression {
 	/**
 	 * Not <code>null</code>.
 	 */
-	private int idWork;
+	private Work work;
 	/**
 	 * Not <code>null</code>.
 	 */
@@ -56,8 +57,8 @@ public class Expression {
 	private String useRestrictionsOnTheExpression;*/
 	
 	
-	public Expression(int idWork, int idExpression, String formOfExpression, Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression){
-		this.setIdWork(idWork);
+	public Expression(Work work, int idExpression, String formOfExpression, Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression){
+		this.setWork(work);
 		this.idExpression = idExpression;
 		this.formOfExpression = formOfExpression;
 		this.dateOfExpression = dateOfExpression;
@@ -67,13 +68,16 @@ public class Expression {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public int getIdWork() {
-		return idWork;
+	public Work getIdWork() {
+		return this.work;
 	}
 
-
-	public void setIdWork(int idWork) {
-		this.idWork = idWork;
+	/**
+	 * @param otherDistinguishingCharacteristic
+	 *            not <code>null</code>.
+	 */
+	public void setWork(Work work) {
+		this.work = Objects.requireNonNull(work);
 	}
 
 	/**
@@ -129,9 +133,12 @@ public class Expression {
 		return dateOfExpression;
 	}
 
-
+	/**
+	 * @param dateOfExpression
+	 *            not <code>null</code>.
+	 */
 	public void setDateOfExpression(Collection<TimeStampedDescription> dateOfExpression) {
-		this.dateOfExpression = dateOfExpression;
+		this.dateOfExpression = Objects.requireNonNull(dateOfExpression);
 	}
 
 	/**
@@ -155,6 +162,7 @@ public class Expression {
 	public Collection<String> getOtherDistinguishingCharacteristic() {
 		return otherDistinguishingCharacteristic;
 	}
+	
 	/**
 	 * @param otherDistinguishingCharacteristic
 	 *            not <code>null</code>.

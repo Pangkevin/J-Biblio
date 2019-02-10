@@ -62,6 +62,13 @@ public class Work {
 		this.formOfWork = formOfWork;
 
 	}
+	
+	/**
+	 * @return not <code>null</code>.
+	 */
+	public Work getWork() {
+		return Objects.requireNonNull(this);
+	}
 
 	/**
 	 * @return not <code>null</code>.

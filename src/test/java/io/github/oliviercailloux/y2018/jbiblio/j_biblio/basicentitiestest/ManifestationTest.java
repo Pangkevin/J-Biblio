@@ -27,23 +27,20 @@ public class ManifestationTest {
 			idItems.add(34);
 			idItems.add(77);
 
-			//Create manifestation title
+			// Create manifestation title
 			Collection<String> titleOfTheManifestation = new ArrayList<>();
 			titleOfTheManifestation.add("Hamlet");
 
 			// Create Person william
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			String birthdate = "1565-04-26";
-			String deathdate = "1616-04-23";
 
 			Instant dateBirth = formatter.parse(birthdate).toInstant();
-			Instant dateDeath = formatter.parse(deathdate).toInstant();
 
 			TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
-			TimeStampedDescription dateStructureDeath = new TimeStampedDescription("DeathDate", dateDeath);
 
 			Person william = new Person("Shakespeare, William, 1564-1616", "William", null, "Shakespeare", null,
-					dateStructureBirth, dateStructureDeath);
+					dateStructureBirth);
 
 			Collection<ResponsibleEntity> statementOfResponsibility = new ArrayList<>();
 			statementOfResponsibility.add(new ResponsibleEntity(william));

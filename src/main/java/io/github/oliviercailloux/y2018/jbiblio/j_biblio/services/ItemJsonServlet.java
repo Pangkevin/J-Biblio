@@ -29,8 +29,8 @@ public class ItemJsonServlet extends HttpServlet {
 
 		Item item = new Item(412, 412, "A12S3", "DS21T47DT", "RES");
 
-		try {
-			Jsonb jsonb = JsonbBuilder.create();
+		try (Jsonb jsonb = JsonbBuilder.create();) {
+
 			// transform a object item to a Jsonb format in string format
 
 			String jsonItem = jsonb.toJson(item);
@@ -45,7 +45,7 @@ public class ItemJsonServlet extends HttpServlet {
 			// Send error status
 
 			LOGGER.warning(" Error  " + e.toString());
-			resp.setStatus(404);
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "The research failed");
 
 		}
@@ -74,7 +74,6 @@ public class ItemJsonServlet extends HttpServlet {
 
 		catch (NumberFormatException e) {
 
-			LOGGER.warning("The insert failed");
 			LOGGER.warning(" Error  " + e.toString());
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "insert failed.");

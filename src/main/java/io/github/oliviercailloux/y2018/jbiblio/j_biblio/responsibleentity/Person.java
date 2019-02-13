@@ -42,14 +42,13 @@ public class Person extends AbstractResponsibleEntity {
 	 */
 	private Optional<TimeStampedDescription> deathdate;
 
-	public Person(String nameAuthority, String firstName, String middleName, String lastName, String personTitle,
-			TimeStampedDescription birthdate) {
+	public Person(String nameAuthority, String firstName, String lastName, TimeStampedDescription birthdate) {
 
-		this.nameAuthority = Strings.nullToEmpty(nameAuthority);
-		this.firstName = Strings.nullToEmpty(firstName);
-		this.middleName = Strings.nullToEmpty(middleName);
-		this.lastName = Strings.nullToEmpty(lastName);
-		this.personTitle = Strings.nullToEmpty(personTitle);
+		this.nameAuthority = Objects.requireNonNull(nameAuthority);
+		this.firstName = Objects.requireNonNull(firstName);
+		this.middleName = "";
+		this.lastName = Objects.requireNonNull(lastName);
+		this.personTitle = "";
 		this.birthdate = Objects.requireNonNull(birthdate);
 		this.deathdate = Optional.empty();
 
@@ -64,10 +63,10 @@ public class Person extends AbstractResponsibleEntity {
 
 	/**
 	 * 
-	 * @param firstName if <code>null</code>, will be converted to an empty string.
+	 * @param firstName not <code>null</code>.
 	 */
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = Objects.requireNonNull(firstName);
 	}
 
 	/**
@@ -82,7 +81,8 @@ public class Person extends AbstractResponsibleEntity {
 	 * @param middleName if <code>null</code>, will be converted to an empty string.
 	 */
 	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
+		this.middleName = Strings.nullToEmpty(middleName);
+		;
 	}
 
 	public String getLastName() {
@@ -91,10 +91,10 @@ public class Person extends AbstractResponsibleEntity {
 
 	/**
 	 * 
-	 * @param lastName if <code>null</code>, will be converted to an empty string.
+	 * @param lastName not <code>null</code>
 	 */
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = Objects.requireNonNull(lastName);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class Person extends AbstractResponsibleEntity {
 	 *                    string.
 	 */
 	public void setPersonTitle(String personTitle) {
-		this.personTitle = personTitle;
+		this.personTitle = Strings.nullToEmpty(personTitle);
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class Person extends AbstractResponsibleEntity {
 	 * @param birthdate not <code>null</code>.
 	 */
 	public void setBirthdate(TimeStampedDescription birthdate) {
-		this.birthdate = birthdate;
+		this.birthdate = Objects.requireNonNull(birthdate);
 	}
 
 	/**
@@ -139,8 +139,8 @@ public class Person extends AbstractResponsibleEntity {
 	 * 
 	 * @param deathdate may be <code>null</code>.
 	 */
-	public void setDeathdate(Optional<TimeStampedDescription> deathdate) {
-		this.deathdate = Objects.requireNonNull(deathdate);
+	public void setDeathdate(TimeStampedDescription deathdate) {
+		this.deathdate = Optional.ofNullable(deathdate);
 	}
 
 }

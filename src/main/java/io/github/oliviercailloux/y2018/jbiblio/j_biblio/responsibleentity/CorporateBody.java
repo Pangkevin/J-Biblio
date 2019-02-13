@@ -1,6 +1,6 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 
-import com.google.common.base.Strings;
+import java.util.Objects;
 
 /**
  * data transfer object or DTO of CorporateBody
@@ -15,8 +15,8 @@ public class CorporateBody extends AbstractResponsibleEntity {
 
 	public CorporateBody(String nameAuthority, String nameCorporateBody) {
 
-		this.nameAuthority = Strings.nullToEmpty(nameAuthority);
-		this.nameCorporateBody = Strings.nullToEmpty(nameCorporateBody);
+		this.nameAuthority = Objects.requireNonNull(nameAuthority);
+		this.nameCorporateBody = Objects.requireNonNull(nameCorporateBody);
 	}
 
 	/**
@@ -31,11 +31,10 @@ public class CorporateBody extends AbstractResponsibleEntity {
 	/**
 	 * Set this nameCorporateBody
 	 * 
-	 * @param nameCorporateBody if <code>null</code>, will be converted to an empty
-	 *                          string.
+	 * @param nameCorporateBody not <code>null</code>.
 	 */
 	public void setNameCorporateBody(String nameCorporateBody) {
-		this.nameCorporateBody = nameCorporateBody;
+		this.nameCorporateBody = Objects.requireNonNull(nameCorporateBody);
 	}
 
 }

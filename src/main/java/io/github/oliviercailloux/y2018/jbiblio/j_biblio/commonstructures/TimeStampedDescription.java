@@ -3,8 +3,6 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures;
 import java.time.Instant;
 import java.util.Objects;
 
-import com.google.common.base.Strings;
-
 public class TimeStampedDescription {
 
 	/**
@@ -19,7 +17,7 @@ public class TimeStampedDescription {
 
 	public TimeStampedDescription(String description, Instant date) {
 
-		this.description = Strings.nullToEmpty(description);
+		this.description = Objects.requireNonNull(description);
 
 		this.date = Objects.requireNonNull(date);
 
@@ -37,11 +35,10 @@ public class TimeStampedDescription {
 	/**
 	 * Set this description
 	 * 
-	 * @param description if <code>null</code>, will be converted to an empty
-	 *                    string.
+	 * @param description not <code>null</code>
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = Objects.requireNonNull(description);
 	}
 
 	/**
@@ -59,7 +56,7 @@ public class TimeStampedDescription {
 	 * @param date not <code>null</code>.
 	 */
 	public void setDate(Instant date) {
-		this.date = date;
+		this.date = Objects.requireNonNull(date);
 	}
 
 }

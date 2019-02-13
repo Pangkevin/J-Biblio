@@ -31,8 +31,7 @@ class ResponsibleEntityTest {
 			Instant dateBirth = formatter.parse(birthdate).toInstant();
 			// Init DateStructure
 			TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
-			Person person = new Person("Shakespeare, William, 1564-1616", "William", null, "Shakespeare", null,
-					dateStructureBirth);
+			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
 
 			ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
 
@@ -49,11 +48,11 @@ class ResponsibleEntityTest {
 	@Test
 	void addCorporateBodyResponsibleEntityTest() {
 
-		CorporateBody cb = new CorporateBody("BNF", null);
-
-		ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
-
 		try {
+			CorporateBody cb = new CorporateBody("BNF", "bnf");
+
+			ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
+
 			responsibleEntity.asPerson();
 
 		} catch (IllegalStateException e) {
@@ -81,8 +80,7 @@ class ResponsibleEntityTest {
 			Instant dateBirth = formatter.parse(birthdate).toInstant();
 			// Init DateStructure
 			TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
-			Person person = new Person("Shakespeare, William, 1564-1616", "William", null, "Shakespeare", null,
-					dateStructureBirth);
+			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
 			ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
 
 			assertEquals(responsibleEntity.asPerson().getNameAuthority(), "Shakespeare, William, 1564-1616");
@@ -101,12 +99,10 @@ class ResponsibleEntityTest {
 	@Test
 	void CorporateBodyResponsibleEntityTest() {
 
-		CorporateBody cb = new CorporateBody("BNF", "bnf");
-
-		ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
-
 		try {
+			CorporateBody cb = new CorporateBody("BNF", "bnf");
 
+			ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
 			assertEquals(responsibleEntity.asCorporateBody().getNameAuthority(), "BNF");
 			assertEquals(responsibleEntity.asCorporateBody().getNameCorporateBody(), "bnf");
 

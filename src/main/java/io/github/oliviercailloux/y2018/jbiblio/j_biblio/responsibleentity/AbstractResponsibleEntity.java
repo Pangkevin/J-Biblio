@@ -1,6 +1,6 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 
-import com.google.common.base.Strings;
+import java.util.Objects;
 
 public class AbstractResponsibleEntity {
 
@@ -24,7 +24,7 @@ public class AbstractResponsibleEntity {
 	 * @param nameAuthority
 	 */
 	public void setNameAuthority(String nameAuthority) {
-		this.nameAuthority = Strings.nullToEmpty(nameAuthority);
+		this.nameAuthority = Objects.requireNonNull(nameAuthority);
 	}
 
 }

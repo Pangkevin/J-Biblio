@@ -41,7 +41,7 @@ public class ItemJsonServlet extends HttpServlet {
 			// display logs in console
 			LOGGER.info(" Display object in JSON format " + jsonItem);
 
-		} catch (JsonGenerationException | NumberFormatException e) {
+		} catch (Exception e) {
 			// Send error status
 
 			LOGGER.warning(" Error  " + e.toString());

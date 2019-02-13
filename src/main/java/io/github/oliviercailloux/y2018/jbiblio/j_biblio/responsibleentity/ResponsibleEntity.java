@@ -1,16 +1,18 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 
+import java.util.Objects;
+
 public class ResponsibleEntity {
 
-	private Person person = null;
-	private CorporateBody corporateBody = null;
+	private Person person;
+	private CorporateBody corporateBody;
 
-	public ResponsibleEntity(Person person) {
-		this.person = person;
+	public ResponsibleEntity(Person person)  throws NullPointerException{
+		this.person = Objects.requireNonNull(person);
 	}
 
-	public ResponsibleEntity(CorporateBody corporateBody) {
-		this.corporateBody = corporateBody;
+	public ResponsibleEntity(CorporateBody corporateBody) throws NullPointerException {
+		this.corporateBody = Objects.requireNonNull(corporateBody);
 	}
 
 	/**

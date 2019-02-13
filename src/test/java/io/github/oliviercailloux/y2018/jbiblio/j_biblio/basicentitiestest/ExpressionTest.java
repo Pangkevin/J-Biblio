@@ -7,8 +7,8 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Expression;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Work;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.DateStructure;
 
 public class ExpressionTest {

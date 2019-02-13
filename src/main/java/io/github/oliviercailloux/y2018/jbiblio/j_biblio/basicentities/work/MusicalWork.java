@@ -1,11 +1,9 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.SubType_Work;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 
 import java.util.Collection;
-
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Work;
 /**
  * Type of Work
- *
+ * Abandoned - Will not be developped
  */
 public class MusicalWork extends Work {
 	

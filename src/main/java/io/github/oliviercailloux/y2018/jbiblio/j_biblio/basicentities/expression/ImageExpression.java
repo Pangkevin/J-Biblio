@@ -1,12 +1,12 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.SubType_Expression;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
 import java.util.Collection;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Expression;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 /**
  * Specific class of Expression
- * 
+ * Abandoned - Will not be developped
  *
  */
 public class ImageExpression extends Expression{
@@ -21,9 +21,9 @@ public class ImageExpression extends Expression{
 	private Collection<String> specialCharacteristic;
 	private String technique;
 	
-	public ImageExpression(int idWork, int idExpression, String formOfExpression,
+	public ImageExpression(Work work, int idExpression, String formOfExpression,
 			Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression) {
-		super(idWork,idExpression, formOfExpression, dateOfExpression, languageOfExpression);
+		super(work,idExpression, formOfExpression, dateOfExpression, languageOfExpression);
 		
 	}
 	

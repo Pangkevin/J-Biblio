@@ -1,6 +1,9 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
 import java.util.Collection;
+import java.util.Objects;
+
+import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.*;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
@@ -14,14 +17,47 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
  */
 
 public class Manifestation {
+
 	private int idManifestation;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<Integer> idItems;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<String> titleOfTheManifestation;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<ResponsibleEntity> statementOfResponsibility;
+
+	/**
+	 * Not <code>null</code>, empty if unknown.
+	 */
 	private String editionDesignation;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<Integer> placeOfPublicationDistribution;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<ResponsibleEntity> publisherDistributer;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private Collection<TimeStampedDescription> dateOfPublicationDistribution;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	public String manifestationIdentifier;
 
 	/**
@@ -58,14 +94,14 @@ public class Manifestation {
 			Collection<TimeStampedDescription> dateOfPublicationDistribution, String manifestationIdentifier) {
 
 		this.idManifestation = idManifestation;
-		this.idItems = idItems;
-		this.titleOfTheManifestation = titleOfTheManifestation;
-		this.statementOfResponsibility = statementOfResponsibility;
-		this.editionDesignation = editionDesignation;
-		this.placeOfPublicationDistribution = placeOfPublicationDistribution;
-		this.publisherDistributer = publisherDistributer;
-		this.dateOfPublicationDistribution = dateOfPublicationDistribution;
-		this.manifestationIdentifier = manifestationIdentifier;
+		this.idItems = Objects.requireNonNull(idItems);
+		this.titleOfTheManifestation = Objects.requireNonNull(titleOfTheManifestation);
+		this.statementOfResponsibility = Objects.requireNonNull(statementOfResponsibility);
+		this.editionDesignation = Objects.requireNonNull(editionDesignation);
+		this.placeOfPublicationDistribution = Objects.requireNonNull(placeOfPublicationDistribution);
+		this.publisherDistributer = Objects.requireNonNull(publisherDistributer);
+		this.dateOfPublicationDistribution = Objects.requireNonNull(dateOfPublicationDistribution);
+		this.manifestationIdentifier = Objects.requireNonNull(manifestationIdentifier);
 
 	}
 
@@ -77,60 +113,109 @@ public class Manifestation {
 		this.idManifestation = idManifestation;
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<Integer> getIdItems() {
 		return idItems;
 	}
 
+	/**
+	 * @param idItems not <code>null</code>
+	 */
 	public void setIdItems(Collection<Integer> idItems) {
-		this.idItems = idItems;
+		this.idItems = Objects.requireNonNull(idItems);
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<String> getTitleOfTheManifestation() {
 		return titleOfTheManifestation;
 	}
 
+	/**
+	 * 
+	 * @param titleOfTheManifestation not <code>null</code>
+	 */
 	public void setTitleOfTheManifestation(Collection<String> titleOfTheManifestation) {
-		this.titleOfTheManifestation = titleOfTheManifestation;
+		this.titleOfTheManifestation = Objects.requireNonNull(titleOfTheManifestation);
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<ResponsibleEntity> getStatementOfResponsibility() {
 		return statementOfResponsibility;
 	}
 
+	/**
+	 * 
+	 * @param statementOfResponsibility not <code>null</code>
+	 */
 	public void setStatementOfResponsibility(Collection<ResponsibleEntity> statementOfResponsibility) {
-		this.statementOfResponsibility = statementOfResponsibility;
+		this.statementOfResponsibility = Objects.requireNonNull(statementOfResponsibility);
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public String getEditionDesignation() {
 		return editionDesignation;
 	}
 
+	/**
+	 * 
+	 * @param editionDesignation if <code>null</code>, will be converted to an empty
+	 *                           string.
+	 */
 	public void setEditionDesignation(String editionDesignation) {
-		this.editionDesignation = editionDesignation;
+		this.editionDesignation = Strings.nullToEmpty(editionDesignation);
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<Integer> getPlaceOfPublicationDistribution() {
 		return placeOfPublicationDistribution;
 	}
 
+	/**
+	 * 
+	 * @param placeOfPublicationDistribution not <code>null</code>
+	 */
 	public void setPlaceOfPublicationDistribution(Collection<Integer> placeOfPublicationDistribution) {
-		this.placeOfPublicationDistribution = placeOfPublicationDistribution;
+		this.placeOfPublicationDistribution = Objects.requireNonNull(placeOfPublicationDistribution);
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<ResponsibleEntity> getPublisherDistributer() {
 		return publisherDistributer;
 	}
 
+	/**
+	 * 
+	 * @param publisherDistributer not <code>null</code>
+	 */
 	public void setPublisherDistributer(Collection<ResponsibleEntity> publisherDistributer) {
-		this.publisherDistributer = publisherDistributer;
+		this.publisherDistributer = Objects.requireNonNull(publisherDistributer);
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public Collection<TimeStampedDescription> getDateOfPublicationDistribution() {
 		return dateOfPublicationDistribution;
 	}
 
+	/**
+	 * 
+	 * @param dateOfPublicationDistribution not <code>null</code>
+	 */
 	public void setDateOfPublicationDistribution(Collection<TimeStampedDescription> dateOfPublicationDistribution) {
-		this.dateOfPublicationDistribution = dateOfPublicationDistribution;
+		this.dateOfPublicationDistribution = Objects.requireNonNull(dateOfPublicationDistribution);
 	}
 
 }

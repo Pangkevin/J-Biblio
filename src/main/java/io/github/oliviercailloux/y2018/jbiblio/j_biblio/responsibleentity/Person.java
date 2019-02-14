@@ -13,22 +13,22 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 public class Person extends AbstractResponsibleEntity {
 
 	/**
-	 * Not <code>null</code>.
+	 * Not <code>null</code>, may be empty.
 	 */
 	private String firstName;
 
 	/**
-	 * Not <code>null</code>.
+	 * Not <code>null</code>, may be empty.
 	 */
 	private String middleName;
 
 	/**
-	 * Not <code>null</code>.
+	 * Not <code>null</code>, may be empty.
 	 */
 	private String lastName;
 
 	/**
-	 * Not <code>null</code>.
+	 * Not <code>null</code>, may be empty.
 	 */
 	private String personTitle;
 

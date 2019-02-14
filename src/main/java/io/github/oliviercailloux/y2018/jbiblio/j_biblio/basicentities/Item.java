@@ -16,22 +16,22 @@ public class Item {
 	 * Not <code>null</code>.
 	 */
 	private int idItem;
-	
+
 	/**
 	 * Not <code>null</code>.
 	 */
 	private int idManifestation;
-	
+
 	/**
 	 * Not <code>null</code>.
 	 */
 	private String itemIdentifier;
-	
+
 	/**
 	 * Not <code>null</code>.
 	 */
 	private String fingerprint;
-	
+
 	/**
 	 * Not <code>null</code>.
 	 */
@@ -51,26 +51,19 @@ public class Item {
 	 *                            the item
 	 */
 	public Item(int idItem, int idManifestation, String itemIdentifier) {
-		this.idItem = Objects.requireNonNull(idItem);
-		this.idManifestation = Objects.requireNonNull(idManifestation);
+		this.idItem = idItem;
+		this.idManifestation = idManifestation;
 		this.itemIdentifier = Objects.requireNonNull(itemIdentifier);
 		this.fingerprint = "";
 		this.provenanceOfTheItem = "";
 	}
 
-	/**
-	 * @return not <code>null</code>.
-	 */
 	public int getIdItem() {
 		return idItem;
 	}
 
-	/**
-	 * 
-	 * @param idItem not <code>null</code>
-	 */
 	public void setIdItem(int idItem) {
-		this.idItem = Objects.requireNonNull(idItem);
+		this.idItem = idItem;
 	}
 
 	/**
@@ -113,16 +106,13 @@ public class Item {
 
 	/**
 	 * 
-	 * @param provenanceOfTheItem if <code>null</code>, will be converted to an empty
-	 *                    string.
+	 * @param provenanceOfTheItem if <code>null</code>, will be converted to an
+	 *                            empty string.
 	 */
 	public void setProvenanceOfTheItem(String provenanceOfTheItem) {
 		this.provenanceOfTheItem = Strings.nullToEmpty(provenanceOfTheItem);
 	}
 
-	/**
-	 * @return not <code>null</code>.
-	 */
 	public int getIdManifestation() {
 		return idManifestation;
 	}

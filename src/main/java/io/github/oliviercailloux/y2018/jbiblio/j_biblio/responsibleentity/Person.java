@@ -82,7 +82,7 @@ public class Person extends AbstractResponsibleEntity {
 	 */
 	public void setMiddleName(String middleName) {
 		this.middleName = Strings.nullToEmpty(middleName);
-		;
+
 	}
 
 	public String getLastName() {

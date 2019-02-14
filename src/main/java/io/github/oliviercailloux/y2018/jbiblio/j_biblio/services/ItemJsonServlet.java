@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 
@@ -24,7 +25,7 @@ public class ItemJsonServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		resp.setContentType("application/json");
+		resp.setContentType(MediaType.APPLICATION_JSON);
 		resp.setLocale(Locale.ENGLISH);
 
 		Item item = new Item(412, 412, "A12S3", "DS21T47DT", "RES");

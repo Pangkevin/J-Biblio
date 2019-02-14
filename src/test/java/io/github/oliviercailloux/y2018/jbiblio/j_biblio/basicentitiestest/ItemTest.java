@@ -10,10 +10,10 @@ public class ItemTest {
 	void createItem() {
 		// Testing Item Constructor
 		String itemIdentifier = "A12S3";
-		String fingerprint = "DS21T47DT";
+		String fingerprint = "";
 		String provenanceOfTheItem = "";
 
-		Item item = new Item(412, 15, "A12S3", "DS21T47DT", "");
+		Item item = new Item(412, 15, "A12S3");
 		assertEquals(item.getIdItem(), 412);
 		assertEquals(item.getIdManifestation(), 15);
 		assertEquals(item.getItemIdentifier(), itemIdentifier);

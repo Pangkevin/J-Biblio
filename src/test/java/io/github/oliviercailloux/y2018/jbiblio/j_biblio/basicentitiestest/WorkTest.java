@@ -1,4 +1,4 @@
-package basicEntitiesTest;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentitiestest;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,7 +6,8 @@ import java.util.Collection;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicEntities.Work;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
+
 
 public class WorkTest {
 

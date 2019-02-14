@@ -68,8 +68,14 @@ public class Expression {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Work getIdWork() {
-		return this.work;
+	public int getIdWork() {
+		return this.work.getIdWork();
+	}
+	/**
+	 * @return not <code>null</code>.
+	 */
+	public Work getWork() {
+		return Objects.requireNonNull(this.work);
 	}
 
 	/**

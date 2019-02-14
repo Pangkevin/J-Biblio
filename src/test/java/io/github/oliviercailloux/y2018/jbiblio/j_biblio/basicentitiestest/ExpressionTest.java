@@ -1,5 +1,8 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentitiestest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -9,25 +12,33 @@ import org.junit.jupiter.api.Test;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.DateStructure;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 
 public class ExpressionTest {
 	@Test
 	public void createExpression() {
+		
+		try {
 
 		Collection<String> titleOfWork = new ArrayList<String>();
 		titleOfWork.add("Romeo and Juliet");
 		String formOfWork = "play";
 
-		Collection<DateStructure> collectionDateStructure = new ArrayList<DateStructure>();
-		Date date = new Date(1598, 1, 1);
-		DateStructure dateStructure = new DateStructure("1598", date);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		Collection<TimeStampedDescription> collectionDateStructure = new ArrayList<TimeStampedDescription>();
+		String createdate = "1603-01-01";
+		Instant createDate;
+	
+			createDate = formatter.parse(createdate).toInstant();
+	
+		TimeStampedDescription dateStructure = new TimeStampedDescription("1598", createDate);
 		collectionDateStructure.add(dateStructure);
 		Work work = new Work(123, titleOfWork, formOfWork);
 
 		String formOfExpression = "movie";
 		String langageOfExpression = "English";
-		Expression expression = new Expression(123, 500, formOfExpression, collectionDateStructure,
+		Expression expression = new Expression(work, 500, formOfExpression, collectionDateStructure,
 				langageOfExpression);
 
 		assertEquals(expression.getIdWork(), 123);
@@ -36,6 +47,12 @@ public class ExpressionTest {
 		assertEquals(expression.getFormOfExpression(), "movie");
 		assertEquals(expression.getLanguageOfExpression(), "English");
 
+		} catch (ParseException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		}
+		
+		
 	}
 
 }

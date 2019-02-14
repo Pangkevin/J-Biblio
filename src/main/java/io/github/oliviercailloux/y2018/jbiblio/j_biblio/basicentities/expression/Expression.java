@@ -57,11 +57,11 @@ public class Expression {
 
 	public Expression(Work work, int idExpression, String formOfExpression,
 			Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression) {
-		this.setWork(work);
-		this.idExpression = idExpression;
-		this.formOfExpression = formOfExpression;
-		this.dateOfExpression = dateOfExpression;
-		this.languageOfExpression = languageOfExpression;
+		this.work = Objects.requireNonNull(work);
+		this.idExpression = Objects.requireNonNull(idExpression);
+		this.formOfExpression = Objects.requireNonNull(formOfExpression);
+		this.dateOfExpression = Objects.requireNonNull(dateOfExpression);
+		this.languageOfExpression = Objects.requireNonNull(languageOfExpression);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class Expression {
 	 * @return not <code>null</code>.
 	 */
 	public Work getWork() {
-		return Objects.requireNonNull(this.work);
+		return this.work;
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class Expression {
 	}
 
 	public void setIdManifestations(Collection<Integer> idManifestations) {
-		this.idManifestations = idManifestations;
+		this.idManifestations = Objects.requireNonNull(idManifestations);
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class Expression {
 	}
 
 	public void setTitleOfExpression(Collection<String> titleOfExpression) {
-		this.titleOfExpression = titleOfExpression;
+		this.titleOfExpression = Objects.requireNonNull(titleOfExpression);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class Expression {
 	}
 
 	public void setFormOfExpression(String formOfExpression) {
-		this.formOfExpression = formOfExpression;
+		this.formOfExpression = Strings.nullToEmpty(formOfExpression);
 	}
 
 	/**

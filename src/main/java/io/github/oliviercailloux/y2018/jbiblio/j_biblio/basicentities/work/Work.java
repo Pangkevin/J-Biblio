@@ -57,12 +57,12 @@ public class Work {
 	private String contextForTheWork;
 
 	public Work(int idWork, Collection<String> titleOfWork, String formOfWork) {
-		this.idWork = idWork;
-		this.titleOfWork = titleOfWork;
-		this.formOfWork = formOfWork;
+		this.idWork = Objects.requireNonNull(idWork);
+		this.titleOfWork = Objects.requireNonNull(titleOfWork);
+		this.formOfWork = Objects.requireNonNull(formOfWork);
 
 	}
-	
+
 	/**
 	 * @return not <code>null</code>.
 	 */

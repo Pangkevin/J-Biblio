@@ -28,7 +28,7 @@ public class ItemJsonServlet extends HttpServlet {
 		resp.setContentType(MediaType.APPLICATION_JSON);
 		resp.setLocale(Locale.ENGLISH);
 
-		Item item = new Item(412, 412, "A12S3", "DS21T47DT", "RES");
+		Item item = new Item(412, 412, "A12S3");
 
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 
@@ -61,8 +61,10 @@ public class ItemJsonServlet extends HttpServlet {
 		String provenanceOfTheItem = req.getParameter("provenanceOfTheItem");
 
 		try {
-			Item item = new Item(Integer.parseInt(idItem), Integer.parseInt(idManifestation), itemIdentifier,
-					fingerprint, provenanceOfTheItem);
+			Item item = new Item(Integer.parseInt(idItem), Integer.parseInt(idManifestation), itemIdentifier);
+
+			item.setFingerprint(fingerprint);
+			item.setProvenanceOfTheItem(provenanceOfTheItem);
 			LOGGER.info("Item idItem : " + item.getIdItem());
 			LOGGER.info("Item idManifestation : " + item.getIdManifestation());
 			LOGGER.info("Item itemIdentifier : " + item.getItemIdentifier());

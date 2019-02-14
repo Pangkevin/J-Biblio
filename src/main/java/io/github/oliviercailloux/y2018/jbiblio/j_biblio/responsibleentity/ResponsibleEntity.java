@@ -7,7 +7,7 @@ public class ResponsibleEntity {
 	private Person person;
 	private CorporateBody corporateBody;
 
-	public ResponsibleEntity(Person person)  throws NullPointerException{
+	public ResponsibleEntity(Person person) throws NullPointerException {
 		this.person = Objects.requireNonNull(person);
 	}
 

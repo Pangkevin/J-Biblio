@@ -26,13 +26,20 @@ class ItemJsonServletTest extends Mockito {
 	/*
 	 * Create an object Item to test the output of JSON format
 	 */
-	Item item = new Item(412, 412, "A12S3", "DS21T47DT", "RES");
+	Item item = new Item(412, 412, "A12S3");
 
 	@Test
 	public void testDoGet() {
+		/**
+		 * Set item
+		 */
+		item.setFingerprint("DS21T47DT");
+		item.setProvenanceOfTheItem("RES");
+
 		/*
 		 * Create the mock object of HttpServletRequest and HttpServletResponse
 		 */
+
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
 

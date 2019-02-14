@@ -59,6 +59,7 @@ class ItemJsonServletTest extends Mockito {
 					json);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			assertTrue(stringWriter.toString().contains(" Display object in JSON format "));
 		}
 	}
@@ -92,6 +93,7 @@ class ItemJsonServletTest extends Mockito {
 			 */
 			assertTrue(stringWriter.toString().contains("The object is successfully insert"));
 		} catch (Exception e) {
+			e.printStackTrace();
 			assertTrue(false);
 		}
 	}

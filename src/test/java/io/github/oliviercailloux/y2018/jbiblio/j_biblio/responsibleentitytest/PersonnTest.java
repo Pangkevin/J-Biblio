@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,11 +33,9 @@ class PersonnTest {
 			TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
 			TimeStampedDescription dateStructureDeath = new TimeStampedDescription("DeathDate", dateDeath);
 
-			Person person = new Person("Shakespeare, William, 1564-1616", "William", null, "Shakespeare", null,
-					dateStructureBirth);
+			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
 
-			Optional<TimeStampedDescription> opDate = Optional.of(dateStructureDeath);
-			person.setDeathdate(opDate);
+			person.setDeathdate(dateStructureDeath);
 
 			// test String attributs
 			assertEquals(person.getNameAuthority(), "Shakespeare, William, 1564-1616");
@@ -47,6 +44,8 @@ class PersonnTest {
 			// Test instant date
 			assertEquals(person.getBirthdate().getDate().toString(), "1565-05-05T23:00:00Z");
 			assertEquals(person.getDeathdate().get().getDate().toString(), "1616-04-22T23:00:00Z");
+			assertEquals(person.getMiddleName(), "");
+			assertEquals(person.getMiddleName(), "");
 		} catch (ParseException e) {
 
 			e.printStackTrace();
@@ -64,9 +63,41 @@ class PersonnTest {
 		try {
 
 			@SuppressWarnings("unused")
-			Person person = new Person("Shakespeare, William, 1564-1616", "William", null, "Shakespeare", null, null);
+			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", null);
 
 		} catch (NullPointerException e) {
+
+			e.printStackTrace();
+			assertTrue(true);
+		}
+
+	}
+
+	/**
+	 * Test Optional attribut deathDate
+	 */
+	@Test
+	void testOptionalAttribut() {
+
+		try {
+
+			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", null);
+
+			assertFalse(person.getDeathdate().isPresent());
+
+			/**
+			 * Init death date
+			 */
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String deathdate = "1616-04-23";
+			Instant dateDeath = formatter.parse(deathdate).toInstant();
+			TimeStampedDescription dateStructureDeath = new TimeStampedDescription("DeathDate", dateDeath);
+			// add deathdate
+			person.setDeathdate(dateStructureDeath);
+			// IsPresent
+			assertTrue(person.getDeathdate().isPresent());
+
+		} catch (NullPointerException | ParseException e) {
 
 			e.printStackTrace();
 			assertTrue(true);

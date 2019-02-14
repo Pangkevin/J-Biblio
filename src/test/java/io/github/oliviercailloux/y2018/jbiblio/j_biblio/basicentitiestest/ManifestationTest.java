@@ -39,7 +39,7 @@ public class ManifestationTest {
 
 			TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
 
-			Person william = new Person("Shakespeare, William, 1564-1616", "William", null, "Shakespeare", null,
+			Person william = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare",
 					dateStructureBirth);
 
 			Collection<ResponsibleEntity> statementOfResponsibility = new ArrayList<>();

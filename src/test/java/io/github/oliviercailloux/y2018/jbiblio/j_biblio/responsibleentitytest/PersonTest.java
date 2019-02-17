@@ -35,15 +35,15 @@ class PersonnTest {
 
 			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
 
-			person.setDeathdate(dateStructureDeath);
+			person.setDeathDate(dateStructureDeath);
 
 			// test String attributs
 			assertEquals(person.getNameAuthority(), "Shakespeare, William, 1564-1616");
 			assertEquals(person.getFirstName(), "William");
 			assertEquals(person.getLastName(), "Shakespeare");
 			// Test instant date
-			assertEquals(person.getBirthdate().getDate().toString(), "1565-05-05T23:00:00Z");
-			assertEquals(person.getDeathdate().get().getDate().toString(), "1616-04-22T23:00:00Z");
+			assertEquals(person.getBirthDate().getDate().toString(), "1565-05-05T23:00:00Z");
+			assertEquals(person.getDeathDate().get().getDate().toString(), "1616-04-22T23:00:00Z");
 			assertEquals(person.getMiddleName(), "");
 			assertEquals(person.getMiddleName(), "");
 		} catch (ParseException e) {
@@ -83,7 +83,7 @@ class PersonnTest {
 
 			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", null);
 
-			assertFalse(person.getDeathdate().isPresent());
+			assertFalse(person.getDeathDate().isPresent());
 
 			/**
 			 * Init death date
@@ -93,9 +93,9 @@ class PersonnTest {
 			Instant dateDeath = formatter.parse(deathdate).toInstant();
 			TimeStampedDescription dateStructureDeath = new TimeStampedDescription("DeathDate", dateDeath);
 			// add deathdate
-			person.setDeathdate(dateStructureDeath);
+			person.setDeathDate(dateStructureDeath);
 			// IsPresent
-			assertTrue(person.getDeathdate().isPresent());
+			assertTrue(person.getDeathDate().isPresent());
 
 		} catch (NullPointerException | ParseException e) {
 

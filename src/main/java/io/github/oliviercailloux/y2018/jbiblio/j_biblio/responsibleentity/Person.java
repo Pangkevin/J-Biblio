@@ -35,22 +35,22 @@ public class Person extends AbstractResponsibleEntity {
 	/**
 	 * Not <code>null</code>.
 	 */
-	private TimeStampedDescription birthdate;
+	private TimeStampedDescription birthDate;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Optional<TimeStampedDescription> deathdate;
+	private Optional<TimeStampedDescription> deathDate;
 
-	public Person(String nameAuthority, String firstName, String lastName, TimeStampedDescription birthdate) {
+	public Person(String nameAuthority, String firstName, String lastName, TimeStampedDescription birthDate) {
 
 		this.nameAuthority = Objects.requireNonNull(nameAuthority);
 		this.firstName = Objects.requireNonNull(firstName);
 		this.middleName = "";
 		this.lastName = Objects.requireNonNull(lastName);
 		this.personTitle = "";
-		this.birthdate = Objects.requireNonNull(birthdate);
-		this.deathdate = Optional.empty();
+		this.birthDate = Objects.requireNonNull(birthDate);
+		this.deathDate = Optional.empty();
 
 	}
 
@@ -116,31 +116,31 @@ public class Person extends AbstractResponsibleEntity {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public TimeStampedDescription getBirthdate() {
-		return birthdate;
+	public TimeStampedDescription getBirthDate() {
+		return birthDate;
 	}
 
 	/**
 	 * 
 	 * @param birthdate not <code>null</code>.
 	 */
-	public void setBirthdate(TimeStampedDescription birthdate) {
-		this.birthdate = Objects.requireNonNull(birthdate);
+	public void setBirthDate(TimeStampedDescription birthdate) {
+		this.birthDate = Objects.requireNonNull(birthdate);
 	}
 
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Optional<TimeStampedDescription> getDeathdate() {
-		return deathdate;
+	public Optional<TimeStampedDescription> getDeathDate() {
+		return deathDate;
 	}
 
 	/**
 	 * 
 	 * @param deathdate may be <code>null</code>.
 	 */
-	public void setDeathdate(TimeStampedDescription deathdate) {
-		this.deathdate = Optional.ofNullable(deathdate);
+	public void setDeathDate(TimeStampedDescription deathdate) {
+		this.deathDate = Optional.ofNullable(deathdate);
 	}
 
 }

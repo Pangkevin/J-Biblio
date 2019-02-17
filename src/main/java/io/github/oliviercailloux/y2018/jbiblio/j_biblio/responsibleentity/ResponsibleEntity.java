@@ -21,11 +21,7 @@ public class ResponsibleEntity {
 	public Person asPerson() throws IllegalStateException {
 
 		if (corporateBody != null) {
-			/**
-			 * IllegalStateException is used to indicated that a method has been invoked at
-			 * an illegal or inappropriate time. asPersonn must not to be use if a
-			 * corporateBody is instanciated
-			 */
+			
 			throw new IllegalStateException();
 		}
 
@@ -36,11 +32,7 @@ public class ResponsibleEntity {
 	public CorporateBody asCorporateBody() throws IllegalStateException {
 
 		if (person != null) {
-			/**
-			 * IllegalStateException is used to indicated that a method has been invoked at
-			 * an illegal or inappropriate time. asPersonn must not to be use if a person is
-			 * instanciated
-			 */
+
 			throw new IllegalStateException();
 		}
 

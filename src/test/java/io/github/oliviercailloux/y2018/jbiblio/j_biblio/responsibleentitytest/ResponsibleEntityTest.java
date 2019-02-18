@@ -84,19 +84,13 @@ class ResponsibleEntityTest {
 	}
 
 	@Test
-	void CorporateBodyResponsibleEntityTest() {
+	void CorporateBodyResponsibleEntityTest() throws IllegalStateException {
 
-		try {
-			CorporateBody cb = new CorporateBody("BNF", "bnf");
+		CorporateBody cb = new CorporateBody("BNF", "bnf");
 
-			ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
-			assertEquals(responsibleEntity.asCorporateBody().getNameAuthority(), "BNF");
-			assertEquals(responsibleEntity.asCorporateBody().getNameCorporateBody(), "bnf");
-
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			assertTrue(false);
-		}
+		ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
+		assertEquals(responsibleEntity.asCorporateBody().getNameAuthority(), "BNF");
+		assertEquals(responsibleEntity.asCorporateBody().getNameCorporateBody(), "bnf");
 
 	}
 

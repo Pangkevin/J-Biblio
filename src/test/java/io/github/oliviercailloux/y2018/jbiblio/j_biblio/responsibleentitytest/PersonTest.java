@@ -10,8 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.ResponsibleEntity;
 
-class PersonnTest {
+class PersonTest {
 
 	@Test
 	void createPersonn() {
@@ -60,17 +61,10 @@ class PersonnTest {
 	@Test
 	void createPersonWithNullBirthDate() {
 
-		try {
-
+		assertThrows(NullPointerException.class, () -> {
 			@SuppressWarnings("unused")
 			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", null);
-
-		} catch (NullPointerException e) {
-
-			e.printStackTrace();
-			assertTrue(true);
-		}
-
+		});
 	}
 
 	/**

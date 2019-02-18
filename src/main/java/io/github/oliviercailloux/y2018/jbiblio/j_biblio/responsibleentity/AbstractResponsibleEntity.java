@@ -5,8 +5,8 @@ import java.util.Objects;
 public class AbstractResponsibleEntity {
 
 	/**
-	 * nameAuthory allows to uniquely identify a responsibleEntity Not
-	 * <code>null</code>, empty if unknown.
+	 * nameAuthory It should not be allowed to be unknown. This is an essential
+	 * information. Not <code>null</code>, empty if unknown.
 	 */
 	protected String nameAuthority;
 

@@ -21,7 +21,7 @@ public class ResponsibleEntity {
 	public Person asPerson() throws IllegalStateException {
 
 		if (corporateBody != null) {
-			
+
 			throw new IllegalStateException();
 		}
 

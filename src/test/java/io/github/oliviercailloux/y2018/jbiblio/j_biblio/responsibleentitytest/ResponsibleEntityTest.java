@@ -16,9 +16,11 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Respon
 class ResponsibleEntityTest {
 	/**
 	 * tests throws IllegalStateException
+	 * 
+	 * @throws ParseException
 	 */
 	@Test
-	void addPersonResponsibleEntityTest() {
+	void addPersonResponsibleEntityTest() throws ParseException {
 		/**
 		 * Init date
 		 */
@@ -26,39 +28,29 @@ class ResponsibleEntityTest {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String birthdate = "1565-04-26";
 
-		try {
-			// Init Instant Date
-			Instant dateBirth = formatter.parse(birthdate).toInstant();
-			// Init DateStructure
-			TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
-			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
+		// Init Instant Date
+		Instant dateBirth = formatter.parse(birthdate).toInstant();
+		// Init DateStructure
+		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
+		Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
+		ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
 
-			ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
-
+		assertThrows(IllegalStateException.class, () -> {
 			responsibleEntity.asCorporateBody();
-
-		} catch (IllegalStateException | ParseException e) {
-
-			e.printStackTrace();
-			assertTrue(true);
-		}
+		});
 
 	}
 
 	@Test
 	void addCorporateBodyResponsibleEntityTest() {
 
-		try {
-			CorporateBody cb = new CorporateBody("BNF", "bnf");
+		CorporateBody cb = new CorporateBody("BNF", "bnf");
 
-			ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
+		ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
 
+		assertThrows(IllegalStateException.class, () -> {
 			responsibleEntity.asPerson();
-
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			assertTrue(true);
-		}
+		});
 
 	}
 
@@ -119,34 +111,26 @@ class ResponsibleEntityTest {
 	@Test
 	void addPersonResponsibleEntityNullTest() {
 
-		try {
+		Person person = null;
 
-			Person person = null;
-
+		assertThrows(NullPointerException.class, () -> {
 			@SuppressWarnings("unused")
 			ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
-
-		} catch (NullPointerException e) {
-
-			e.printStackTrace();
-			assertTrue(true);
-		}
-
+		});
 	}
 
+	/**
+	 * Test throws NullPointerException
+	 */
 	@Test
 	void addCorporateBodyResponsibleEntityNullTest() {
-		try {
-			CorporateBody cb = null;
 
+		CorporateBody cb = null;
+
+		assertThrows(NullPointerException.class, () -> {
 			@SuppressWarnings("unused")
 			ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
-
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			assertTrue(true);
-		}
-
+		});
 	}
 
 }

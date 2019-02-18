@@ -21,19 +21,6 @@
 			<version>8.0</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-		<!-- The javax.servlet package contains a number of classes and interfaces 
-			that describe and define the contracts between a servlet class and the runtime 
-			environment provided for an instance of such a class by a conforming servlet 
-			container. source : https://docs.oracle.com/javaee/7/api/javax/servlet/package-summary.html -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -50,13 +37,6 @@
 			<groupId>org.mnode.ical4j</groupId>
 			<artifactId>ical4j</artifactId>
 			<version>3.0.2</version>
-		</dependency>
-		<!-- It allows to transform JSON to Object and Object to Json -->
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
-			<groupId>javax.json.bind</groupId>
-			<artifactId>javax.json.bind-api</artifactId>
-			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish</groupId>

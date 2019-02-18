@@ -56,10 +56,12 @@ class ResponsibleEntityTest {
 
 	/**
 	 * Tests if a CorporateBody and a Personn is initialize correctly and properly
+	 * 
+	 * @throws ParseException
 	 */
 
 	@Test
-	void PersonResponsibleEntityTest() {
+	void PersonResponsibleEntityTest() throws ParseException {
 		/**
 		 * Init date
 		 */
@@ -67,24 +69,17 @@ class ResponsibleEntityTest {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String birthdate = "1565-04-26";
 
-		try {
-			// Init Instant Date
-			Instant dateBirth = formatter.parse(birthdate).toInstant();
-			// Init DateStructure
-			TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
-			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
-			ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
+		// Init Instant Date
+		Instant dateBirth = formatter.parse(birthdate).toInstant();
+		// Init DateStructure
+		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
+		Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
+		ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
 
-			assertEquals(responsibleEntity.asPerson().getNameAuthority(), "Shakespeare, William, 1564-1616");
-			assertEquals(responsibleEntity.asPerson().getFirstName(), "William");
-			assertEquals(responsibleEntity.asPerson().getLastName(), "Shakespeare");
-			assertEquals(responsibleEntity.asPerson().getPersonTitle(), "");
-
-		} catch (IllegalStateException | ParseException e) {
-
-			e.printStackTrace();
-			assertTrue(false);
-		}
+		assertEquals(responsibleEntity.asPerson().getNameAuthority(), "Shakespeare, William, 1564-1616");
+		assertEquals(responsibleEntity.asPerson().getFirstName(), "William");
+		assertEquals(responsibleEntity.asPerson().getLastName(), "Shakespeare");
+		assertEquals(responsibleEntity.asPerson().getPersonTitle(), "");
 
 	}
 

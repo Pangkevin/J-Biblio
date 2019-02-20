@@ -10,7 +10,6 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Respon
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import java.text.ParseException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +17,7 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class ManifestationTest {
 	@Test
-	void createManifestation() throws ParseException {
+	void createManifestation() {
 		// Testing Manifestation Constructor
 
 		// Create items' ids list

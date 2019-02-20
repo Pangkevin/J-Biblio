@@ -17,7 +17,7 @@ import javax.json.bind.JsonbBuilder;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
 
 @SuppressWarnings("serial")
-@WebServlet("item/get")
+@WebServlet("item")
 public class ItemJsonServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger.getLogger(ItemJsonServlet.class.getCanonicalName());
 
@@ -32,7 +32,9 @@ public class ItemJsonServlet extends HttpServlet {
 		 */
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 
-			// transform an object item to a Jsonb format in string format
+			/**
+			 * Jpa will be implemented in the next sprint
+			 */
 			Item item = this.initItem(req);
 			String jsonItem = jsonb.toJson(item);
 			resp.setStatus(HttpServletResponse.SC_OK);

@@ -31,7 +31,8 @@ public class ManifestationTest {
 
 		// Create Person william
 
-		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", Instant.now());
+		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate",
+				Instant.parse("1565-05-05T23:00:00Z"));
 
 		Person william = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
 
@@ -51,7 +52,7 @@ public class ManifestationTest {
 
 		// Create publication date
 		Collection<TimeStampedDescription> dateOfPublicationDistribution = new ArrayList<>();
-		TimeStampedDescription dateStructurePublish = new TimeStampedDescription("Publication Date", Instant.now());
+		TimeStampedDescription dateStructurePublish = new TimeStampedDescription("Publication Date", Instant.parse("1616-05-05T23:00:00Z"));
 		dateOfPublicationDistribution.add(dateStructurePublish);
 
 		// Create manifestation Identifier

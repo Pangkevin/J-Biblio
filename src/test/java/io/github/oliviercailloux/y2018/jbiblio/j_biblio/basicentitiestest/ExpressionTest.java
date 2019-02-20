@@ -21,7 +21,7 @@ public class ExpressionTest {
 
 		Collection<TimeStampedDescription> collectionDateStructure = new ArrayList<>();
 
-		TimeStampedDescription dateStructure = new TimeStampedDescription("1598", Instant.now());
+		TimeStampedDescription dateStructure = new TimeStampedDescription("1598", Instant.parse("1598-05-05T23:00:00Z"));
 		collectionDateStructure.add(dateStructure);
 		Work work = new Work(123, titleOfWork, formOfWork);
 
@@ -42,7 +42,7 @@ public class ExpressionTest {
 	void testThrowsNullPointeurExpressionConstructor() {
 		Collection<TimeStampedDescription> collectionDateStructure = new ArrayList<>();
 
-		TimeStampedDescription dateStructure = new TimeStampedDescription("1598", Instant.now());
+		TimeStampedDescription dateStructure = new TimeStampedDescription("1598",Instant.parse("1598-05-05T23:00:00Z"));
 		collectionDateStructure.add(dateStructure);
 
 		String formOfExpression = "movie";

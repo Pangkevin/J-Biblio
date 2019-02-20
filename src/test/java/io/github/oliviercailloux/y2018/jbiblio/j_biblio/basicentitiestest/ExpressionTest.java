@@ -1,7 +1,5 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentitiestest;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,40 +15,47 @@ public class ExpressionTest {
 	@Test
 	public void createExpression() {
 
-		try {
+		Collection<String> titleOfWork = new ArrayList<>();
+		titleOfWork.add("Romeo and Juliet");
+		String formOfWork = "play";
 
-			Collection<String> titleOfWork = new ArrayList<>();
-			titleOfWork.add("Romeo and Juliet");
-			String formOfWork = "play";
+		Collection<TimeStampedDescription> collectionDateStructure = new ArrayList<>();
 
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		TimeStampedDescription dateStructure = new TimeStampedDescription("1598", Instant.now());
+		collectionDateStructure.add(dateStructure);
+		Work work = new Work(123, titleOfWork, formOfWork);
 
-			Collection<TimeStampedDescription> collectionDateStructure = new ArrayList<>();
-			String createdate = "1603-01-01";
-			Instant createDate;
+		String formOfExpression = "movie";
+		String langageOfExpression = "English";
+		Expression expression = new Expression(work, 500, formOfExpression, collectionDateStructure,
+				langageOfExpression);
 
-			createDate = formatter.parse(createdate).toInstant();
+		assertEquals(expression.getIdWork(), 123);
+		assertTrue(expression.getDateOfExpression().contains(dateStructure));
+		assertEquals(expression.getIdExpression(), 500);
+		assertEquals(expression.getFormOfExpression(), "movie");
+		assertEquals(expression.getLanguageOfExpression(), "English");
 
-			TimeStampedDescription dateStructure = new TimeStampedDescription("1598", createDate);
-			collectionDateStructure.add(dateStructure);
-			Work work = new Work(123, titleOfWork, formOfWork);
+	}
 
-			String formOfExpression = "movie";
-			String langageOfExpression = "English";
-			Expression expression = new Expression(work, 500, formOfExpression, collectionDateStructure,
+	@Test
+	void testThrowsNullPointeurExpressionConstructor() {
+		Collection<TimeStampedDescription> collectionDateStructure = new ArrayList<>();
+
+		TimeStampedDescription dateStructure = new TimeStampedDescription("1598", Instant.now());
+		collectionDateStructure.add(dateStructure);
+
+		String formOfExpression = "movie";
+		String langageOfExpression = "English";
+
+		assertThrows(NullPointerException.class, () -> {
+
+			// Create manifestation
+			@SuppressWarnings("unused")
+			Expression expression = new Expression(null, 500, formOfExpression, collectionDateStructure,
 					langageOfExpression);
 
-			assertEquals(expression.getIdWork(), 123);
-			assertTrue(expression.getDateOfExpression().contains(dateStructure));
-			assertEquals(expression.getIdExpression(), 500);
-			assertEquals(expression.getFormOfExpression(), "movie");
-			assertEquals(expression.getLanguageOfExpression(), "English");
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-			assertFalse(true);
-		}
-
+		});
 	}
 
 }

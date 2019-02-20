@@ -23,4 +23,18 @@ public class WorkTest {
 
 	}
 
+	@Test
+	void testThrowsNullPointeurWorkConstructor() {
+		Collection<String> titleOfWork = new ArrayList<>();
+		titleOfWork.add("game");
+		String formOfWork = null;
+
+		assertThrows(NullPointerException.class, () -> {
+
+			// Create manifestation
+			@SuppressWarnings("unused")
+			Work work = new Work(123, titleOfWork, formOfWork);
+
+		});
+	}
 }

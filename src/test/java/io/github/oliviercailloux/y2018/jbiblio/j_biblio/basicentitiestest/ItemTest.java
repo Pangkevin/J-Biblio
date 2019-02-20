@@ -26,4 +26,14 @@ public class ItemTest {
 		assertEquals(item.getProvenanceOfTheItem(), provenanceOfTheItem);
 	}
 
+	@Test
+	void testThrowsNullPointeurItemSetItemIdentifier() {
+		Item item = new Item();
+
+		assertThrows(NullPointerException.class, () -> {
+
+			item.setItemIdentifier(null);
+		});
+	}
+
 }

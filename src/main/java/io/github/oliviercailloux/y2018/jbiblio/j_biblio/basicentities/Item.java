@@ -50,13 +50,6 @@ public class Item {
 	 * @param provenanceOfTheItem A record of previous ownership or custodianship of
 	 *                            the item
 	 */
-	public Item(int idItem, int idManifestation, String itemIdentifier) {
-		this.idItem = idItem;
-		this.idManifestation = idManifestation;
-		this.itemIdentifier = Objects.requireNonNull(itemIdentifier);
-		this.fingerprint = "";
-		this.provenanceOfTheItem = "";
-	}
 
 	public int getIdItem() {
 		return idItem;

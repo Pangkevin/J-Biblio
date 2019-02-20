@@ -58,7 +58,7 @@ public class ItemJsonServlet extends HttpServlet {
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 			try (BufferedReader reader = req.getReader()) {
 				/**
-				 * Jpa will be implement in the next sprint
+				 * Jpa will be implemented in the next sprint
 				 */
 				@SuppressWarnings("unused")
 				Item item = jsonb.fromJson(reader, Item.class);

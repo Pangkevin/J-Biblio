@@ -1,5 +1,9 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
+import java.util.Objects;
+
+import com.google.common.base.Strings;
+
 /**
  * This class represents the 4th element from group 1 entities of FRBR model
  * Item is a single exemplar of a manifestation We will implement at a first
@@ -8,10 +12,29 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
  * ...)
  */
 public class Item {
+	/**
+	 * Not <code>null</code>.
+	 */
 	private int idItem;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private int idManifestation;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private String itemIdentifier;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private String fingerprint;
+
+	/**
+	 * Not <code>null</code>.
+	 */
 	private String provenanceOfTheItem;
 
 	/**
@@ -27,14 +50,6 @@ public class Item {
 	 * @param provenanceOfTheItem A record of previous ownership or custodianship of
 	 *                            the item
 	 */
-	public Item(int idItem, int idManifestation, String itemIdentifier, String fingerprint,
-			String provenanceOfTheItem) {
-		this.idItem = idItem;
-		this.idManifestation = idManifestation;
-		this.itemIdentifier = itemIdentifier;
-		this.fingerprint = fingerprint;
-		this.provenanceOfTheItem = provenanceOfTheItem;
-	}
 
 	public int getIdItem() {
 		return idItem;
@@ -44,28 +59,51 @@ public class Item {
 		this.idItem = idItem;
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public String getItemIdentifier() {
 		return itemIdentifier;
 	}
 
+	/**
+	 * 
+	 * @param itemIdentifier not <code>null</code>
+	 */
 	public void setItemIdentifier(String itemIdentifier) {
-		this.itemIdentifier = itemIdentifier;
+		this.itemIdentifier = Objects.requireNonNull(itemIdentifier);
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public String getFingerprint() {
 		return fingerprint;
 	}
 
+	/**
+	 * 
+	 * @param fingerprint if <code>null</code>, will be converted to an empty
+	 *                    string.
+	 */
 	public void setFingerprint(String fingerprint) {
-		this.fingerprint = fingerprint;
+		this.fingerprint = Strings.nullToEmpty(fingerprint);
 	}
 
+	/**
+	 * @return not <code>null</code>.
+	 */
 	public String getProvenanceOfTheItem() {
 		return provenanceOfTheItem;
 	}
 
+	/**
+	 * 
+	 * @param provenanceOfTheItem if <code>null</code>, will be converted to an
+	 *                            empty string.
+	 */
 	public void setProvenanceOfTheItem(String provenanceOfTheItem) {
-		this.provenanceOfTheItem = provenanceOfTheItem;
+		this.provenanceOfTheItem = Strings.nullToEmpty(provenanceOfTheItem);
 	}
 
 	public int getIdManifestation() {

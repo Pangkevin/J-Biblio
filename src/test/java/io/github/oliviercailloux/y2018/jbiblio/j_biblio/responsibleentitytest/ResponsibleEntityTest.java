@@ -24,7 +24,6 @@ class ResponsibleEntityTest {
 		/**
 		 * Init date
 		 */
-
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String birthdate = "1565-04-26";
 

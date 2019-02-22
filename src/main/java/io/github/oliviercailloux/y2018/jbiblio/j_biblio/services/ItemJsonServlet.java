@@ -25,7 +25,7 @@ public class ItemJsonServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		resp.setContentType("application/json");
+		resp.setContentType(MediaType.APPLICATION_JSON);
 		resp.setLocale(Locale.ENGLISH);
 		/**
 		 * Converting to Json format
@@ -87,7 +87,7 @@ public class ItemJsonServlet extends HttpServlet {
 		Item item = new Item();
 		item.setIdItem(idItem);
 		item.setIdManifestation(idManifestation);
-		// itemIdentifier musto be not null
+		// itemIdentifier must not be null
 		item.setItemIdentifier(req.getParameter("itemIdentifier"));
 		// if null will be converted to an empty string
 		item.setFingerprint(req.getParameter("fingerprint"));

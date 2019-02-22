@@ -52,7 +52,8 @@ public class ManifestationTest {
 
 		// Create publication date
 		Collection<TimeStampedDescription> dateOfPublicationDistribution = new ArrayList<>();
-		TimeStampedDescription dateStructurePublish = new TimeStampedDescription("Publication Date", Instant.parse("1616-05-05T23:00:00Z"));
+		TimeStampedDescription dateStructurePublish = new TimeStampedDescription("Publication Date",
+				Instant.parse("1616-05-05T23:00:00Z"));
 		dateOfPublicationDistribution.add(dateStructurePublish);
 
 		// Create manifestation Identifier
@@ -77,7 +78,7 @@ public class ManifestationTest {
 			// Create manifestation
 			@SuppressWarnings("unused")
 			Manifestation manifestation = new Manifestation(512, null, null, null, null, null, null, null, null);
-			;
+
 		});
 	}
 }

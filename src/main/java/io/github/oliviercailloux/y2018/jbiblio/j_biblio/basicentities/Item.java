@@ -2,6 +2,8 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
 import java.util.Objects;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
+
 import com.google.common.base.Strings;
 
 /**
@@ -11,6 +13,7 @@ import com.google.common.base.Strings;
  * later to include attributes related to other types of items (books, music,
  * ...)
  */
+@JsonbPropertyOrder({ "idItem", "idManifestation", "itemIdentifier", "fingerprint", "provenanceOfTheItem" })
 public class Item {
 	/**
 	 * Not <code>null</code>.

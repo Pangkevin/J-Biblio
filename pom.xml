@@ -23,9 +23,10 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<!-- The javax.servlet package contains a number of classes and interfaces 
-			that describe and define the contracts between a servlet class and the runtime 
-			environment provided for an instance of such a class by a conforming servlet 
-			container. source : https://docs.oracle.com/javaee/7/api/javax/servlet/package-summary.html -->
+			We need to keep this dependency to maintain the performance of the unit test, 
+			otherwise we'll get the following error: "AVERTISSEMENT: TestEngine with 
+			ID 'junit-jupiter' failed to execute tests java.lang.NoClassDefFoundError: 
+			junit/framework/ComparisonFailure" -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

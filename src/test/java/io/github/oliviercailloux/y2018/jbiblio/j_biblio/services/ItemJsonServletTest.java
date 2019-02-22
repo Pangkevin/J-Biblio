@@ -41,7 +41,7 @@ class ItemJsonServletTest extends Mockito {
 		new ItemJsonServlet().doGet(request, response);
 		writer.flush();
 		assertTrue(stringWriter.toString().contains(
-				"{\"fingerprint\":\"DS21T47DT\",\"idItem\":412,\"idManifestation\":420,\"itemIdentifier\":\"A12S3\",\"provenanceOfTheItem\":\"AAA\"}"));
+				"{\"idItem\":412,\"idManifestation\":420,\"itemIdentifier\":\"A12S3\",\"fingerprint\":\"DS21T47DT\",\"provenanceOfTheItem\":\"AAA\"}"));
 
 	}
 

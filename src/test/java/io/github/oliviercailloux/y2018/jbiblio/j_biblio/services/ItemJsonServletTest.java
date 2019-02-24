@@ -6,6 +6,9 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Test;
@@ -69,64 +72,19 @@ class ItemJsonServletTest extends Mockito {
 	}
 
 	@Test
-	public void testInitItem() throws Exception {
+	public void testConvertJsonToItemObject() throws Exception {
 
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		when(request.getParameter("idItem")).thenReturn("412");
-		when(request.getParameter("idManifestation")).thenReturn("420");
-		when(request.getParameter("itemIdentifier")).thenReturn("A12S3");
-		when(request.getParameter("fingerprint")).thenReturn("DS21T47DT");
-		when(request.getParameter("provenanceOfTheItem")).thenReturn("AAA");
-
-		Item item = new ItemJsonServlet().initItem(request);
-		assertEquals(item.getIdItem(), 412);
-		assertEquals(item.getIdManifestation(), 420);
-		assertEquals(item.getItemIdentifier(), "A12S3");
-		assertEquals(item.getFingerprint(), "DS21T47DT");
-		assertEquals(item.getProvenanceOfTheItem(), "AAA");
-
-	}
-
-	@Test
-	public void testThrowNumberFormatExceptionInitItem() throws Exception {
-
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		/*
-		 * Mock parameter
-		 */
-		when(request.getParameter("idItem")).thenReturn("helloWorld");
-		when(request.getParameter("idManifestation")).thenReturn("420");
-		when(request.getParameter("itemIdentifier")).thenReturn("A12S3");
-		when(request.getParameter("fingerprint")).thenReturn("DS21T47DT");
-		when(request.getParameter("provenanceOfTheItem")).thenReturn("AAA");
-
-		assertThrows(NumberFormatException.class, () -> {
-
-			// Create manifestation
-			new ItemJsonServlet().initItem(request);
-
-		});
-
-	}
-
-	@Test
-	public void testThrowNullPointerExceptionInitItem() throws Exception {
-
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		/*
-		 * Mock parameter
-		 */
-		when(request.getParameter("idItem")).thenReturn("420");
-		when(request.getParameter("idManifestation")).thenReturn("420");
-		when(request.getParameter("fingerprint")).thenReturn("DS21T47DT");
-		when(request.getParameter("provenanceOfTheItem")).thenReturn("AAA");
-
-		assertThrows(NullPointerException.class, () -> {
-
-			// Create manifestation
-			new ItemJsonServlet().initItem(request);
-
-		});
+		try (Jsonb jsonb = JsonbBuilder.create();) {
+			try (BufferedReader reader = new BufferedReader(new StringReader(
+					"{\"fingerprint\":\"DS21T47DT\",\"idItem\":412,\"idManifestation\":420,\"itemIdentifier\":\"A12S3\",\"provenanceOfTheItem\":\"RES\"}"));) {
+				Item item = jsonb.fromJson(reader, Item.class);
+				assertEquals(item.getIdItem(), 412);
+				assertEquals(item.getIdManifestation(), 420);
+				assertEquals(item.getItemIdentifier(), "A12S3");
+				assertEquals(item.getFingerprint(), "DS21T47DT");
+				assertEquals(item.getProvenanceOfTheItem(), "RES");
+			}
+		}
 
 	}
 

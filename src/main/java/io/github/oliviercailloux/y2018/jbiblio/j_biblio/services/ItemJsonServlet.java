@@ -59,8 +59,7 @@ public class ItemJsonServlet extends HttpServlet {
 				/**
 				 * Jpa will be implemented in the next sprint
 				 */
-				@SuppressWarnings("unused")
-				Item item = jsonb.fromJson(reader, Item.class);
+				jsonb.fromJson(reader, Item.class);
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println(

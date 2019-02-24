@@ -79,7 +79,7 @@ class ItemJsonServletTest extends Mockito {
 					"{\"fingerprint\":\"DS21T47DT\",\"idItem\":412,\"idManifestation\":420,\"itemIdentifier\":\"A12S3\",\"provenanceOfTheItem\":\"RES\"}"));) {
 				/**
 				 * we used fromJson(BufferedReader, Class) in doPost method to convert a Json
-				 * format to a Item Object
+				 * format to an Item Object
 				 */
 				Item item = jsonb.fromJson(reader, Item.class);
 				assertEquals(item.getIdItem(), 412);

@@ -70,7 +70,6 @@ public class ItemJsonServlet extends HttpServlet {
 		catch (Exception e) {
 
 			LOGGER.warning(" Error  " + e.toString());
-			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "insert failed.");
 		}
 

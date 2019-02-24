@@ -3,7 +3,6 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentitytest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
@@ -21,16 +20,10 @@ class ResponsibleEntityTest {
 	 */
 	@Test
 	void addPersonResponsibleEntityTest() throws ParseException {
-		/**
-		 * Init date
-		 */
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String birthdate = "1565-04-26";
-
-		// Init Instant Date
-		Instant dateBirth = formatter.parse(birthdate).toInstant();
 		// Init DateStructure
-		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
+		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate",
+				Instant.parse("1565-05-05T23:00:00Z"));
+
 		Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
 		ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
 
@@ -54,46 +47,6 @@ class ResponsibleEntityTest {
 	}
 
 	/**
-	 * Tests if a CorporateBody and a Personn is initialize correctly and properly
-	 * 
-	 * @throws ParseException
-	 */
-
-	@Test
-	void PersonResponsibleEntityTest() throws ParseException {
-		/**
-		 * Init date
-		 */
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String birthdate = "1565-04-26";
-
-		// Init Instant Date
-		Instant dateBirth = formatter.parse(birthdate).toInstant();
-		// Init DateStructure
-		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate", dateBirth);
-		Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
-		ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
-
-		assertEquals(responsibleEntity.asPerson().getNameAuthority(), "Shakespeare, William, 1564-1616");
-		assertEquals(responsibleEntity.asPerson().getFirstName(), "William");
-		assertEquals(responsibleEntity.asPerson().getLastName(), "Shakespeare");
-		assertEquals(responsibleEntity.asPerson().getPersonTitle(), "");
-
-	}
-
-	@Test
-	void CorporateBodyResponsibleEntityTest() throws IllegalStateException {
-
-		CorporateBody cb = new CorporateBody("BNF", "bnf");
-
-		ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
-		assertEquals(responsibleEntity.asCorporateBody().getNameAuthority(), "BNF");
-		assertEquals(responsibleEntity.asCorporateBody().getNameCorporateBody(), "bnf");
-
-	}
-
-	/**
 	 * Test throws NullPointerException
 	 */
 	@Test
@@ -102,8 +55,7 @@ class ResponsibleEntityTest {
 		Person person = null;
 
 		assertThrows(NullPointerException.class, () -> {
-			@SuppressWarnings("unused")
-			ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
+			new ResponsibleEntity(person);
 		});
 	}
 
@@ -116,8 +68,8 @@ class ResponsibleEntityTest {
 		CorporateBody cb = null;
 
 		assertThrows(NullPointerException.class, () -> {
-			@SuppressWarnings("unused")
-			ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
+
+			new ResponsibleEntity(cb);
 		});
 	}
 

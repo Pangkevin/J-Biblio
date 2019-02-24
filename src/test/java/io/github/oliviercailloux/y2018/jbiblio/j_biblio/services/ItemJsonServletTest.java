@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
+
 /**
  * This class use Mockito to test doPost and doGet methods which are in the
  * ItemJsonServlet class
@@ -20,17 +22,11 @@ class ItemJsonServletTest extends Mockito {
 
 	@Test
 	public void testDoGet() throws Exception {
-		/*
-		 * Create the mock object of HttpServletRequest and HttpServletResponse
-		 */
+
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter writer = new PrintWriter(stringWriter);
-
-		/*
-		 * Mock parameter
-		 */
 		when(request.getParameter("idItem")).thenReturn("412");
 		when(request.getParameter("idManifestation")).thenReturn("420");
 		when(request.getParameter("itemIdentifier")).thenReturn("A12S3");
@@ -47,9 +43,7 @@ class ItemJsonServletTest extends Mockito {
 
 	@Test
 	public void testDoPost() throws Exception {
-		/*
-		 * Create the mock object of HttpServletRequest and HttpServletResponse
-		 */
+
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
 
@@ -69,7 +63,71 @@ class ItemJsonServletTest extends Mockito {
 			/*
 			 * Last step to test if the output of message error is correct
 			 */
-			assertTrue(stringWriter.toString().contains("The object is successfully insert"));
+			assertTrue(stringWriter.toString().contains(
+					"The object is successfully initialized. Database insertion  will be implemented in the next sprint"));
 		}
 	}
+
+	@Test
+	public void testInitItem() throws Exception {
+
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getParameter("idItem")).thenReturn("412");
+		when(request.getParameter("idManifestation")).thenReturn("420");
+		when(request.getParameter("itemIdentifier")).thenReturn("A12S3");
+		when(request.getParameter("fingerprint")).thenReturn("DS21T47DT");
+		when(request.getParameter("provenanceOfTheItem")).thenReturn("AAA");
+
+		Item item = new ItemJsonServlet().initItem(request);
+		assertEquals(item.getIdItem(), 412);
+		assertEquals(item.getIdManifestation(), 420);
+		assertEquals(item.getItemIdentifier(), "A12S3");
+		assertEquals(item.getFingerprint(), "DS21T47DT");
+		assertEquals(item.getProvenanceOfTheItem(), "AAA");
+
+	}
+
+	@Test
+	public void testThrowNumberFormatExceptionInitItem() throws Exception {
+
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		/*
+		 * Mock parameter
+		 */
+		when(request.getParameter("idItem")).thenReturn("helloWorld");
+		when(request.getParameter("idManifestation")).thenReturn("420");
+		when(request.getParameter("itemIdentifier")).thenReturn("A12S3");
+		when(request.getParameter("fingerprint")).thenReturn("DS21T47DT");
+		when(request.getParameter("provenanceOfTheItem")).thenReturn("AAA");
+
+		assertThrows(NumberFormatException.class, () -> {
+
+			// Create manifestation
+			new ItemJsonServlet().initItem(request);
+
+		});
+
+	}
+
+	@Test
+	public void testThrowNullPointerExceptionInitItem() throws Exception {
+
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		/*
+		 * Mock parameter
+		 */
+		when(request.getParameter("idItem")).thenReturn("420");
+		when(request.getParameter("idManifestation")).thenReturn("420");
+		when(request.getParameter("fingerprint")).thenReturn("DS21T47DT");
+		when(request.getParameter("provenanceOfTheItem")).thenReturn("AAA");
+
+		assertThrows(NullPointerException.class, () -> {
+
+			// Create manifestation
+			new ItemJsonServlet().initItem(request);
+
+		});
+
+	}
+
 }

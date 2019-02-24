@@ -22,7 +22,7 @@ public class ItemJsonServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger.getLogger(ItemJsonServlet.class.getCanonicalName());
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		resp.setContentType(MediaType.APPLICATION_JSON);
@@ -43,10 +43,8 @@ public class ItemJsonServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			// Send error status
-
 			LOGGER.warning(" Error  " + e.toString());
-			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "The research failed");
+			throw new ServletException();
 
 		}
 	}
@@ -65,7 +63,8 @@ public class ItemJsonServlet extends HttpServlet {
 				Item item = jsonb.fromJson(reader, Item.class);
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
-			resp.getWriter().println("The object is successfully inserted");
+			resp.getWriter().println(
+					"The object is successfully initialized. Database insertion  will be implemented in the next sprint");
 		}
 
 		catch (Exception e) {
@@ -77,7 +76,7 @@ public class ItemJsonServlet extends HttpServlet {
 
 	}
 
-	private Item initItem(HttpServletRequest req) throws NumberFormatException, NullPointerException {
+	public Item initItem(HttpServletRequest req) throws NumberFormatException, NullPointerException {
 
 		int idItem = Integer.parseInt(req.getParameter("idItem"));
 		int idManifestation = Integer.parseInt(req.getParameter("idManifestation"));

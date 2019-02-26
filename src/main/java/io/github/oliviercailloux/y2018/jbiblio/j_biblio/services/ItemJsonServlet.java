@@ -44,7 +44,7 @@ public class ItemJsonServlet extends HttpServlet {
 		} catch (Exception e) {
 			// Send error status
 			LOGGER.warning(" Error  " + e.toString());
-			throw new ServletException(e.fillInStackTrace());
+			throw new ServletException(e);
 
 		}
 	}

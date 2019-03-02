@@ -1,0 +1,9 @@
+language: java
+git:
+  depth: 1
+dist: xenial
+cache:
+  directories:
+    - $HOME/.m2
+ notifications:
+    slack: j-biblio:YdhU5ex8QRZKFvG2EdCCMM3p

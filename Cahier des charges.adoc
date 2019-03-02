@@ -40,8 +40,8 @@ image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-en
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
-|US2.001  |Créer les objets du modèle à partir de format JSON  |  |
-|US2.002  |Importer les objets du modèle à partir de format MODS |  |
+|US2.001  |Créer les objets du modèle à partir de format JSON  |9  |1
+|US2.002  |Importer les objets du modèle à partir de format MODS |10  |2
 |US2.003  |Importer les objets du modèle à partir de format MARC21  |  |
 |======================
 
@@ -68,7 +68,7 @@ image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-en
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
-|US5.001  |Client pour la création d’un objet du modèle (GUI simple)  |  |
+|US5.001  |Client pour la création d’un objet du modèle (GUI simple)  |11  |1
 |US5.002  |Transformer les clients pour en faire des clients SOAP |  |
 |======================
 
@@ -76,8 +76,8 @@ image::https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FRBR-Group-2-en
 [width="100%",options="header"]
 |======================
 |Ref  |User Story |Priorité |User Point
-|US6.001  |Implémenter des entités JPA et les méthodes permettant d’écrire et de lire depuis la BD les Work et Expression  |  |
-|US6.002  |Implémenter des entités JPA et les méthodes permettant d’écrire et de lire depuis la BD les Manifestation, Item et Person |  |
+|US6.001  |Implémenter des entités JPA et les méthodes permettant d’écrire et de lire depuis la BD les Work et Expression  |7  |1
+|US6.002  |Implémenter des entités JPA et les méthodes permettant d’écrire et de lire depuis la BD les Manifestation, Item et Person |8  |1
 |======================
 
 ==== Epic 7: Déploiement du serveur en-ligne
@@ -114,3 +114,16 @@ US4.001: [assigné à Guillaume - 0.5 SP] Servlet Get pour récupérer les objet
 US4.002: [assigné à Guillaume - 0.5 SP] Servlet Set pour assigner des valeurs aux attributs des objets du modèle à travers les requêtes HTTP
 
 US3.001: [assigné à Juan - 1 SP] Exporter les objets du modèle sous format JSON
+
+=== Itération 2
+A la fin de la deuxième itération les stories suivantes seront livrées: 
+
+US6.001: [assigné à Vima - 1 SP] Implémenter des entités JPA (Work, Expression).
+
+US6.002: [assigné à Kévin - 1 SP] Implémenter des entités JPA (Manifestation, Item, Person).
+
+US2.001  [assigné à Juan - 1 SP] Créer les objets du modèle à partir de format JSON.
+
+US2.002: [assigné à Caroline - 2 SP] Créer les objets du modèle à partir de format MODS.
+
+US5.001: [assigné à Guillaume - 1 SP] Client pour la création d’un objet du modèle (GUI simple).

@@ -2,6 +2,13 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 
 import java.util.Objects;
 import java.util.Optional;
+
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
@@ -9,7 +16,8 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  * data transfer object or DTO of Person
  */
-
+@XmlRootElement(name = "publisher")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person extends AbstractResponsibleEntity {
 
 	/**
@@ -41,6 +49,10 @@ public class Person extends AbstractResponsibleEntity {
 	 * Not <code>null</code>.
 	 */
 	private Optional<TimeStampedDescription> deathDate;
+	
+	public Person() {
+		this.middleName="hell";
+	}
 
 	public Person(String nameAuthority, String firstName, String lastName, TimeStampedDescription birthDate) {
 

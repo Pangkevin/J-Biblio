@@ -1,12 +1,22 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
 
 import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.*;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
+
+
+
 
 /**
  * This class represents the 3rd element from group 1 entities of FRBR model
@@ -15,8 +25,9 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
  * enhance the class later to include attributes related to other types of
  * manifestations (books, music, ...)
  */
-
-public class Manifestation {
+@XmlRootElement(name="Manifestation")
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+public class Manifestation implements Serializable {
 
 	private int idManifestation;
 
@@ -44,6 +55,11 @@ public class Manifestation {
 	 * Not <code>null</code>.
 	 */
 	private Collection<Integer> placeOfPublicationDistribution;
+	
+	/**
+	 * Not <code>null</code>.
+	 */
+	private Collection<Place> lblPlaceOfPublication;
 
 	/**
 	 * Not <code>null</code>.
@@ -104,6 +120,10 @@ public class Manifestation {
 		this.manifestationIdentifier = Objects.requireNonNull(manifestationIdentifier);
 
 	}
+	
+	public Manifestation() {
+		this.idManifestation = 1;
+	}
 
 	public int getIdManifestation() {
 		return idManifestation;
@@ -129,7 +149,9 @@ public class Manifestation {
 
 	/**
 	 * @return not <code>null</code>.
-	 */
+	 **/
+	@XmlElementWrapper(name="titleInfo")
+	 @XmlElement(name="title")
 	public Collection<String> getTitleOfTheManifestation() {
 		return titleOfTheManifestation;
 	}
@@ -191,9 +213,16 @@ public class Manifestation {
 	/**
 	 * @return not <code>null</code>.
 	 */
+
+	@XmlElementWrapper(name="originInfo")
+    @XmlElement(name="publisher", type=ResponsibleEntity.class)
 	public Collection<ResponsibleEntity> getPublisherDistributer() {
 		return publisherDistributer;
 	}
+	/* @XmlElements({
+    @XmlElement(name="publisher", type=Person.class),
+    @XmlElement(name="capitaine", type=CorporateBody.class)
+})*/
 
 	/**
 	 * 
@@ -216,6 +245,20 @@ public class Manifestation {
 	 */
 	public void setDateOfPublicationDistribution(Collection<TimeStampedDescription> dateOfPublicationDistribution) {
 		this.dateOfPublicationDistribution = Objects.requireNonNull(dateOfPublicationDistribution);
+	}
+
+	
+	/**
+	 * @return not <code>null</code>.
+	 */
+	@XmlElementWrapper(name="originInfo")
+	@XmlElement(name="place", type=Place.class)
+	public Collection<Place> getPlaceOfPublication() {
+		return lblPlaceOfPublication;
+	}
+
+	public void setPlaceOfPublication(Collection<Place> placeOfPublication) {
+		this.lblPlaceOfPublication = placeOfPublication;
 	}
 
 }

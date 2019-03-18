@@ -11,6 +11,7 @@ import com.google.common.collect.Iterables;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.Place;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ManifestationUnmarshalling;;
 
 class ManifestationUnmarshallingTest {
@@ -35,7 +36,7 @@ class ManifestationUnmarshallingTest {
 				" 	 	<place>\n" + 
 				" 	 	 	<placeTerm type=\"text\">New York</placeTerm>\n" + 
 				" 	 	</place>\n" + 
-				" 	 <publisher> W. Lake Borland</publisher>\n" + 
+				" 	 <publisher> <artname>W. Lake Borland</artname> </publisher>\n" + 
 				" 	 	<dateIssued keyDate=\"yes\" encoding=\"w3cdtf\">1889</dateIssued>\n" + 
 				" 	</originInfo>\n" + 
 				" 	<language>\n" + 
@@ -51,17 +52,20 @@ class ManifestationUnmarshallingTest {
 		
 		assertTrue(manifestation.getTitleOfTheManifestation().contains("At Gettysburg, or, What a Girl Saw and Heard of the Battle: A True Narrative"));
 		
-		Place place = new Place("New York"); 
-		
+		Place place = new Place("New York"); 	
 		Collection<Place> places = new ArrayList<Place>();
 		places.add(place);
-		
 		Place placeInColl = Iterables.get(manifestation.getPlaceOfPublication(), 0);
 	
 		assertTrue(placeInColl.equals(place));
-		assertTrue(manifestation.getTitleOfTheManifestation().contains("At Gettysburg, or, What a Girl Saw and Heard of the Battle: A True Narrative"));
+	
+		Person person = new Person("W. Lake Borland"); 	
+		Collection<Person> personnes = new ArrayList<Person>();
+		personnes.add(person);
+		String personInColl = Iterables.get(manifestation.getPublisherDistributer(), 0).getPersonTitle();
+	
+		assertEquals(personInColl,person.getPersonTitle());
 		
 		
-		//assertTrue(manifestation.getPublisherDistributer().contains("W. Lake Borland"));
-	}
+		}
 }

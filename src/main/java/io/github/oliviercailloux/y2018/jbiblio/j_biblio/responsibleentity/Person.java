@@ -11,13 +11,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.base.Strings;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.Place;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 
 /**
  * data transfer object or DTO of Person
  */
 @XmlRootElement(name = "publisher")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class Person extends AbstractResponsibleEntity {
 
 	/**
@@ -38,6 +39,7 @@ public class Person extends AbstractResponsibleEntity {
 	/**
 	 * Not <code>null</code>, may be empty.
 	 */
+	
 	private String personTitle;
 
 	/**
@@ -51,7 +53,6 @@ public class Person extends AbstractResponsibleEntity {
 	private Optional<TimeStampedDescription> deathDate;
 	
 	public Person() {
-		this.middleName="hell";
 	}
 
 	public Person(String nameAuthority, String firstName, String lastName, TimeStampedDescription birthDate) {
@@ -64,6 +65,10 @@ public class Person extends AbstractResponsibleEntity {
 		this.birthDate = Objects.requireNonNull(birthDate);
 		this.deathDate = Optional.empty();
 
+	}
+
+	public Person(String title) {
+		this.setPersonTitle(title);
 	}
 
 	/**
@@ -112,8 +117,9 @@ public class Person extends AbstractResponsibleEntity {
 	/**
 	 * @return not <code>null</code>.
 	 */
+	@XmlElement(name="artname")
 	public String getPersonTitle() {
-		return personTitle;
+		return this.personTitle;
 	}
 
 	/**
@@ -155,4 +161,10 @@ public class Person extends AbstractResponsibleEntity {
 		this.deathDate = Optional.ofNullable(deathdate);
 	}
 
+	public boolean equals(Person b) {
+		if(b.getPersonTitle().equals(this.getPersonTitle()))
+			return true;
+		
+		else return false;
+		}
 }

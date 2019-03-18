@@ -5,9 +5,13 @@ import java.util.Collection;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAccessType;
 
 import com.google.common.base.Strings;
@@ -64,7 +68,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Collection<ResponsibleEntity> publisherDistributer;
+	private Collection<Person> publisherDistributer;
 
 	/**
 	 * Not <code>null</code>.
@@ -75,6 +79,9 @@ public class Manifestation implements Serializable {
 	 * Not <code>null</code>.
 	 */
 	public String manifestationIdentifier;
+	
+
+	private OriginInfo originInfo;
 
 	/**
 	 * This function is the constructor of manifestation entity
@@ -106,7 +113,7 @@ public class Manifestation implements Serializable {
 
 	public Manifestation(int idManifestation, Collection<Integer> idItems, Collection<String> titleOfTheManifestation,
 			Collection<ResponsibleEntity> statementOfResponsibility, String editionDesignation,
-			Collection<Integer> placeOfPublicationDistribution, Collection<ResponsibleEntity> publisherDistributer,
+			Collection<Integer> placeOfPublicationDistribution, Collection<Person> publisherDistributer,
 			Collection<TimeStampedDescription> dateOfPublicationDistribution, String manifestationIdentifier) {
 
 		this.idManifestation = idManifestation;
@@ -213,22 +220,20 @@ public class Manifestation implements Serializable {
 	/**
 	 * @return not <code>null</code>.
 	 */
-
-	@XmlElementWrapper(name="originInfo")
-    @XmlElement(name="publisher", type=ResponsibleEntity.class)
-	public Collection<ResponsibleEntity> getPublisherDistributer() {
-		return publisherDistributer;
+	public Collection<Person> getPublisherDistributer() {
+		if(originInfo!=null) {
+			return originInfo.getPublisher();
+			}
+		else
+		return this.publisherDistributer;
 	}
-	/* @XmlElements({
-    @XmlElement(name="publisher", type=Person.class),
-    @XmlElement(name="capitaine", type=CorporateBody.class)
-})*/
 
 	/**
 	 * 
 	 * @param publisherDistributer not <code>null</code>
 	 */
-	public void setPublisherDistributer(Collection<ResponsibleEntity> publisherDistributer) {
+	public void setPublisherDistributer(Collection<Person> publisherDistributer) {
+		originInfo.setPublisher(Objects.requireNonNull(publisherDistributer));
 		this.publisherDistributer = Objects.requireNonNull(publisherDistributer);
 	}
 
@@ -251,14 +256,25 @@ public class Manifestation implements Serializable {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	@XmlElementWrapper(name="originInfo")
-	@XmlElement(name="place", type=Place.class)
 	public Collection<Place> getPlaceOfPublication() {
-		return lblPlaceOfPublication;
+		if(originInfo!=null) {
+		return originInfo.getPlace();
+		}
+		else return this.lblPlaceOfPublication;
 	}
 
 	public void setPlaceOfPublication(Collection<Place> placeOfPublication) {
+		originInfo.setPlace(placeOfPublication);
 		this.lblPlaceOfPublication = placeOfPublication;
+	}
+	
+	@XmlElement(name = "originInfo", type = OriginInfo.class)
+	public OriginInfo getOriginInfo() {
+		return originInfo;
+	}
+
+	public void setOriginInfo(OriginInfo originInfo) {
+		this.originInfo = originInfo;
 	}
 
 }

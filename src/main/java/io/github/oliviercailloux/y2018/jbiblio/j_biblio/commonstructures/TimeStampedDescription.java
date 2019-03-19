@@ -3,16 +3,32 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures;
 import java.time.Instant;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TimeStampedDescription")
 public class TimeStampedDescription {
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int id;
 
 	/**
 	 * Not <code>null</code>, empty if unknown.
 	 */
+	@Column(name = "description")
 	private String description;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "date")
 	private Instant date;
 
 	public TimeStampedDescription(String description, Instant date) {
@@ -20,6 +36,10 @@ public class TimeStampedDescription {
 		this.description = Objects.requireNonNull(description);
 
 		this.date = Objects.requireNonNull(date);
+
+	}
+
+	public TimeStampedDescription() {
 
 	}
 

@@ -19,8 +19,8 @@ class PersonTest {
 	void createPersonWithNullBirthDate() {
 
 		assertThrows(NullPointerException.class, () -> {
-			@SuppressWarnings("unused")
-			Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", null);
+
+			new Person().setBirthDate(null);
 		});
 	}
 
@@ -33,12 +33,11 @@ class PersonTest {
 	void testOptionalAttribut() throws ParseException {
 
 		// Init DateStructure
-		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate",
-				Instant.parse("1565-05-05T23:00:00Z"));
+
 		TimeStampedDescription dateStructureDeath = new TimeStampedDescription("DeathDate",
 				Instant.parse("1616-04-22T23:00:00Z"));
 
-		Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
+		Person person = new Person();
 
 		assertFalse(person.getDeathDate().isPresent());
 

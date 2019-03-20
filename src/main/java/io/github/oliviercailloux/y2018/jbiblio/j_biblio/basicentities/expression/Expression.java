@@ -3,6 +3,12 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expressio
 import java.util.Collection;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
@@ -11,15 +17,20 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  * 
  */
+@Entity
 public class Expression {
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ManyToOne
 	private Work work;
 	/**
 	 * Not <code>null</code>.
 	 */
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idExpression;
 	/**
 	 * Not <code>null</code>.
@@ -55,6 +66,10 @@ public class Expression {
 	 * useRestrictionsOnTheExpression;
 	 */
 
+	public Expression() {
+		super();
+	}
+	
 	public Expression(Work work, int idExpression, String formOfExpression,
 			Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression) {
 		this.work = Objects.requireNonNull(work);

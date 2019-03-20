@@ -3,24 +3,41 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 import java.util.Collection;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import com.google.common.base.Strings;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 
 /**
  */
+@Entity
 public class Work {
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idWork;
+
 
 	/**
 	 * Not <code>null</code>.
 	 */
 	private Collection<Integer> idExpressions;
 
+	/**
+	 * Not <code>null</code>.
+	 */
+	@OneToMany (mappedBy = "work")
+	private Collection<Expression> expressions;
+	
 	/**
 	 * Not <code>null</code>.
 	 */
@@ -56,6 +73,10 @@ public class Work {
 	 */
 	private String contextForTheWork;
 
+	public Work() {
+		super();
+	}
+	
 	public Work(int idWork, Collection<String> titleOfWork, String formOfWork) {
 		this.idWork = Objects.requireNonNull(idWork);
 		this.titleOfWork = Objects.requireNonNull(titleOfWork);

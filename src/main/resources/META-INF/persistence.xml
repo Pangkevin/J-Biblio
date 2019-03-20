@@ -6,6 +6,8 @@
 	<persistence-unit name="jibiblio">
 		<class>io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person</class>
 		<class>io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription</class>
+		<class>io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression</class>
+		<class>io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work</class>
 		<properties>
 			<property
 				name="javax.persistence.schema-generation.database.action"

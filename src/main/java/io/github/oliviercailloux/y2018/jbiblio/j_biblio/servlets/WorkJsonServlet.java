@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,11 +24,17 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.WorkService;
 
 @SuppressWarnings("serial")
-@WebServlet("item")
+@WebServlet("work")
 public class WorkJsonServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger.getLogger(WorkJsonServlet.class.getCanonicalName());
+	@PersistenceContext
+	private EntityManager em;
+
+	@Inject
+	private WorkService workService;// = new CommentService();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -40,8 +50,17 @@ public class WorkJsonServlet extends HttpServlet {
 			/**
 			 * Jpa will be implemented in the next sprint
 			 */
-			Work item = this.initWork(req);
-			String jsonItem = jsonb.toJson(item);
+
+			final List<Work> allItems = workService.getAll();
+			String jsonItem = "";
+
+			for (Work work : allItems) {
+
+				// Work item = this.initWork(req);
+
+				jsonItem = jsonItem + jsonb.toJson(work) + "\n";
+			}
+
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println(jsonItem);
 			LOGGER.info(" Display object in JSON format " + jsonItem);
@@ -61,10 +80,9 @@ public class WorkJsonServlet extends HttpServlet {
 		resp.setLocale(Locale.ENGLISH);
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 			try (BufferedReader reader = req.getReader()) {
-				/**
-				 * Jpa will be implemented in the next sprint
-				 */
-				jsonb.fromJson(reader, Work.class);
+
+				Work work = jsonb.fromJson(reader, Work.class);
+				workService.persist(work);
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println(

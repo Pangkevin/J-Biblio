@@ -17,32 +17,24 @@ import javax.ws.rs.core.Response;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 
 @RequestScoped
-@Path("workJPA")
 public class WorkService {
-	@SuppressWarnings("unused")
-	private static final Logger LOGGER = Logger.getLogger(WorkService.class.getCanonicalName());
-
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Inject
-	private HttpServletRequest request;
+	private QueryHelper helper;
 
-	@GET
 	@Transactional
-	@Produces("text/plain")
-	public Response getWorkServlet() {
+	public List<Work> getAll() {
 
-		List<Work> works = em.createQuery("Select W from Work W", Work.class).getResultList();
-		String allWorks = "";
-		for (Work work : works) {
-			allWorks += work.getIdWork()+"\n";
-		}
-		if (allWorks.equals(""))
-			return Response.status(Response.Status.OK).build();
-		else			
-			return Response.ok().entity(allWorks).build();
+		return em.createQuery(helper.selectAll(Work.class)).getResultList();
+
+	}
+
+	@Transactional
+	public void persist(Work work) {
+
+		em.persist(work);
+
 	}
 }
-
-

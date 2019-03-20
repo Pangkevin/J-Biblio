@@ -1,13 +1,19 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.google.common.base.Strings;
 
@@ -17,6 +23,7 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  */
 @Entity
+@Table(name = "Work")
 public class Work {
 
 	/**
@@ -26,57 +33,71 @@ public class Work {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idWork;
 
-
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
 	private Collection<Integer> idExpressions;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	@OneToMany (mappedBy = "work")
+	@OneToMany(mappedBy = "work")
 	private Collection<Expression> expressions;
-	
+
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
 	private Collection<String> titleOfWork;
 
 	/**
 	 * Class to which the work belongs (novel play etc.) Not <code>null</code>.
 	 */
+	@Column(name = "formOfWork")
 	private String formOfWork;
 
 	/**
 	 * Normally the year Not <code>null</code>.
 	 */
+	@Transient
 	private Collection<TimeStampedDescription> dateOfWork;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "intendedTermination")
 	private boolean intendedTermination;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
 	private Collection<String> intendedAudience;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "contextForTheWork")
 	private String contextForTheWork;
 
 	public Work() {
-		super();
+		idExpressions = new ArrayList<>();
+		expressions = new ArrayList<>();
+		titleOfWork = new ArrayList<>();
+		dateOfWork = new ArrayList<>();
+		intendedAudience = new ArrayList<>();
+		otherDistinguishingCharacteristic = new ArrayList<>();
+		formOfWork = "";
+
 	}
-	
+
 	public Work(int idWork, Collection<String> titleOfWork, String formOfWork) {
 		this.idWork = Objects.requireNonNull(idWork);
 		this.titleOfWork = Objects.requireNonNull(titleOfWork);

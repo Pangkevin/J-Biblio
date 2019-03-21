@@ -36,7 +36,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	private Collection<Integer> idExpressions;
 
 	/**
@@ -66,7 +66,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/**
@@ -78,7 +78,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	private Collection<String> intendedAudience;
 
 	/**

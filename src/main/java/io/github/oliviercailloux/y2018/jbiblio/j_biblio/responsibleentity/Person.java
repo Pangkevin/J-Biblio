@@ -31,9 +31,9 @@ public class Person {
 	private String nameAuthority;
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "idPerson")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int id;
+	private int idPerson;
 	/**
 	 * Not <code>null</code>, may be empty.
 	 */

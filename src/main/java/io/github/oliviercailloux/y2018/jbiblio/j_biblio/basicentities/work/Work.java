@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -37,6 +38,7 @@ public class Work {
 	 * Not <code>null</code>.
 	 */
 	@ElementCollection
+	@CollectionTable(name = "idExpressions", joinColumns = @javax.persistence.JoinColumn(name = "Work_idExpressions"))
 	private Collection<Integer> idExpressions;
 
 	/**
@@ -49,6 +51,7 @@ public class Work {
 	 * Not <code>null</code>.
 	 */
 	@ElementCollection
+	@CollectionTable(name = "titleOfWork", joinColumns = @javax.persistence.JoinColumn(name = "Work_titleOfWork"))
 	private Collection<String> titleOfWork;
 
 	/**
@@ -67,6 +70,7 @@ public class Work {
 	 * Not <code>null</code>.
 	 */
 	@ElementCollection
+	@CollectionTable(name = "otherDistinguishingCharacteristic", joinColumns = @javax.persistence.JoinColumn(name = "Work_otherDistinguishingCharacteristic"))
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/**
@@ -79,6 +83,7 @@ public class Work {
 	 * Not <code>null</code>.
 	 */
 	@ElementCollection
+	@CollectionTable(name = "intendedAudience", joinColumns = @javax.persistence.JoinColumn(name = "Work_otherDistinguishingCharacteristic"))
 	private Collection<String> intendedAudience;
 
 	/**

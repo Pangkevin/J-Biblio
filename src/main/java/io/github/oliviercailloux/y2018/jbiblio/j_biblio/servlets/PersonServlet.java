@@ -3,32 +3,34 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
+
+import javax.inject.Inject;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
-import javax.inject.Inject;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ItemService;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.PersonService;
 
 @SuppressWarnings("serial")
-@WebServlet("item")
-public class ItemJsonServlet extends HttpServlet {
-	private static final Logger LOGGER = Logger.getLogger(ItemJsonServlet.class.getCanonicalName());
+@WebServlet("person")
+public class PersonServlet extends HttpServlet {
+	private static final Logger LOGGER = Logger.getLogger(PersonServlet.class.getCanonicalName());
 	@PersistenceContext
 	private EntityManager em;
 
 	@Inject
-	private ItemService itemService;
+	private PersonService personService;// = new CommentService();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -41,11 +43,14 @@ public class ItemJsonServlet extends HttpServlet {
 		 */
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 
-			/**
-			 * Jpa will be implemented in the next sprint
-			 */
-			Item item = this.initItem(req);
-			String jsonItem = jsonb.toJson(item);
+			final List<Person> allPerson = personService.getAll();
+			String jsonItem = "";
+
+			for (Person person : allPerson) {
+
+				jsonItem = jsonItem + jsonb.toJson(person) + "\n";
+			}
+
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println(jsonItem);
 			LOGGER.info(" Display object in JSON format " + jsonItem);
@@ -65,13 +70,12 @@ public class ItemJsonServlet extends HttpServlet {
 		resp.setLocale(Locale.ENGLISH);
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 			try (BufferedReader reader = req.getReader()) {
-				Item item = jsonb.fromJson(reader, Item.class);
-				// Insert in the database
-				itemService.persist(item);
+
+				Person work = jsonb.fromJson(reader, Person.class);
+				personService.persist(work);
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
-			resp.getWriter().println(
-					"The object is successfully initialized. Database insertion  will be implemented in the next sprint");
+			resp.getWriter().println("The object is successfully initialized");
 		}
 
 		catch (Exception e) {
@@ -82,23 +86,4 @@ public class ItemJsonServlet extends HttpServlet {
 
 	}
 
-	public Item initItem(HttpServletRequest req) throws NumberFormatException, NullPointerException {
-
-		int idItem = Integer.parseInt(req.getParameter("idItem"));
-		int idManifestation = Integer.parseInt(req.getParameter("idManifestation"));
-		/**
-		 * If parsInt doesn't throw NumberFormatException, then we can init a Item
-		 */
-		Item item = new Item();
-		item.setIdItem(idItem);
-		item.setIdManifestation(idManifestation);
-		// itemIdentifier must not be null
-		item.setItemIdentifier(req.getParameter("itemIdentifier"));
-		// if null will be converted to an empty string
-		item.setFingerprint(req.getParameter("fingerprint"));
-		item.setProvenanceOfTheItem(req.getParameter("provenanceOfTheItem"));
-
-		return item;
-
-	}
 }

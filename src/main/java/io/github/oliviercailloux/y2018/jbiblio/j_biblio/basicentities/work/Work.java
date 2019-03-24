@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +46,8 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@OneToMany(mappedBy = "work")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "work", cascade = { CascadeType.ALL })
 	private Collection<Expression> expressions;
 
 	/**
@@ -102,6 +103,7 @@ public class Work {
 		intendedAudience = new ArrayList<>();
 		otherDistinguishingCharacteristic = new ArrayList<>();
 		formOfWork = "";
+		contextForTheWork = "";
 
 	}
 
@@ -131,6 +133,20 @@ public class Work {
 	 */
 	public void setIdWork(int idWork) {
 		this.idWork = idWork;
+	}
+
+	/**
+	 * @return not <code>null</code>.
+	 */
+	public Collection<Expression> getExpressions() {
+		return expressions;
+	}
+
+	/**
+	 * @param expressions not <code>null</code>.
+	 */
+	public void setExpressions(Collection<Expression> expressions) {
+		this.expressions = Objects.requireNonNull(expressions);
 	}
 
 	/**

@@ -1,17 +1,21 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.google.common.base.Strings;
 
@@ -39,13 +43,13 @@ public class Expression {
 	/**
 	 * Not <code>null</code>.
 	 */
-
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	private Collection<Integer> idManifestations;
 	/**
 	 * Not <code>null</code>.
 	 */
-
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	private Collection<String> titleOfExpression;
 	/**
@@ -66,7 +70,7 @@ public class Expression {
 	/**
 	 * Not <code>null</code>.
 	 */
-
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	private Collection<String> otherDistinguishingCharacteristic;
 
@@ -83,6 +87,10 @@ public class Expression {
 
 		this.formOfExpression = "";
 		this.languageOfExpression = "";
+		this.dateOfExpression = new ArrayList<>();
+		this.titleOfExpression = new ArrayList<>();
+		this.idManifestations = new ArrayList<>();
+		this.otherDistinguishingCharacteristic = new ArrayList<>();
 
 	}
 

@@ -4,19 +4,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-import javax.json.bind.annotation.JsonbPropertyOrder;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import com.google.common.base.Strings;
 
@@ -25,11 +23,8 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 
 /**
  */
-
 @Entity
 @Table(name = "Work")
-@JsonbPropertyOrder({ "idWork", "idExpressions", "expressions", "titleOfWork", "formOfWork", "dateOfWork",
-		"otherDistinguishingCharacteristic", "intendedTermination", "intendedAudience", "contextForTheWork" })
 public class Work {
 
 	/**
@@ -43,7 +38,7 @@ public class Work {
 	 * Not <code>null</code>.
 	 */
 	@ElementCollection
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@CollectionTable(name = "idExpressions", joinColumns = @javax.persistence.JoinColumn(name = "Work_idExpressions"))
 	private Collection<Integer> idExpressions;
 
 	/**
@@ -55,8 +50,8 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
+	@CollectionTable(name = "titleOfWork", joinColumns = @javax.persistence.JoinColumn(name = "Work_titleOfWork"))
 	private Collection<String> titleOfWork;
 
 	/**
@@ -74,8 +69,8 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
+	@CollectionTable(name = "otherDistinguishingCharacteristic", joinColumns = @javax.persistence.JoinColumn(name = "Work_otherDistinguishingCharacteristic"))
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/**
@@ -87,8 +82,8 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
+	@CollectionTable(name = "intendedAudience", joinColumns = @javax.persistence.JoinColumn(name = "Work_otherDistinguishingCharacteristic"))
 	private Collection<String> intendedAudience;
 
 	/**

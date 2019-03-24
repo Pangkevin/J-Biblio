@@ -18,9 +18,9 @@ import javax.persistence.Table;
 public class CorporateBody {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "idCorporateBody")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int id;
+	private int idCorporateBody;
 
 	/**
 	 * nameAuthory It should not be allowed to be unknown. This is an essential

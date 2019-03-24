@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
@@ -36,7 +39,8 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@ElementCollection(fetch=FetchType.EAGER)
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Integer> idExpressions;
 
 	/**
@@ -48,6 +52,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	private Collection<String> titleOfWork;
 
@@ -66,7 +71,8 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@ElementCollection(fetch=FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/**
@@ -78,7 +84,8 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@ElementCollection(fetch=FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
 	private Collection<String> intendedAudience;
 
 	/**

@@ -102,7 +102,8 @@ public class WorkJsonServlet extends HttpServlet {
 	}
 
 	/**
-	 * This fonction allow to transform a work object and his his children into Json format
+	 * This fonction allow to transform a work object and his his children into Json
+	 * format
 	 * 
 	 * @param work
 	 * @return
@@ -113,12 +114,13 @@ public class WorkJsonServlet extends HttpServlet {
 		JsonObjectBuilder jsonObjectExpression = Json.createObjectBuilder();
 		jsonObjectExpression.build();
 		workBuilder.add("idWork", work.getIdWork());
-		workBuilder.add("idExpressions", work.getDateOfWork().toString());
-		workBuilder.add("otherDistinguishingCharacteristic", work.getOtherDistinguishingCharacteristic().toString());
-		workBuilder.add("intendedTermination", work.getIntendedAudience().toString());
-		workBuilder.add("intendedAudience", work.getIntendedAudience().toString());
+		workBuilder.add("idExpressions", Json.createArrayBuilder(work.getDateOfWork()));
+		workBuilder.add("otherDistinguishingCharacteristic",
+				Json.createArrayBuilder(work.getOtherDistinguishingCharacteristic()));
+		workBuilder.add("intendedTermination", Json.createArrayBuilder(work.getIntendedAudience()));
+		workBuilder.add("intendedAudience", Json.createArrayBuilder(work.getIntendedAudience()));
 		workBuilder.add("contextForTheWork", work.getContextForTheWork());
-		workBuilder.add("titleOfWork", work.getTitleOfWork().toString());
+		workBuilder.add("titleOfWork", Json.createArrayBuilder(work.getTitleOfWork()));
 		workBuilder.add("formOfWork", work.getFormOfWork());
 		/**
 		 * Convert Collection of Expression to JsonArrayBuilder
@@ -136,10 +138,10 @@ public class WorkJsonServlet extends HttpServlet {
 
 			jsonArrayExpression.add(Json.createObjectBuilder().add("formOfExpression", e.getFormOfExpression())
 					.add("idExpression", e.getIdExpression()).add("languageOfExpression", e.getLanguageOfExpression())
-					.add("idManifestations", e.getIdManifestations().toString())
-					.add("titleOfExpression", e.getTitleOfExpression().toString())
-					.add("dateOfExpression", jsonArrayTimeStampedDescription)
-					.add("otherDistinguishingCharacteristic", e.getOtherDistinguishingCharacteristic().toString()));
+					.add("idManifestations", Json.createArrayBuilder(e.getIdManifestations()))
+					.add("titleOfExpression", Json.createArrayBuilder(e.getTitleOfExpression()))
+					.add("dateOfExpression", jsonArrayTimeStampedDescription).add("otherDistinguishingCharacteristic",
+							Json.createArrayBuilder(e.getOtherDistinguishingCharacteristic())));
 		}
 
 		workBuilder.add("expressions", jsonArrayExpression);
@@ -157,24 +159,6 @@ public class WorkJsonServlet extends HttpServlet {
 		JsonObject workJson = workBuilder.build();
 
 		return workJson.toString();
-	}
-
-	public Work initWork(HttpServletRequest req) throws NumberFormatException, NullPointerException {
-
-		int idWork = Integer.parseInt(req.getParameter("idWork"));
-		String titleOfWork = req.getParameter("titleOfWork");
-		String formOfWork = req.getParameter("formOfWork");
-		Collection<String> collectionTitleOfWork = new ArrayList<>();
-
-		if (!StringUtils.isBlank(titleOfWork)) {
-
-			collectionTitleOfWork.add(titleOfWork);
-		}
-
-		Work work = new Work(idWork, collectionTitleOfWork, formOfWork);
-
-		return work;
-
 	}
 
 }

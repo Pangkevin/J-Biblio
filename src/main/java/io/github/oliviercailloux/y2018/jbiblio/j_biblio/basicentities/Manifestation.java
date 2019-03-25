@@ -1,7 +1,20 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.google.common.base.Strings;
 
@@ -16,23 +29,32 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
  * manifestations (books, music, ...)
  */
 
+@Entity
+@Table(name = "Manifestation")
 public class Manifestation {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idManifestation;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Integer> idItems;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<String> titleOfTheManifestation;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Transient
 	private Collection<ResponsibleEntity> statementOfResponsibility;
 
 	/**
@@ -43,22 +65,27 @@ public class Manifestation {
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Integer> placeOfPublicationDistribution;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Transient
 	private Collection<ResponsibleEntity> publisherDistributer;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Transient
 	private Collection<TimeStampedDescription> dateOfPublicationDistribution;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	public String manifestationIdentifier;
+	@Column(name = "manifestationIdentifier")
+	private String manifestationIdentifier;
 
 	/**
 	 * This function is the constructor of manifestation entity
@@ -103,6 +130,17 @@ public class Manifestation {
 		this.dateOfPublicationDistribution = Objects.requireNonNull(dateOfPublicationDistribution);
 		this.manifestationIdentifier = Objects.requireNonNull(manifestationIdentifier);
 
+	}
+
+	public Manifestation() {
+		this.idItems = new ArrayList<>();
+		this.titleOfTheManifestation = new ArrayList<>();
+		this.statementOfResponsibility = new ArrayList<>();
+		this.editionDesignation = "";
+		this.placeOfPublicationDistribution = new ArrayList<>();
+		this.publisherDistributer = new ArrayList<>();
+		this.dateOfPublicationDistribution = new ArrayList<>();
+		this.manifestationIdentifier = "";
 	}
 
 	public int getIdManifestation() {

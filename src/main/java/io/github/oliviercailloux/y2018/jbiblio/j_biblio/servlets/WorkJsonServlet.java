@@ -10,6 +10,10 @@ import java.util.Locale;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.persistence.EntityManager;
@@ -23,7 +27,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.WorkService;
 
 @SuppressWarnings("serial")
@@ -52,14 +58,9 @@ public class WorkJsonServlet extends HttpServlet {
 			 */
 
 			final List<Work> allItems = workService.getAll();
-			String jsonItem = "";
 
-			for (Work work : allItems) {
-
-				// Work item = this.initWork(req);
-
-				jsonItem = jsonItem + jsonb.toJson(work) + "\n";
-			}
+			String jsonItem = convertToJson(allItems.get(0));
+			// jsonItem = jsonb.toJson(allItems);
 
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println(jsonItem);
@@ -82,6 +83,9 @@ public class WorkJsonServlet extends HttpServlet {
 			try (BufferedReader reader = req.getReader()) {
 
 				Work work = jsonb.fromJson(reader, Work.class);
+				Expression expression = new Expression();
+				expression.setWork(work);
+				work.getExpressions().add(expression);
 				workService.persist(work);
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
@@ -97,6 +101,64 @@ public class WorkJsonServlet extends HttpServlet {
 
 	}
 
+	/**
+	 * This fonction allow to transform a work object and his his children into Json format
+	 * 
+	 * @param work
+	 * @return
+	 */
+	public String convertToJson(Work work) {
+
+		JsonObjectBuilder workBuilder = Json.createObjectBuilder();
+		JsonObjectBuilder jsonObjectExpression = Json.createObjectBuilder();
+		jsonObjectExpression.build();
+		workBuilder.add("idWork", work.getIdWork());
+		workBuilder.add("idExpressions", work.getDateOfWork().toString());
+		workBuilder.add("otherDistinguishingCharacteristic", work.getOtherDistinguishingCharacteristic().toString());
+		workBuilder.add("intendedTermination", work.getIntendedAudience().toString());
+		workBuilder.add("intendedAudience", work.getIntendedAudience().toString());
+		workBuilder.add("contextForTheWork", work.getContextForTheWork());
+		workBuilder.add("titleOfWork", work.getTitleOfWork().toString());
+		workBuilder.add("formOfWork", work.getFormOfWork());
+		/**
+		 * Convert Collection of Expression to JsonArrayBuilder
+		 */
+		JsonArrayBuilder jsonArrayExpression = Json.createArrayBuilder();
+		for (Expression e : work.getExpressions()) {
+			/**
+			 * Convert Collection of TimeStampedDescription to JsonArrayBuilder
+			 */
+			JsonArrayBuilder jsonArrayTimeStampedDescription = Json.createArrayBuilder();
+			for (TimeStampedDescription tsd : e.getDateOfExpression()) {
+				jsonArrayTimeStampedDescription.add(Json.createObjectBuilder().add("description", tsd.getDescription())
+						.add("date", tsd.getDate().toString()));
+			}
+
+			jsonArrayExpression.add(Json.createObjectBuilder().add("formOfExpression", e.getFormOfExpression())
+					.add("idExpression", e.getIdExpression()).add("languageOfExpression", e.getLanguageOfExpression())
+					.add("idManifestations", e.getIdManifestations().toString())
+					.add("titleOfExpression", e.getTitleOfExpression().toString())
+					.add("dateOfExpression", jsonArrayTimeStampedDescription)
+					.add("otherDistinguishingCharacteristic", e.getOtherDistinguishingCharacteristic().toString()));
+		}
+
+		workBuilder.add("expressions", jsonArrayExpression);
+		/**
+		 * Convert Collection of TimeStampedDescription to JsonArrayBuilder
+		 */
+		JsonArrayBuilder jsonArrayTimeStampedDescription = Json.createArrayBuilder();
+		for (TimeStampedDescription tsd : work.getDateOfWork()) {
+			jsonArrayTimeStampedDescription.add(Json.createObjectBuilder().add("description", tsd.getDescription())
+					.add("date", tsd.getDate().toString()));
+		}
+
+		workBuilder.add("dateOfWork", jsonArrayTimeStampedDescription);
+
+		JsonObject workJson = workBuilder.build();
+
+		return workJson.toString();
+	}
+
 	public Work initWork(HttpServletRequest req) throws NumberFormatException, NullPointerException {
 
 		int idWork = Integer.parseInt(req.getParameter("idWork"));
@@ -110,11 +172,6 @@ public class WorkJsonServlet extends HttpServlet {
 		}
 
 		Work work = new Work(idWork, collectionTitleOfWork, formOfWork);
-
-//		item.setItemIdentifier(req.getParameter("itemIdentifier"));
-//		// if null will be converted to an empty string
-//		item.setFingerprint(req.getParameter("fingerprint"));
-//		item.setProvenanceOfTheItem(req.getParameter("provenanceOfTheItem"));
 
 		return work;
 

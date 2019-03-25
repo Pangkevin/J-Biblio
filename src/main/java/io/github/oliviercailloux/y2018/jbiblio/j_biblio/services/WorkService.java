@@ -6,6 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import javax.transaction.Transactional;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
@@ -20,8 +21,13 @@ public class WorkService {
 
 	@Transactional
 	public List<Work> getAll() {
-
 		return em.createQuery(helper.selectAll(Work.class)).getResultList();
+
+	}
+
+	@Transactional
+	public Work findById(int id) {
+		return em.find(Work.class, id);
 
 	}
 
@@ -31,4 +37,5 @@ public class WorkService {
 		em.persist(work);
 
 	}
+
 }

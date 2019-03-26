@@ -53,11 +53,18 @@ public class WorkJsonServlet extends HttpServlet {
 		 */
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 
+			final List<Work> allItems;
+			String formOfWork = req.getParameter("formOfWork");
+
+			if (!StringUtils.isBlank(formOfWork)) {
+				allItems = workService.findByField(formOfWork);
+			} else {
+				allItems = workService.getAll();
+			}
+
 			/**
 			 * Jpa will be implemented in the next sprint
 			 */
-
-			final List<Work> allItems = workService.getAll();
 
 			String jsonItem = convertToJson(allItems.get(0));
 			// jsonItem = jsonb.toJson(allItems);

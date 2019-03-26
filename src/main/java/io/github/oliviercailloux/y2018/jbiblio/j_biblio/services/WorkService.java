@@ -6,7 +6,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
@@ -28,7 +31,18 @@ public class WorkService {
 	@Transactional
 	public Work findById(int id) {
 		return em.find(Work.class, id);
+	}
 
+	public List<Work> findByField(String value) {
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		// Query for a List of objects.
+		final CriteriaQuery<Work> cq = cb.createQuery(Work.class);
+		final Root<Work> e = cq.from(Work.class);
+		cq.where(cb.like(e.get("formOfWork"), value));
+		Query query = em.createQuery(cq);
+		List<Work> result = query.getResultList();
+
+		return result;
 	}
 
 	@Transactional

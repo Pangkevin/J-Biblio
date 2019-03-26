@@ -12,6 +12,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
+
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 
 @RequestScoped
@@ -33,15 +35,21 @@ public class WorkService {
 		return em.find(Work.class, id);
 	}
 
-	public List<Work> findByField(String value) {
+	@SuppressWarnings("unchecked")
+	public List<Work> findByField(String formOfWorkValue, String contextForTheWorkValue) {
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
-		// Query for a List of objects.
 		final CriteriaQuery<Work> cq = cb.createQuery(Work.class);
 		final Root<Work> e = cq.from(Work.class);
-		cq.where(cb.like(e.get("formOfWork"), value));
-		Query query = em.createQuery(cq);
-		List<Work> result = query.getResultList();
+		if (!StringUtils.isBlank(formOfWorkValue)) {
+			cq.where(cb.like(e.get("formOfWork"), formOfWorkValue));
+		}
+		if (!StringUtils.isBlank(contextForTheWorkValue)) {
+			cq.where(cb.like(e.get("contextForTheWork"), contextForTheWorkValue));
+		}
 
+		final Query query = em.createQuery(cq);
+
+		List<Work> result = query.getResultList();
 		return result;
 	}
 

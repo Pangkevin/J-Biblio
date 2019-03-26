@@ -46,10 +46,7 @@ public class PersonServlet extends HttpServlet {
 			final List<Person> allPerson = personService.getAll();
 			String jsonItem = "";
 
-			for (Person person : allPerson) {
-
-				jsonItem = jsonItem + jsonb.toJson(person) + "\n";
-			}
+			jsonItem = jsonb.toJson(allPerson);
 
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println(jsonItem);

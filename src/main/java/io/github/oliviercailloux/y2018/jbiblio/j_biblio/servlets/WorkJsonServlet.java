@@ -3,8 +3,6 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -26,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
@@ -54,21 +54,25 @@ public class WorkJsonServlet extends HttpServlet {
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 
 			final List<Work> allItems;
-			String formOfWork = req.getParameter("formOfWork");
+			// get parameter value
+			String formOfWork = Strings.nullToEmpty(req.getParameter("formOfWork"));
+			String contextForTheWork = Strings.nullToEmpty(req.getParameter("contextForTheWork"));
 
-			if (!StringUtils.isBlank(formOfWork)) {
-				allItems = workService.findByField(formOfWork);
+			/**
+			 * Checks if both parameters are empty otherwise we select all work in the
+			 * work's table
+			 */
+			if (!StringUtils.isBlank(formOfWork) || !StringUtils.isBlank(contextForTheWork)) {
+				allItems = workService.findByField(formOfWork, contextForTheWork);
 			} else {
 				allItems = workService.getAll();
 			}
 
 			/**
-			 * Jpa will be implemented in the next sprint
+			 * Allow to convert a work object in JSON representation thanks to to JSON-P
 			 */
 
 			String jsonItem = convertToJson(allItems.get(0));
-			// jsonItem = jsonb.toJson(allItems);
-
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println(jsonItem);
 			LOGGER.info(" Display object in JSON format " + jsonItem);
@@ -96,8 +100,7 @@ public class WorkJsonServlet extends HttpServlet {
 				workService.persist(work);
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
-			resp.getWriter().println(
-					"The object is successfully initialized. Database insertion  will be implemented in the next sprint");
+			resp.getWriter().println("The object is successfully initialized.");
 		}
 
 		catch (Exception e) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
@@ -30,8 +29,7 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 
 @Entity
 @Table(name = "Work")
-@JsonbPropertyOrder({ "idWork", "idExpressions", "expressions", "titleOfWork", "formOfWork", "dateOfWork",
-		"otherDistinguishingCharacteristic", "intendedTermination", "intendedAudience", "contextForTheWork" })
+
 public class Work {
 
 	/**

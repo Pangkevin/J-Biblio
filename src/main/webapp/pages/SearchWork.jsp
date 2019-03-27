@@ -9,7 +9,7 @@
 <body>
 	<form method="GET" action="/jbiblio/work">
 		<div>
-			<h1>Create Work</h1>
+			<h1>Search Work</h1>
 			<input type="text" name="formOfWork" placeholder="formOfWork" /> <input
 				type="text" name="contextForTheWork" placeholder="contextForTheWork" />
 			<input type="submit" value="Submit"></input>

@@ -72,7 +72,7 @@ public class WorkJsonServlet extends HttpServlet {
 			 * Allow to convert a work object in JSON representation thanks to to JSON-P
 			 */
 
-			String jsonItem = convertToJson(allItems.get(0));
+			String jsonItem = convertToJson(allItems);
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println(jsonItem);
 			LOGGER.info(" Display object in JSON format " + jsonItem);
@@ -118,56 +118,68 @@ public class WorkJsonServlet extends HttpServlet {
 	 * @param work
 	 * @return
 	 */
-	public String convertToJson(Work work) {
-
-		JsonObjectBuilder workBuilder = Json.createObjectBuilder();
-		JsonObjectBuilder jsonObjectExpression = Json.createObjectBuilder();
-		jsonObjectExpression.build();
-		workBuilder.add("idWork", work.getIdWork());
-		workBuilder.add("idExpressions", Json.createArrayBuilder(work.getDateOfWork()));
-		workBuilder.add("otherDistinguishingCharacteristic",
-				Json.createArrayBuilder(work.getOtherDistinguishingCharacteristic()));
-		workBuilder.add("intendedTermination", Json.createArrayBuilder(work.getIntendedAudience()));
-		workBuilder.add("intendedAudience", Json.createArrayBuilder(work.getIntendedAudience()));
-		workBuilder.add("contextForTheWork", work.getContextForTheWork());
-		workBuilder.add("titleOfWork", Json.createArrayBuilder(work.getTitleOfWork()));
-		workBuilder.add("formOfWork", work.getFormOfWork());
+	public String convertToJson(List<Work> listWork) {
 		/**
-		 * Convert Collection of Expression to JsonArrayBuilder
+		 * Init workListBuilder and jsonArrayWork to display a list of Work in JSON
+		 * format
 		 */
-		JsonArrayBuilder jsonArrayExpression = Json.createArrayBuilder();
-		for (Expression e : work.getExpressions()) {
+		JsonObjectBuilder workListBuilder = Json.createObjectBuilder();
+		JsonArrayBuilder jsonArrayWork = Json.createArrayBuilder();
+		/**
+		 * For each work in the listWork, we convert a work in JsonObjectBuilder. Each
+		 * JsonObjectBuilder will be added in the jsonArrayWork
+		 */
+		for (Work work : listWork) {
+
+			JsonObjectBuilder workBuilder = Json.createObjectBuilder();
+			workBuilder.add("idWork", work.getIdWork());
+			workBuilder.add("idExpressions", Json.createArrayBuilder(work.getDateOfWork()));
+			workBuilder.add("otherDistinguishingCharacteristic",
+					Json.createArrayBuilder(work.getOtherDistinguishingCharacteristic()));
+			workBuilder.add("intendedTermination", Json.createArrayBuilder(work.getIntendedAudience()));
+			workBuilder.add("intendedAudience", Json.createArrayBuilder(work.getIntendedAudience()));
+			workBuilder.add("contextForTheWork", work.getContextForTheWork());
+			workBuilder.add("titleOfWork", Json.createArrayBuilder(work.getTitleOfWork()));
+			workBuilder.add("formOfWork", work.getFormOfWork());
+			/**
+			 * Convert Collection of Expression to JsonArrayBuilder
+			 */
+			JsonArrayBuilder jsonArrayExpression = Json.createArrayBuilder();
+			for (Expression e : work.getExpressions()) {
+				/**
+				 * Convert Collection of TimeStampedDescription to JsonArrayBuilder
+				 */
+				JsonArrayBuilder jsonArrayTimeStampedDescription = Json.createArrayBuilder();
+				for (TimeStampedDescription tsd : e.getDateOfExpression()) {
+					jsonArrayTimeStampedDescription.add(Json.createObjectBuilder()
+							.add("description", tsd.getDescription()).add("date", tsd.getDate().toString()));
+				}
+
+				jsonArrayExpression.add(Json.createObjectBuilder().add("formOfExpression", e.getFormOfExpression())
+						.add("idExpression", e.getIdExpression())
+						.add("languageOfExpression", e.getLanguageOfExpression())
+						.add("idManifestations", Json.createArrayBuilder(e.getIdManifestations()))
+						.add("titleOfExpression", Json.createArrayBuilder(e.getTitleOfExpression()))
+						.add("dateOfExpression", jsonArrayTimeStampedDescription)
+						.add("otherDistinguishingCharacteristic",
+								Json.createArrayBuilder(e.getOtherDistinguishingCharacteristic())));
+			}
+
+			workBuilder.add("expressions", jsonArrayExpression);
 			/**
 			 * Convert Collection of TimeStampedDescription to JsonArrayBuilder
 			 */
 			JsonArrayBuilder jsonArrayTimeStampedDescription = Json.createArrayBuilder();
-			for (TimeStampedDescription tsd : e.getDateOfExpression()) {
+			for (TimeStampedDescription tsd : work.getDateOfWork()) {
 				jsonArrayTimeStampedDescription.add(Json.createObjectBuilder().add("description", tsd.getDescription())
 						.add("date", tsd.getDate().toString()));
 			}
 
-			jsonArrayExpression.add(Json.createObjectBuilder().add("formOfExpression", e.getFormOfExpression())
-					.add("idExpression", e.getIdExpression()).add("languageOfExpression", e.getLanguageOfExpression())
-					.add("idManifestations", Json.createArrayBuilder(e.getIdManifestations()))
-					.add("titleOfExpression", Json.createArrayBuilder(e.getTitleOfExpression()))
-					.add("dateOfExpression", jsonArrayTimeStampedDescription).add("otherDistinguishingCharacteristic",
-							Json.createArrayBuilder(e.getOtherDistinguishingCharacteristic())));
+			workBuilder.add("dateOfWork", jsonArrayTimeStampedDescription);
+			jsonArrayWork.add(workBuilder);
 		}
-
-		workBuilder.add("expressions", jsonArrayExpression);
-		/**
-		 * Convert Collection of TimeStampedDescription to JsonArrayBuilder
-		 */
-		JsonArrayBuilder jsonArrayTimeStampedDescription = Json.createArrayBuilder();
-		for (TimeStampedDescription tsd : work.getDateOfWork()) {
-			jsonArrayTimeStampedDescription.add(Json.createObjectBuilder().add("description", tsd.getDescription())
-					.add("date", tsd.getDate().toString()));
-		}
-
-		workBuilder.add("dateOfWork", jsonArrayTimeStampedDescription);
-
-		JsonObject workJson = workBuilder.build();
-
+		workListBuilder.add("Work", jsonArrayWork);
+		JsonObject workJson = workListBuilder.build();
 		return workJson.toString();
 	}
 

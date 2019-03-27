@@ -123,7 +123,7 @@ public class WorkJsonServlet extends HttpServlet {
 		 * Init workListBuilder and jsonArrayWork to display a list of Work in JSON
 		 * format
 		 */
-		JsonObjectBuilder workListBuilder = Json.createObjectBuilder();
+		// JsonObjectBuilder workListBuilder = Json.createObjectBuilder();
 		JsonArrayBuilder jsonArrayWork = Json.createArrayBuilder();
 		/**
 		 * For each work in the listWork, we convert a work in JsonObjectBuilder. Each
@@ -178,9 +178,9 @@ public class WorkJsonServlet extends HttpServlet {
 			workBuilder.add("dateOfWork", jsonArrayTimeStampedDescription);
 			jsonArrayWork.add(workBuilder);
 		}
-		workListBuilder.add("Work", jsonArrayWork);
-		JsonObject workJson = workListBuilder.build();
-		return workJson.toString();
+		// workListBuilder.add("Work", jsonArrayWork);
+		return jsonArrayWork.build().toString();
+
 	}
 
 }

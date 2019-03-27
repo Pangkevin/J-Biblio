@@ -1,7 +1,21 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.google.common.base.Strings;
 
@@ -11,39 +25,53 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  * 
  */
+@Entity
 public class Expression {
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ManyToOne
 	private Work work;
 	/**
 	 * Not <code>null</code>.
 	 */
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
 	private Collection<Integer> idManifestations;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
 	private Collection<String> titleOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "formOfExpression")
 	private String formOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Transient
 	private Collection<TimeStampedDescription> dateOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "languageOfExpression")
 	private String languageOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/*
@@ -54,6 +82,17 @@ public class Expression {
 	 * criticalResponseToTheExpression; private String
 	 * useRestrictionsOnTheExpression;
 	 */
+
+	public Expression() {
+
+		this.formOfExpression = "";
+		this.languageOfExpression = "";
+		this.dateOfExpression = new ArrayList<>();
+		this.titleOfExpression = new ArrayList<>();
+		this.idManifestations = new ArrayList<>();
+		this.otherDistinguishingCharacteristic = new ArrayList<>();
+
+	}
 
 	public Expression(Work work, int idExpression, String formOfExpression,
 			Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression) {

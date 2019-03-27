@@ -1,4 +1,4 @@
-package io.github.oliviercailloux.y2018.jbiblio.j_biblio.services;
+package io.github.oliviercailloux.y2018.jbiblio.j_biblio.servlets;
 
 import static org.junit.jupiter.api.Assertions.*;
 

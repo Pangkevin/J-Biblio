@@ -3,6 +3,12 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 import java.util.Objects;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.google.common.base.Strings;
 
@@ -14,30 +20,39 @@ import com.google.common.base.Strings;
  * ...)
  */
 @JsonbPropertyOrder({ "idItem", "idManifestation", "itemIdentifier", "fingerprint", "provenanceOfTheItem" })
+@Entity
+@Table(name = "Item")
 public class Item {
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Id
+	@Column(name = "idItem")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idItem;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "idManifestation")
 	private int idManifestation;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "itemIdentifier")
 	private String itemIdentifier;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "fingerprint")
 	private String fingerprint;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "provenanceOfTheItem")
 	private String provenanceOfTheItem;
 
 	/**

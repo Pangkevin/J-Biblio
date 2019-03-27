@@ -14,13 +14,26 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAccessType;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.*;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
-
-
-
 
 /**
  * This class represents the 3rd element from group 1 entities of FRBR model
@@ -29,25 +42,36 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
  * enhance the class later to include attributes related to other types of
  * manifestations (books, music, ...)
  */
-@XmlRootElement(name="Manifestation")
+
+@SuppressWarnings("serial")
+@XmlRootElement(name = "Manifestation")
 @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@Entity
+@Table(name = "Manifestation")
 public class Manifestation implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idManifestation;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Integer> idItems;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<String> titleOfTheManifestation;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Transient
 	private Collection<ResponsibleEntity> statementOfResponsibility;
 
 	/**
@@ -58,8 +82,10 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>.
 	 */
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Integer> placeOfPublicationDistribution;
-	
+
 	/**
 	 * Not <code>null</code>.
 	 */
@@ -68,20 +94,29 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>.
 	 */
+
+	@Transient
 	private Collection<Person> publisherDistributer;
+
+	@Transient
+	private Collection<ResponsibleEntity> publisherDistributerResponsibleEntity;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Transient
 	private Collection<TimeStampedDescription> dateOfPublicationDistribution;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	public String manifestationIdentifier;
-	
-
 	private OriginInfo originInfo;
+
+	/**
+	 * Not <code>null</code>.
+	 */
+	@Column(name = "manifestationIdentifier")
+	private String manifestationIdentifier;
 
 	/**
 	 * This function is the constructor of manifestation entity
@@ -127,9 +162,16 @@ public class Manifestation implements Serializable {
 		this.manifestationIdentifier = Objects.requireNonNull(manifestationIdentifier);
 
 	}
-	
+
 	public Manifestation() {
-		this.idManifestation = 1;
+		this.idItems = new ArrayList<>();
+		this.titleOfTheManifestation = new ArrayList<>();
+		this.statementOfResponsibility = new ArrayList<>();
+		this.editionDesignation = "";
+		this.placeOfPublicationDistribution = new ArrayList<>();
+		this.publisherDistributer = new ArrayList<>();
+		this.dateOfPublicationDistribution = new ArrayList<>();
+		this.manifestationIdentifier = "";
 	}
 
 	public int getIdManifestation() {
@@ -157,8 +199,8 @@ public class Manifestation implements Serializable {
 	/**
 	 * @return not <code>null</code>.
 	 **/
-	@XmlElementWrapper(name="titleInfo")
-	 @XmlElement(name="title")
+	@XmlElementWrapper(name = "titleInfo")
+	@XmlElement(name = "title")
 	public Collection<String> getTitleOfTheManifestation() {
 		return titleOfTheManifestation;
 	}
@@ -218,13 +260,13 @@ public class Manifestation implements Serializable {
 	}
 
 	/**
-	 * @return not <code>null</code>.
+	 * @return not <code>null</code>. 
+	 * Adapted to objects parsed from mods to java
 	 */
 	public Collection<Person> getPublisherDistributer() {
-		if(originInfo!=null) {
+		if (originInfo != null) {
 			return originInfo.getPublisher();
-			}
-		else
+		}
 		return this.publisherDistributer;
 	}
 
@@ -252,22 +294,21 @@ public class Manifestation implements Serializable {
 		this.dateOfPublicationDistribution = Objects.requireNonNull(dateOfPublicationDistribution);
 	}
 
-	
 	/**
 	 * @return not <code>null</code>.
 	 */
 	public Collection<Place> getPlaceOfPublication() {
-		if(originInfo!=null) {
-		return originInfo.getPlace();
+		if (originInfo != null) {
+			return originInfo.getPlace();
 		}
-		else return this.lblPlaceOfPublication;
+		return this.lblPlaceOfPublication;
 	}
 
 	public void setPlaceOfPublication(Collection<Place> placeOfPublication) {
 		originInfo.setPlace(placeOfPublication);
 		this.lblPlaceOfPublication = placeOfPublication;
 	}
-	
+
 	@XmlElement(name = "originInfo", type = OriginInfo.class)
 	public OriginInfo getOriginInfo() {
 		return originInfo;

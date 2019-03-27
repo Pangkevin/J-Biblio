@@ -3,6 +3,7 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures;
 import java.time.Instant;
 import java.util.Objects;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TimeStampedDescription")
 @Embeddable
+@JsonbPropertyOrder({ "id", "description", "date" })
 public class TimeStampedDescription {
 
 	@Id

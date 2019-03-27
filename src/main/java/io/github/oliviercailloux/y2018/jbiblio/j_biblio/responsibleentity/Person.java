@@ -3,11 +3,14 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +24,8 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 
 @Entity
 @Table(name = "Person")
+@JsonbPropertyOrder({ "nameAuthority", "idPerson", "firstName", "middleName", "lastName", "personTitle", "birthDate",
+		"birthDate" })
 public class Person {
 
 	/**
@@ -61,7 +66,7 @@ public class Person {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.ALL })
 	private TimeStampedDescription birthDate;
 
 	/**
@@ -78,6 +83,7 @@ public class Person {
 		this.middleName = "";
 		this.lastName = "";
 		this.personTitle = "";
+		birthDate = new TimeStampedDescription();
 
 	}
 

@@ -83,10 +83,10 @@ public class WorkJsonServlet extends HttpServlet {
 
 				Work work = jsonb.fromJson(reader, Work.class);
 				workService.persist(work);
+				
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
-			resp.getWriter().println(
-					"The object is successfully initialized. Database insertion  will be implemented in the next sprint");
+			resp.getWriter().println("The object is successfully initialized");
 		}
 
 		catch (Exception e) {
@@ -110,7 +110,6 @@ public class WorkJsonServlet extends HttpServlet {
 		}
 
 		Work work = new Work(idWork, collectionTitleOfWork, formOfWork);
-
 //		item.setItemIdentifier(req.getParameter("itemIdentifier"));
 //		// if null will be converted to an empty string
 //		item.setFingerprint(req.getParameter("fingerprint"));

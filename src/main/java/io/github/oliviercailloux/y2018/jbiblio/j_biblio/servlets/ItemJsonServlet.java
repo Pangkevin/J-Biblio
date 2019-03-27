@@ -18,7 +18,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ItemService;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.PersonService;
 
 @SuppressWarnings("serial")
 @WebServlet("item")
@@ -29,6 +31,7 @@ public class ItemJsonServlet extends HttpServlet {
 
 	@Inject
 	private ItemService itemService;
+	private PersonService personService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -65,13 +68,15 @@ public class ItemJsonServlet extends HttpServlet {
 		resp.setLocale(Locale.ENGLISH);
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 			try (BufferedReader reader = req.getReader()) {
+				// From JSON to object
 				Item item = jsonb.fromJson(reader, Item.class);
+				Person person = jsonb.fromJson(reader, Person.class);
 				// Insert in the database
 				itemService.persist(item);
+				personService.persist(person);	
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
-			resp.getWriter().println(
-					"The object is successfully initialized. Database insertion  will be implemented in the next sprint");
+			resp.getWriter().println("The objects are successfully initialized.");
 		}
 
 		catch (Exception e) {

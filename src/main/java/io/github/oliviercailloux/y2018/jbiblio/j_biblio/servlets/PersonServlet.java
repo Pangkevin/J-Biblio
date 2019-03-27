@@ -71,8 +71,8 @@ public class PersonServlet extends HttpServlet {
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 			try (BufferedReader reader = req.getReader()) {
 
-				Person work = jsonb.fromJson(reader, Person.class);
-				personService.persist(work);
+				Person person = jsonb.fromJson(reader, Person.class);
+				personService.persist(person);
 			}
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.getWriter().println("The object is successfully initialized");

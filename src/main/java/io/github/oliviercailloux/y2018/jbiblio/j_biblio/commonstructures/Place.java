@@ -7,18 +7,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="place")
+@XmlRootElement(name = "place")
 @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class Place {
 
-	
 	private String label;
 
-	
 	public Place() {
-		
+
 	}
-	
+
 	public Place(String label) {
 		this.label = label;
 	}
@@ -28,14 +26,15 @@ public class Place {
 		return label;
 	}
 
-	public void setLabel( String label) {
+	public void setLabel(String label) {
 		this.label = label;
 	}
-	
-public boolean equals(Place b) {
-	if(b.getLabel().equals(this.getLabel()))
-		return true;
-	
-	else return false;
+
+	public boolean equals(Place b) {
+		if (b.getLabel().equals(this.getLabel()))
+			return true;
+
+		return false;
+
 	}
 }

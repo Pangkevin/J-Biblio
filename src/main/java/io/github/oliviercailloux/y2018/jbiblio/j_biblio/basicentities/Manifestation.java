@@ -87,8 +87,9 @@ public class Manifestation implements Serializable {
 	private Collection<Integer> placeOfPublicationDistribution;
 
 	/**
-	 * Not <code>null</code>.
+	 * Not <code>null</code>. Adapted for the parsing from mods to java object
 	 */
+	@Transient
 	private Collection<Place> lblPlaceOfPublication;
 
 	/**
@@ -108,8 +109,9 @@ public class Manifestation implements Serializable {
 	private Collection<TimeStampedDescription> dateOfPublicationDistribution;
 
 	/**
-	 * Not <code>null</code>.
+	 * Not <code>null</code>. Adapted for the parsing from mods to java object
 	 */
+	@Transient
 	private OriginInfo originInfo;
 
 	/**
@@ -260,8 +262,7 @@ public class Manifestation implements Serializable {
 	}
 
 	/**
-	 * @return not <code>null</code>. 
-	 * Adapted to objects parsed from mods to java
+	 * @return not <code>null</code>. Adapted to objects parsed from mods to java
 	 */
 	public Collection<Person> getPublisherDistributer() {
 		if (originInfo != null) {
@@ -305,8 +306,8 @@ public class Manifestation implements Serializable {
 	}
 
 	public void setPlaceOfPublication(Collection<Place> placeOfPublication) {
-		originInfo.setPlace(placeOfPublication);
-		this.lblPlaceOfPublication = placeOfPublication;
+		originInfo.setPlace(Objects.requireNonNull(placeOfPublication));
+		this.lblPlaceOfPublication = Objects.requireNonNull(placeOfPublication);
 	}
 
 	@XmlElement(name = "originInfo", type = OriginInfo.class)
@@ -315,7 +316,7 @@ public class Manifestation implements Serializable {
 	}
 
 	public void setOriginInfo(OriginInfo originInfo) {
-		this.originInfo = originInfo;
+		this.originInfo = Objects.requireNonNull(originInfo);
 	}
 
 }

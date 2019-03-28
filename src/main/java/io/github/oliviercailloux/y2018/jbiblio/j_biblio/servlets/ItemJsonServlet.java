@@ -41,9 +41,7 @@ public class ItemJsonServlet extends HttpServlet {
 		 */
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 
-			/**
-			 * Jpa will be implemented in the next sprint
-			 */
+			
 			Item item = this.initItem(req);
 			String jsonItem = jsonb.toJson(item);
 			resp.setStatus(HttpServletResponse.SC_OK);
@@ -87,7 +85,7 @@ public class ItemJsonServlet extends HttpServlet {
 	public Item initItem(HttpServletRequest req) throws NumberFormatException, NullPointerException {
 
 		int idItem = Integer.parseInt(req.getParameter("idItem"));
-		int idManifestation = Integer.parseInt(req.getParameter("idManifestation"));
+		int idManifestation = req.getParameter("idManifestation");
 		/**
 		 * If parsInt doesn't throw NumberFormatException, then we can init a Item
 		 */

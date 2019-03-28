@@ -5,25 +5,22 @@ import java.util.Collection;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAccessType;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -32,6 +29,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.google.common.base.Strings;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.*;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
 
@@ -57,9 +55,15 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@ElementCollection
+	@ManyToOne
+	private Expression expression;
+	
+	/**
+	 * Not <code>null</code>.
+	 */
+	@OneToMany(mappedBy = "manifestation", cascade = { CascadeType.ALL })
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Collection<Integer> idItems;
+	private Collection<Item> items;
 
 	/**
 	 * Not <code>null</code>.
@@ -154,7 +158,7 @@ public class Manifestation implements Serializable {
 			Collection<TimeStampedDescription> dateOfPublicationDistribution, String manifestationIdentifier) {
 
 		this.idManifestation = idManifestation;
-		this.idItems = Objects.requireNonNull(idItems);
+		this.items = Objects.requireNonNull(items);
 		this.titleOfTheManifestation = Objects.requireNonNull(titleOfTheManifestation);
 		this.statementOfResponsibility = Objects.requireNonNull(statementOfResponsibility);
 		this.editionDesignation = Objects.requireNonNull(editionDesignation);
@@ -166,7 +170,7 @@ public class Manifestation implements Serializable {
 	}
 
 	public Manifestation() {
-		this.idItems = new ArrayList<>();
+		this.items = new ArrayList<>();
 		this.titleOfTheManifestation = new ArrayList<>();
 		this.statementOfResponsibility = new ArrayList<>();
 		this.editionDesignation = "";
@@ -187,15 +191,15 @@ public class Manifestation implements Serializable {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<Integer> getIdItems() {
-		return idItems;
+	public Collection<Item> getItems() {
+		return items;
 	}
 
 	/**
 	 * @param idItems not <code>null</code>
 	 */
-	public void setIdItems(Collection<Integer> idItems) {
-		this.idItems = Objects.requireNonNull(idItems);
+	public void setIdItems(Collection<Item> idItems) {
+		this.items = Objects.requireNonNull(items);
 	}
 
 	/**

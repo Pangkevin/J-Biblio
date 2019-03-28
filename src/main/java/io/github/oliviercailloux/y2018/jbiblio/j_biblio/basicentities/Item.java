@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.google.common.base.Strings;
@@ -34,8 +35,9 @@ public class Item {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@Column(name = "idManifestation")
-	private int idManifestation;
+	@Column(name = "manifestation")
+	@ManyToOne
+	private Manifestation manifestation;
 
 	/**
 	 * Not <code>null</code>.
@@ -124,12 +126,12 @@ public class Item {
 		this.provenanceOfTheItem = Strings.nullToEmpty(provenanceOfTheItem);
 	}
 
-	public int getIdManifestation() {
-		return idManifestation;
+	public Manifestation getManifestation() {
+		return manifestation;
 	}
 
-	public void setIdManifestation(int idManifestation) {
-		this.idManifestation = idManifestation;
+	public void setIdManifestation(Manifestation manifestation) {
+		this.manifestation = manifestation;
 	}
 
 }

@@ -35,7 +35,6 @@ public class Item {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@Column(name = "manifestation")
 	@ManyToOne
 	private Manifestation manifestation;
 

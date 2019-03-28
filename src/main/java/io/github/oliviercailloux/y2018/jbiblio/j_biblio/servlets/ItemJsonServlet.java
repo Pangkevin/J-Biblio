@@ -26,15 +26,11 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ItemService;
 @RequestScoped
 @Path("item")
 public class ItemJsonServlet extends HttpServlet {
-	@SuppressWarnings("unused")
+
 	private static final Logger LOGGER = Logger.getLogger(ItemJsonServlet.class.getCanonicalName());
 
 	@PersistenceContext
 	private EntityManager em;
-
-	@Inject
-	private HttpServletRequest request;
-
 
 	@Inject
 	private ItemService itemService;

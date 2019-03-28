@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 //import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ItemService;
 
 @SuppressWarnings("serial")
@@ -85,13 +86,14 @@ public class ItemJsonServlet extends HttpServlet {
 	public Item initItem(HttpServletRequest req) throws NumberFormatException, NullPointerException {
 
 		int idItem = Integer.parseInt(req.getParameter("idItem"));
-		int idManifestation = req.getParameter("idManifestation");
+		Manifestation Manifestation = (Manifestation) req.getAttribute("idManifestation");
+		
 		/**
 		 * If parsInt doesn't throw NumberFormatException, then we can init a Item
 		 */
 		Item item = new Item();
 		item.setIdItem(idItem);
-		item.setIdManifestation(idManifestation);
+		item.setManifestation(Manifestation);
 		// itemIdentifier must not be null
 		item.setItemIdentifier(req.getParameter("itemIdentifier"));
 		// if null will be converted to an empty string

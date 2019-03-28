@@ -129,7 +129,7 @@ public class Item {
 		return manifestation;
 	}
 
-	public void setIdManifestation(Manifestation manifestation) {
+	public void setManifestation(Manifestation manifestation) {
 		this.manifestation = manifestation;
 	}
 

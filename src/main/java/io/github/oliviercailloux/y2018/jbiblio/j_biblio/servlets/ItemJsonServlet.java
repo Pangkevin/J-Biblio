@@ -19,6 +19,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
+
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ItemService;
 
 @RequestScoped
@@ -32,6 +34,7 @@ public class ItemJsonServlet extends HttpServlet {
 
 	@Inject
 	private HttpServletRequest request;
+
 
 	@Inject
 	private ItemService itemService;

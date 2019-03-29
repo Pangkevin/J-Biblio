@@ -8,8 +8,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -23,15 +21,12 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.WorkService;
 
 @RequestScoped
 @Path("work")
-public class WorkJsonServlet extends HttpServlet {
-	@SuppressWarnings("unused")
+public class WorkJsonServlet {
+
 	private static final Logger LOGGER = Logger.getLogger(WorkJsonServlet.class.getCanonicalName());
 
 	@PersistenceContext
 	private EntityManager em;
-
-	@Inject
-	private HttpServletRequest request;
 
 	@Inject
 	private WorkService workService;

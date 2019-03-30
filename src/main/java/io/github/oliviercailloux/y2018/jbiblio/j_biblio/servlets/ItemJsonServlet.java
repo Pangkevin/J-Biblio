@@ -8,8 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,12 +19,11 @@ import javax.ws.rs.core.Response;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ItemService;
 
 @RequestScoped
 @Path("item")
-public class ItemJsonServlet extends HttpServlet {
+public class ItemJsonServlet {
 
 	private static final Logger LOGGER = Logger.getLogger(ItemJsonServlet.class.getCanonicalName());
 

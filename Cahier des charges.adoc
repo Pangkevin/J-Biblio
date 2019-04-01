@@ -12,6 +12,8 @@ Ces informations sont souvent entachées d’erreurs ou difficilement exploitabl
 
 Bien que de nombreuses bases de données accessibles publiquement existent pour récupérer les méta-données, leur qualité nécessairement imparfaite conduit les chercheurs à passer du temps à se constituer une base de données (à peu près) à jour après vérification des données. Ce travail est dupliqué par chacun. L’objectif de ce projet est de fournir une plate-forme permettant de partager ce travail, et d’améliorer les méta-données, en distinguant les homonymes par exemple.
 
+//xjc -d src -p main.java.io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods mods.xsd
+
 == Projet
 
 Le projet a pour but de développer une application orientée WEB afin de partager/récupérer des notices bibliographiques de qualité. Cette application a également pour de but de permettre aux scientifiques de travailler ensemble.

@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
+
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
+
 //import javax.inject.Inject;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
-//import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ItemService;
 
 @SuppressWarnings("serial")
 @WebServlet("item")

@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlAccessType;
 
 import java.util.ArrayList;
@@ -44,8 +45,8 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
  */
 
 @SuppressWarnings("serial")
-@XmlRootElement(name = "Manifestation")
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @Entity
 @Table(name = "Manifestation")
 public class Manifestation implements Serializable {
@@ -89,7 +90,6 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>. Adapted for the parsing from mods to java object
 	 */
-	@Transient
 	private Collection<Place> lblPlaceOfPublication;
 
 	/**
@@ -111,7 +111,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>. Adapted for the parsing from mods to java object
 	 */
-	@Transient
+	
 	private OriginInfo originInfo;
 
 	/**

@@ -2,7 +2,6 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
@@ -35,8 +34,8 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 
 @Entity
 @Table(name = "Work")
-@JsonbPropertyOrder({ "idWork", "titleOfWork", "formOfWork", "dateOfWork",
-		"otherDistinguishingCharacteristic", "intendedTermination", "intendedAudience", "contextForTheWork" })
+@JsonbPropertyOrder({ "idWork", "titleOfWork", "formOfWork", "dateOfWork", "otherDistinguishingCharacteristic",
+		"intendedTermination", "intendedAudience", "contextForTheWork" })
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Work {
@@ -55,8 +54,8 @@ public class Work {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "work", cascade = { CascadeType.ALL })
 	@XmlElementWrapper(name = "expressions")
-	@XmlElement(name= "expression")
-	private List<Expression> expressions;
+	@XmlElement(name = "expression")
+	private Collection<Expression> expressions;
 
 	/**
 	 * Not <code>null</code>.
@@ -64,8 +63,8 @@ public class Work {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	@XmlElementWrapper(name = "titles")
-	@XmlElement(name= "title")
-	private List<String> titleOfWork;
+	@XmlElement(name = "title")
+	private Collection<String> titleOfWork;
 
 	/**
 	 * Class to which the work belongs (novel play etc.) Not <code>null</code>.
@@ -86,7 +85,7 @@ public class Work {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	@XmlElementWrapper(name = "characteristics")
-	@XmlElement(name= "characteristic")
+	@XmlElement(name = "characteristic")
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/**
@@ -102,8 +101,8 @@ public class Work {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	@XmlElementWrapper(name = "audiences")
-	@XmlElement(name= "adience")
-	private List<String> intendedAudience;
+	@XmlElement(name = "adience")
+	private Collection<String> intendedAudience;
 
 	/**
 	 * Not <code>null</code>.
@@ -124,7 +123,7 @@ public class Work {
 
 	}
 
-	public Work(int idWork, List<String> titleOfWork, String formOfWork) {
+	public Work(int idWork, Collection<String> titleOfWork, String formOfWork) {
 		this.idWork = Objects.requireNonNull(idWork);
 		this.titleOfWork = Objects.requireNonNull(titleOfWork);
 		this.formOfWork = Objects.requireNonNull(formOfWork);
@@ -162,7 +161,7 @@ public class Work {
 	/**
 	 * @param expressions not <code>null</code>.
 	 */
-	public void setExpressions(List<Expression> expressions) {
+	public void setExpressions(Collection<Expression> expressions) {
 		this.expressions = Objects.requireNonNull(expressions);
 	}
 
@@ -176,7 +175,7 @@ public class Work {
 	/**
 	 * @param titleOfWork not <code>null</code>.
 	 */
-	public void setTitleOfWork(List<String> titleOfWork) {
+	public void setTitleOfWork(Collection<String> titleOfWork) {
 		this.titleOfWork = Objects.requireNonNull(titleOfWork);
 	}
 
@@ -241,7 +240,7 @@ public class Work {
 	/**
 	 * @param intendedAudience not <code>null</code>.
 	 */
-	public void setIntendedAudience(List<String> intendedAudience) {
+	public void setIntendedAudience(Collection<String> intendedAudience) {
 		this.intendedAudience = Objects.requireNonNull(intendedAudience);
 	}
 

@@ -34,6 +34,7 @@ public class Expression {
 	/**
 	 * Not <code>null</code>.
 	 */
+	
 	@ManyToOne
 	private Work work;
 	/**

@@ -34,7 +34,7 @@ public class WorkJsonServlet {
 
 	@GET
 	@Transactional
-	@Produces("application/json")
+	@Produces({"application/json"})
 	public List<Work> getWorksServlet() {
 
 		List<Work> works = workService.getAll();

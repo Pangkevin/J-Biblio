@@ -2,11 +2,11 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.CascadeType;
-
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -16,6 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -30,7 +35,10 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 
 @Entity
 @Table(name = "Work")
-@JsonbPropertyOrder({ "idWork", "idExpressions", "expressions", "titleOfWork", "formOfWork","dateOfWork","otherDistinguishingCharacteristic","intendedTermination","intendedAudience","contextForTheWork" })
+@JsonbPropertyOrder({ "idWork", "titleOfWork", "formOfWork", "dateOfWork",
+		"otherDistinguishingCharacteristic", "intendedTermination", "intendedAudience", "contextForTheWork" })
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class Work {
 
 	/**
@@ -38,33 +46,32 @@ public class Work {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@XmlElement
 	private int idWork;
-
-	/**
-	 * Not <code>null</code>.
-	 */
-	@ElementCollection
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private Collection<Integer> idExpressions;
 
 	/**
 	 * Not <code>null</code>.
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "work", cascade = { CascadeType.ALL })
-	private Collection<Expression> expressions;
+	@XmlElementWrapper(name = "expressions")
+	@XmlElement(name= "expression")
+	private List<Expression> expressions;
 
 	/**
 	 * Not <code>null</code>.
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	private Collection<String> titleOfWork;
+	@XmlElementWrapper(name = "titles")
+	@XmlElement(name= "title")
+	private List<String> titleOfWork;
 
 	/**
 	 * Class to which the work belongs (novel play etc.) Not <code>null</code>.
 	 */
 	@Column(name = "formOfWork")
+	@XmlElement
 	private String formOfWork;
 
 	/**
@@ -78,12 +85,15 @@ public class Work {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
+	@XmlElementWrapper(name = "characteristics")
+	@XmlElement(name= "characteristic")
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Column(name = "intendedTermination")
+	@XmlElement
 	private boolean intendedTermination;
 
 	/**
@@ -91,16 +101,19 @@ public class Work {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	private Collection<String> intendedAudience;
+	@XmlElementWrapper(name = "audiences")
+	@XmlElement(name= "adience")
+	private List<String> intendedAudience;
 
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Column(name = "contextForTheWork")
+	@XmlElement
 	private String contextForTheWork;
 
 	public Work() {
-		idExpressions = new ArrayList<>();
+
 		expressions = new ArrayList<>();
 		titleOfWork = new ArrayList<>();
 		dateOfWork = new ArrayList<>();
@@ -111,7 +124,7 @@ public class Work {
 
 	}
 
-	public Work(int idWork, Collection<String> titleOfWork, String formOfWork) {
+	public Work(int idWork, List<String> titleOfWork, String formOfWork) {
 		this.idWork = Objects.requireNonNull(idWork);
 		this.titleOfWork = Objects.requireNonNull(titleOfWork);
 		this.formOfWork = Objects.requireNonNull(formOfWork);
@@ -149,22 +162,8 @@ public class Work {
 	/**
 	 * @param expressions not <code>null</code>.
 	 */
-	public void setExpressions(Collection<Expression> expressions) {
+	public void setExpressions(List<Expression> expressions) {
 		this.expressions = Objects.requireNonNull(expressions);
-	}
-
-	/**
-	 * @return not <code>null</code>.
-	 */
-	public Collection<Integer> getIdExpressions() {
-		return idExpressions;
-	}
-
-	/**
-	 * @param titleOfWork not <code>null</code>.
-	 */
-	public void setIdExpressions(Collection<Integer> idExpressions) {
-		this.idExpressions = Objects.requireNonNull(idExpressions);
 	}
 
 	/**
@@ -177,7 +176,7 @@ public class Work {
 	/**
 	 * @param titleOfWork not <code>null</code>.
 	 */
-	public void setTitleOfWork(Collection<String> titleOfWork) {
+	public void setTitleOfWork(List<String> titleOfWork) {
 		this.titleOfWork = Objects.requireNonNull(titleOfWork);
 	}
 
@@ -242,7 +241,7 @@ public class Work {
 	/**
 	 * @param intendedAudience not <code>null</code>.
 	 */
-	public void setIntendedAudience(Collection<String> intendedAudience) {
+	public void setIntendedAudience(List<String> intendedAudience) {
 		this.intendedAudience = Objects.requireNonNull(intendedAudience);
 	}
 

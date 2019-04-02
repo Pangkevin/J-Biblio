@@ -14,21 +14,15 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestat
  */
 public class ManifestationUnmarshalling {
 
-	public Manifestation unmarshal(String xml) {
-
+	public Manifestation unmarshal(String xml) throws JAXBException {
 		Manifestation stock = null;
 
-		try {
-
-			JAXBContext jaxbContext = JAXBContext.newInstance(Manifestation.class);
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			Manifestation retr = (Manifestation) jaxbUnmarshaller.unmarshal(new StringReader(xml));
-			stock = retr;
-
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
+		JAXBContext jaxbContext = JAXBContext.newInstance(Manifestation.class);
+		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		Manifestation retr = (Manifestation) jaxbUnmarshaller.unmarshal(new StringReader(xml));
+		stock = retr;
 
 		return stock;
+
 	}
 }

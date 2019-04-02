@@ -1,6 +1,5 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.servlets;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 

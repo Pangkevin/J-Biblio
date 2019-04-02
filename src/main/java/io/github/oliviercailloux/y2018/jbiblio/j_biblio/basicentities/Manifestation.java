@@ -1,7 +1,7 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
 import java.io.Serializable;
-import java.util.Collection;
+
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,9 +24,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import com.google.common.base.Strings;
 
@@ -62,21 +60,19 @@ public class Manifestation implements Serializable {
 	 * Not <code>null</code>.
 	 */
 	@OneToMany(mappedBy = "manifestation", cascade = { CascadeType.ALL })
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private Collection<Item> items;
+	private List<Item> items;
 
 	/**
 	 * Not <code>null</code>.
 	 */
 	@ElementCollection
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private Collection<String> titleOfTheManifestation;
+	private List<String> titleOfTheManifestation;
 
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Transient
-	private Collection<ResponsibleEntity> statementOfResponsibility;
+	private List<ResponsibleEntity> statementOfResponsibility;
 
 	/**
 	 * Not <code>null</code>, empty if unknown.
@@ -87,30 +83,29 @@ public class Manifestation implements Serializable {
 	 * Not <code>null</code>.
 	 */
 	@ElementCollection
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private Collection<Integer> placeOfPublicationDistribution;
+	private List<Integer> placeOfPublicationDistribution;
 
 	/**
 	 * Not <code>null</code>. Adapted for the parsing from mods to java object
 	 */
 	@Transient
-	private Collection<Place> lblPlaceOfPublication;
+	private List<Place> lblPlaceOfPublication;
 
 	/**
 	 * Not <code>null</code>.
 	 */
 
 	@Transient
-	private Collection<Person> publisherDistributer;
+	private List<Person> publisherDistributer;
 
 	@Transient
-	private Collection<ResponsibleEntity> publisherDistributerResponsibleEntity;
+	private List<ResponsibleEntity> publisherDistributerResponsibleEntity;
 
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Transient
-	private Collection<TimeStampedDescription> dateOfPublicationDistribution;
+	private List<TimeStampedDescription> dateOfPublicationDistribution;
 
 	/**
 	 * Not <code>null</code>. Adapted for the parsing from mods to java object
@@ -152,10 +147,10 @@ public class Manifestation implements Serializable {
 	 *                                       the manifestation to identify it
 	 */
 
-	public Manifestation(int idManifestation, Collection<Item> itemsList, Collection<String> titleOfTheManifestation,
-			Collection<ResponsibleEntity> statementOfResponsibility, String editionDesignation,
-			Collection<Integer> placeOfPublicationDistribution, Collection<Person> publisherDistributer,
-			Collection<TimeStampedDescription> dateOfPublicationDistribution, String manifestationIdentifier) {
+	public Manifestation(int idManifestation, List<Item> itemsList, List<String> titleOfTheManifestation,
+			List<ResponsibleEntity> statementOfResponsibility, String editionDesignation,
+			List<Integer> placeOfPublicationDistribution, List<Person> publisherDistributer,
+			List<TimeStampedDescription> dateOfPublicationDistribution, String manifestationIdentifier) {
 
 		this.idManifestation = idManifestation;
 		this.items = Objects.requireNonNull(itemsList);
@@ -191,14 +186,14 @@ public class Manifestation implements Serializable {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<Item> getItems() {
+	public List<Item> getItems() {
 		return items;
 	}
 
 	/**
 	 * @param idItems not <code>null</code>
 	 */
-	public void setItems(Collection<Item> items) {
+	public void setItems(List<Item> items) {
 		this.items = Objects.requireNonNull(items);
 	}
 
@@ -207,7 +202,7 @@ public class Manifestation implements Serializable {
 	 **/
 	@XmlElementWrapper(name = "titleInfo")
 	@XmlElement(name = "title")
-	public Collection<String> getTitleOfTheManifestation() {
+	public List<String> getTitleOfTheManifestation() {
 		return titleOfTheManifestation;
 	}
 
@@ -215,14 +210,14 @@ public class Manifestation implements Serializable {
 	 * 
 	 * @param titleOfTheManifestation not <code>null</code>
 	 */
-	public void setTitleOfTheManifestation(Collection<String> titleOfTheManifestation) {
+	public void setTitleOfTheManifestation(List<String> titleOfTheManifestation) {
 		this.titleOfTheManifestation = Objects.requireNonNull(titleOfTheManifestation);
 	}
 
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<ResponsibleEntity> getStatementOfResponsibility() {
+	public List<ResponsibleEntity> getStatementOfResponsibility() {
 		return statementOfResponsibility;
 	}
 
@@ -230,7 +225,7 @@ public class Manifestation implements Serializable {
 	 * 
 	 * @param statementOfResponsibility not <code>null</code>
 	 */
-	public void setStatementOfResponsibility(Collection<ResponsibleEntity> statementOfResponsibility) {
+	public void setStatementOfResponsibility(List<ResponsibleEntity> statementOfResponsibility) {
 		this.statementOfResponsibility = Objects.requireNonNull(statementOfResponsibility);
 	}
 
@@ -253,7 +248,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<Integer> getPlaceOfPublicationDistribution() {
+	public List<Integer> getPlaceOfPublicationDistribution() {
 		return placeOfPublicationDistribution;
 	}
 
@@ -261,14 +256,14 @@ public class Manifestation implements Serializable {
 	 * 
 	 * @param placeOfPublicationDistribution not <code>null</code>
 	 */
-	public void setPlaceOfPublicationDistribution(Collection<Integer> placeOfPublicationDistribution) {
+	public void setPlaceOfPublicationDistribution(List<Integer> placeOfPublicationDistribution) {
 		this.placeOfPublicationDistribution = Objects.requireNonNull(placeOfPublicationDistribution);
 	}
 
 	/**
 	 * @return not <code>null</code>. Adapted to objects parsed from mods to java
 	 */
-	public Collection<Person> getPublisherDistributer() {
+	public List<Person> getPublisherDistributer() {
 		if (originInfo != null) {
 			return originInfo.getPublisher();
 		}
@@ -279,7 +274,7 @@ public class Manifestation implements Serializable {
 	 * 
 	 * @param publisherDistributer not <code>null</code>
 	 */
-	public void setPublisherDistributer(Collection<Person> publisherDistributer) {
+	public void setPublisherDistributer(List<Person> publisherDistributer) {
 		originInfo.setPublisher(Objects.requireNonNull(publisherDistributer));
 		this.publisherDistributer = Objects.requireNonNull(publisherDistributer);
 	}
@@ -287,7 +282,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<TimeStampedDescription> getDateOfPublicationDistribution() {
+	public List<TimeStampedDescription> getDateOfPublicationDistribution() {
 		return dateOfPublicationDistribution;
 	}
 
@@ -295,21 +290,21 @@ public class Manifestation implements Serializable {
 	 * 
 	 * @param dateOfPublicationDistribution not <code>null</code>
 	 */
-	public void setDateOfPublicationDistribution(Collection<TimeStampedDescription> dateOfPublicationDistribution) {
+	public void setDateOfPublicationDistribution(List<TimeStampedDescription> dateOfPublicationDistribution) {
 		this.dateOfPublicationDistribution = Objects.requireNonNull(dateOfPublicationDistribution);
 	}
 
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<Place> getPlaceOfPublication() {
+	public List<Place> getPlaceOfPublication() {
 		if (originInfo != null) {
 			return originInfo.getPlace();
 		}
 		return this.lblPlaceOfPublication;
 	}
 
-	public void setPlaceOfPublication(Collection<Place> placeOfPublication) {
+	public void setPlaceOfPublication(List<Place> placeOfPublication) {
 		originInfo.setPlace(Objects.requireNonNull(placeOfPublication));
 		this.lblPlaceOfPublication = Objects.requireNonNull(placeOfPublication);
 	}

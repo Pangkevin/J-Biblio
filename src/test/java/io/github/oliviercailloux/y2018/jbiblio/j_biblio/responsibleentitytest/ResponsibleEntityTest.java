@@ -2,8 +2,6 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentitytest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.text.ParseException;
-
 import org.junit.jupiter.api.Test;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.CorporateBody;

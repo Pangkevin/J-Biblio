@@ -1,6 +1,6 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,28 +10,28 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person
 @XmlRootElement(name = "originInfo")
 public class OriginInfo {
 
-	private Collection<Person> publisher;
-	private Collection<Place> place;
+	private List<Person> publisher;
+	private List<Place> place;
 
 	public OriginInfo() {
 
 	}
 
 	@XmlElement(name = "publisher", type = Person.class)
-	public Collection<Person> getPublisher() {
+	public List<Person> getPublisher() {
 		return publisher;
 	}
 
-	public void setPublisher(Collection<Person> publisher) {
+	public void setPublisher(List<Person> publisher) {
 		this.publisher = publisher;
 	}
 
 	@XmlElement(name = "place", type = Place.class)
-	public Collection<Place> getPlace() {
+	public List<Place> getPlace() {
 		return place;
 	}
 
-	public void setPlace(Collection<Place> place) {
+	public void setPlace(List<Place> place) {
 		this.place = place;
 	}
 

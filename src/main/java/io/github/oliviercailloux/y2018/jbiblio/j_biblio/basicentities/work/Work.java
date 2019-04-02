@@ -1,7 +1,7 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
@@ -20,9 +20,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import com.google.common.base.Strings;
 
@@ -51,20 +48,19 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "work", cascade = { CascadeType.ALL })
 	@XmlElementWrapper(name = "expressions")
 	@XmlElement(name = "expression")
-	private Collection<Expression> expressions;
+	private List<Expression> expressions;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
+
 	@ElementCollection
 	@XmlElementWrapper(name = "titles")
 	@XmlElement(name = "title")
-	private Collection<String> titleOfWork;
+	private List<String> titleOfWork;
 
 	/**
 	 * Class to which the work belongs (novel play etc.) Not <code>null</code>.
@@ -77,16 +73,16 @@ public class Work {
 	 * Normally the year Not <code>null</code>.
 	 */
 	@Transient
-	private Collection<TimeStampedDescription> dateOfWork;
+	private List<TimeStampedDescription> dateOfWork;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
+
 	@ElementCollection
 	@XmlElementWrapper(name = "characteristics")
 	@XmlElement(name = "characteristic")
-	private Collection<String> otherDistinguishingCharacteristic;
+	private List<String> otherDistinguishingCharacteristic;
 
 	/**
 	 * Not <code>null</code>.
@@ -98,11 +94,11 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
+
 	@ElementCollection
 	@XmlElementWrapper(name = "audiences")
 	@XmlElement(name = "adience")
-	private Collection<String> intendedAudience;
+	private List<String> intendedAudience;
 
 	/**
 	 * Not <code>null</code>.
@@ -123,7 +119,7 @@ public class Work {
 
 	}
 
-	public Work(int idWork, Collection<String> titleOfWork, String formOfWork) {
+	public Work(int idWork, List<String> titleOfWork, String formOfWork) {
 		this.idWork = Objects.requireNonNull(idWork);
 		this.titleOfWork = Objects.requireNonNull(titleOfWork);
 		this.formOfWork = Objects.requireNonNull(formOfWork);
@@ -154,28 +150,28 @@ public class Work {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<Expression> getExpressions() {
+	public List<Expression> getExpressions() {
 		return expressions;
 	}
 
 	/**
 	 * @param expressions not <code>null</code>.
 	 */
-	public void setExpressions(Collection<Expression> expressions) {
+	public void setExpressions(List<Expression> expressions) {
 		this.expressions = Objects.requireNonNull(expressions);
 	}
 
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<String> getTitleOfWork() {
+	public List<String> getTitleOfWork() {
 		return titleOfWork;
 	}
 
 	/**
 	 * @param titleOfWork not <code>null</code>.
 	 */
-	public void setTitleOfWork(Collection<String> titleOfWork) {
+	public void setTitleOfWork(List<String> titleOfWork) {
 		this.titleOfWork = Objects.requireNonNull(titleOfWork);
 	}
 
@@ -197,28 +193,28 @@ public class Work {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<TimeStampedDescription> getDateOfWork() {
+	public List<TimeStampedDescription> getDateOfWork() {
 		return dateOfWork;
 	}
 
 	/**
 	 * @param dateOfWork not <code>null</code>.
 	 */
-	public void setDateOfWork(Collection<TimeStampedDescription> dateOfWork) {
+	public void setDateOfWork(List<TimeStampedDescription> dateOfWork) {
 		this.dateOfWork = Objects.requireNonNull(dateOfWork);
 	}
 
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<String> getOtherDistinguishingCharacteristic() {
+	public List<String> getOtherDistinguishingCharacteristic() {
 		return otherDistinguishingCharacteristic;
 	}
 
 	/**
 	 * @param otherDistinguishingCharacteristic not <code>null</code>.
 	 */
-	public void setOtherDistinguishingCharacteristic(Collection<String> otherDistinguishingCharacteristic) {
+	public void setOtherDistinguishingCharacteristic(List<String> otherDistinguishingCharacteristic) {
 		this.otherDistinguishingCharacteristic = Objects.requireNonNull(otherDistinguishingCharacteristic);
 	}
 
@@ -233,14 +229,14 @@ public class Work {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<String> getIntendedAudience() {
+	public List<String> getIntendedAudience() {
 		return intendedAudience;
 	}
 
 	/**
 	 * @param intendedAudience not <code>null</code>.
 	 */
-	public void setIntendedAudience(Collection<String> intendedAudience) {
+	public void setIntendedAudience(List<String> intendedAudience) {
 		this.intendedAudience = Objects.requireNonNull(intendedAudience);
 	}
 

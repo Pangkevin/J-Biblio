@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.xml.bind.JAXBException;
+
 import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Iterables;
@@ -19,7 +21,7 @@ class ManifestationUnmarshallingTest {
 	// https://www.loc.gov/standards/mods/userguide/examples.html
 
 	@Test
-	void marshalling() {
+	void marshalling() throws JAXBException {
 		String xml = "<Manifestation>" + " 	<titleInfo>"
 				+ "     <title>At Gettysburg, or, What a Girl Saw and Heard of the Battle: A True Narrative</title>"
 				+ " 	</titleInfo>" + " 	<name type=\"personal\">\n"

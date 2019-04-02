@@ -16,9 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
@@ -34,7 +31,7 @@ public class Expression {
 	/**
 	 * Not <code>null</code>.
 	 */
-	
+
 	@ManyToOne
 	private Work work;
 	/**
@@ -47,13 +44,11 @@ public class Expression {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "expression", cascade = { CascadeType.ALL })
 	private Collection<Manifestation> manifestations;
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	private Collection<String> titleOfExpression;
 	/**
@@ -74,7 +69,6 @@ public class Expression {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	private Collection<String> otherDistinguishingCharacteristic;
 

@@ -51,7 +51,6 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "work", cascade = { CascadeType.ALL })
 	@XmlElementWrapper(name = "expressions")
 	@XmlElement(name = "expression")

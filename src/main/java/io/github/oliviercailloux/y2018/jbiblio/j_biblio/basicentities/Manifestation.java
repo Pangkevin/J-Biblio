@@ -57,7 +57,7 @@ public class Manifestation implements Serializable {
 	 */
 	@ManyToOne
 	private Expression expression;
-	
+
 	/**
 	 * Not <code>null</code>.
 	 */
@@ -152,13 +152,13 @@ public class Manifestation implements Serializable {
 	 *                                       the manifestation to identify it
 	 */
 
-	public Manifestation(int idManifestation, Collection<Integer> idItems, Collection<String> titleOfTheManifestation,
+	public Manifestation(int idManifestation, Collection<Item> itemsList, Collection<String> titleOfTheManifestation,
 			Collection<ResponsibleEntity> statementOfResponsibility, String editionDesignation,
 			Collection<Integer> placeOfPublicationDistribution, Collection<Person> publisherDistributer,
 			Collection<TimeStampedDescription> dateOfPublicationDistribution, String manifestationIdentifier) {
 
 		this.idManifestation = idManifestation;
-		this.items = Objects.requireNonNull(items);
+		this.items = Objects.requireNonNull(itemsList);
 		this.titleOfTheManifestation = Objects.requireNonNull(titleOfTheManifestation);
 		this.statementOfResponsibility = Objects.requireNonNull(statementOfResponsibility);
 		this.editionDesignation = Objects.requireNonNull(editionDesignation);
@@ -198,7 +198,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * @param idItems not <code>null</code>
 	 */
-	public void setIdItems(Collection<Item> idItems) {
+	public void setItems(Collection<Item> items) {
 		this.items = Objects.requireNonNull(items);
 	}
 

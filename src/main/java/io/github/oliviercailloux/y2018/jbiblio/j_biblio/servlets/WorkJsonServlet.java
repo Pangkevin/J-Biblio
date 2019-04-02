@@ -34,7 +34,7 @@ public class WorkJsonServlet {
 
 	@GET
 	@Transactional
-	@Produces({"application/json"})
+	@Produces({ "application/json" })
 	public List<Work> getWorksServlet() {
 
 		List<Work> works = workService.getAll();
@@ -44,7 +44,7 @@ public class WorkJsonServlet {
 	@POST
 	@Transactional
 	@Consumes("application/json")
-	public Response addWorkServlet(Work work) throws IOException {
+	public Response addWorkServlet(Work work) {
 		em.persist(work);
 		LOGGER.info("Work added!");
 		return Response.status(Response.Status.OK).build();

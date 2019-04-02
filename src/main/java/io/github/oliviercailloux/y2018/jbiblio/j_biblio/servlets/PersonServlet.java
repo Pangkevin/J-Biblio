@@ -46,7 +46,7 @@ public class PersonServlet {
 	@POST
 	@Transactional
 	@Consumes("application/json")
-	public Response addWorkServlet(Person person) throws IOException {
+	public Response addWorkServlet(Person person) {
 		em.persist(person);
 		LOGGER.info("Person added!");
 		return Response.status(Response.Status.OK).build();

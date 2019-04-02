@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.ParseException;
 import java.time.Instant;
+import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +31,7 @@ class PersonTest {
 	 * @throws ParseException
 	 */
 	@Test
-	void testOptionalAttribut() throws ParseException {
+	void testOptionalAttribut() throws DateTimeParseException {
 
 		// Init DateStructure
 

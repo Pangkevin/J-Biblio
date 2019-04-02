@@ -28,8 +28,6 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
  * data transfer object or DTO of Person
  */
 
-@XmlRootElement(name = "publisher")
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 @Entity
 @Table(name = "Person")
 @JsonbPropertyOrder({ "nameAuthority", "idPerson", "firstName", "middleName", "lastName", "personTitle", "birthDate",

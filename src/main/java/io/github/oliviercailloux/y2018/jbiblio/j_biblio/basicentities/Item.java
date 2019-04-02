@@ -20,9 +20,10 @@ import com.google.common.base.Strings;
  * later to include attributes related to other types of items (books, music,
  * ...)
  */
-@JsonbPropertyOrder({ "idItem", "idManifestation", "itemIdentifier", "fingerprint", "provenanceOfTheItem" })
+
 @Entity
 @Table(name = "Item")
+@JsonbPropertyOrder({ "idItem", "manifestation", "itemIdentifier", "fingerprint", "provenanceOfTheItem" })
 public class Item {
 	/**
 	 * Not <code>null</code>.

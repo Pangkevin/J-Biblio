@@ -45,7 +45,7 @@ public class ItemJsonServlet {
 	@POST
 	@Transactional
 	@Consumes("application/json")
-	public Response addItemServlet(Item item) throws IOException {
+	public Response addItemServlet(Item item) {
 		em.persist(item);
 		LOGGER.info("Item added!");
 		return Response.status(Response.Status.OK).build();

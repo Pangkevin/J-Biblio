@@ -13,11 +13,9 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Respon
 class ResponsibleEntityTest {
 	/**
 	 * tests throws IllegalStateException
-	 * 
-	 * @throws ParseException
 	 */
 	@Test
-	void addPersonResponsibleEntityTest() throws ParseException {
+	void addPersonResponsibleEntityTest() {
 
 		Person person = new Person();
 		ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);

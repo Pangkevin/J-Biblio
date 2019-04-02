@@ -21,6 +21,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
@@ -48,6 +51,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "work", cascade = { CascadeType.ALL })
 	@XmlElementWrapper(name = "expressions")
 	@XmlElement(name = "expression")
@@ -56,7 +60,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	@XmlElementWrapper(name = "titles")
 	@XmlElement(name = "title")
@@ -78,7 +82,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	@XmlElementWrapper(name = "characteristics")
 	@XmlElement(name = "characteristic")
@@ -94,7 +98,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	@XmlElementWrapper(name = "audiences")
 	@XmlElement(name = "adience")

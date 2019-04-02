@@ -7,6 +7,10 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 
@@ -65,6 +69,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	private List<String> titleOfTheManifestation;
 
@@ -82,6 +87,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	private List<Integer> placeOfPublicationDistribution;
 

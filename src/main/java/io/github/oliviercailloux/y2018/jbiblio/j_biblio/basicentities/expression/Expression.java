@@ -1,49 +1,80 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.google.common.base.Strings;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 
 /**
  * 
  */
+@Entity
 public class Expression {
 
 	/**
 	 * Not <code>null</code>.
 	 */
+
+	@ManyToOne
 	private Work work;
 	/**
 	 * Not <code>null</code>.
 	 */
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Collection<Integer> idManifestations;
+	@OneToMany(mappedBy = "expression", cascade = { CascadeType.ALL })
+	private Collection<Manifestation> manifestations;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
 	private Collection<String> titleOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "formOfExpression")
 	private String formOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Transient
 	private Collection<TimeStampedDescription> dateOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "languageOfExpression")
 	private String languageOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
 	private Collection<String> otherDistinguishingCharacteristic;
 
 	/*
@@ -54,6 +85,17 @@ public class Expression {
 	 * criticalResponseToTheExpression; private String
 	 * useRestrictionsOnTheExpression;
 	 */
+
+	public Expression() {
+
+		this.formOfExpression = "";
+		this.languageOfExpression = "";
+		this.dateOfExpression = new ArrayList<>();
+		this.titleOfExpression = new ArrayList<>();
+		this.manifestations = new ArrayList<>();
+		this.otherDistinguishingCharacteristic = new ArrayList<>();
+
+	}
 
 	public Expression(Work work, int idExpression, String formOfExpression,
 			Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression) {
@@ -96,12 +138,12 @@ public class Expression {
 		this.idExpression = idExpression;
 	}
 
-	public Collection<Integer> getIdManifestations() {
-		return idManifestations;
+	public Collection<Manifestation> getManifestations() {
+		return manifestations;
 	}
 
-	public void setIdManifestations(Collection<Integer> idManifestations) {
-		this.idManifestations = Objects.requireNonNull(idManifestations);
+	public void setIdManifestations(Collection<Manifestation> manifestations) {
+		this.manifestations = Objects.requireNonNull(manifestations);
 	}
 
 	/**

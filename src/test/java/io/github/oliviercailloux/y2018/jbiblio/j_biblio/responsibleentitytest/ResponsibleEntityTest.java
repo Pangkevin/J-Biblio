@@ -2,12 +2,8 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentitytest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.text.ParseException;
-import java.time.Instant;
-
 import org.junit.jupiter.api.Test;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.CorporateBody;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Person;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.ResponsibleEntity;
@@ -15,16 +11,11 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.Respon
 class ResponsibleEntityTest {
 	/**
 	 * tests throws IllegalStateException
-	 * 
-	 * @throws ParseException
 	 */
 	@Test
-	void addPersonResponsibleEntityTest() throws ParseException {
-		// Init DateStructure
-		TimeStampedDescription dateStructureBirth = new TimeStampedDescription("BirthDate",
-				Instant.parse("1565-05-05T23:00:00Z"));
+	void addPersonResponsibleEntityTest() {
 
-		Person person = new Person("Shakespeare, William, 1564-1616", "William", "Shakespeare", dateStructureBirth);
+		Person person = new Person();
 		ResponsibleEntity responsibleEntity = new ResponsibleEntity(person);
 
 		assertThrows(IllegalStateException.class, () -> {
@@ -36,7 +27,7 @@ class ResponsibleEntityTest {
 	@Test
 	void addCorporateBodyResponsibleEntityTest() {
 
-		CorporateBody cb = new CorporateBody("BNF", "bnf");
+		CorporateBody cb = new CorporateBody();
 
 		ResponsibleEntity responsibleEntity = new ResponsibleEntity(cb);
 

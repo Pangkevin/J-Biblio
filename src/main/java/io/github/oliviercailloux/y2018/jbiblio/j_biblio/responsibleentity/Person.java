@@ -2,6 +2,20 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity;
 
 import java.util.Objects;
 import java.util.Optional;
+
+import javax.xml.bind.annotation.XmlElement;
+
+import javax.json.bind.annotation.JsonbPropertyOrder;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.google.common.base.Strings;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeStampedDescription;
@@ -10,48 +24,90 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
  * data transfer object or DTO of Person
  */
 
-public class Person extends AbstractResponsibleEntity {
+@Entity
+@Table(name = "Person")
+@JsonbPropertyOrder({ "nameAuthority", "idPerson", "firstName", "middleName", "lastName", "personTitle", "birthDate",
+		"birthDate" })
+public class Person {
 
+	/**
+	 * nameAuthory It should not be allowed to be unknown. This is an essential
+	 * information. Not <code>null</code>, empty if unknown.
+	 */
+	@Column(name = "nameAuthority")
+	private String nameAuthority;
+
+	@Id
+	@Column(name = "idPerson")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int idPerson;
 	/**
 	 * Not <code>null</code>, may be empty.
 	 */
+	@Column(name = "firstName")
 	private String firstName;
 
 	/**
 	 * Not <code>null</code>, may be empty.
 	 */
+	@Column(name = "middleName")
 	private String middleName;
 
 	/**
 	 * Not <code>null</code>, may be empty.
 	 */
+	@Column(name = "lastName")
 	private String lastName;
 
 	/**
 	 * Not <code>null</code>, may be empty.
 	 */
+	@Column(name = "personTitle")
 	private String personTitle;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@OneToOne(cascade = { CascadeType.ALL })
 	private TimeStampedDescription birthDate;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Optional<TimeStampedDescription> deathDate;
 
-	public Person(String nameAuthority, String firstName, String lastName, TimeStampedDescription birthDate) {
+	@OneToOne
+	private TimeStampedDescription deathDate;
 
-		this.nameAuthority = Objects.requireNonNull(nameAuthority);
-		this.firstName = Objects.requireNonNull(firstName);
+	public Person() {
+
+		this.nameAuthority = "";
+		this.firstName = "";
 		this.middleName = "";
-		this.lastName = Objects.requireNonNull(lastName);
+		this.lastName = "";
 		this.personTitle = "";
-		this.birthDate = Objects.requireNonNull(birthDate);
-		this.deathDate = Optional.empty();
+		birthDate = new TimeStampedDescription();
 
+	}
+
+	/**
+	 * Return name authority of the Responsible entitie
+	 * 
+	 * @return not <code>null</code>.
+	 */
+	public String getNameAuthority() {
+		return nameAuthority;
+	}
+
+	/**
+	 * 
+	 * @param nameAuthority
+	 */
+	public void setNameAuthority(String nameAuthority) {
+		this.nameAuthority = Objects.requireNonNull(nameAuthority);
+	}
+
+	public Person(String title) {
+		this.setPersonTitle(title);
 	}
 
 	/**
@@ -100,8 +156,9 @@ public class Person extends AbstractResponsibleEntity {
 	/**
 	 * @return not <code>null</code>.
 	 */
+	@XmlElement(name = "artname")
 	public String getPersonTitle() {
-		return personTitle;
+		return this.personTitle;
 	}
 
 	/**
@@ -132,7 +189,7 @@ public class Person extends AbstractResponsibleEntity {
 	 * @return not <code>null</code>.
 	 */
 	public Optional<TimeStampedDescription> getDeathDate() {
-		return deathDate;
+		return Optional.ofNullable(this.deathDate);
 	}
 
 	/**
@@ -140,7 +197,13 @@ public class Person extends AbstractResponsibleEntity {
 	 * @param deathdate may be <code>null</code>.
 	 */
 	public void setDeathDate(TimeStampedDescription deathdate) {
-		this.deathDate = Optional.ofNullable(deathdate);
+		this.deathDate = deathdate;
 	}
 
+	public boolean equals(Person b) {
+		if (b.getPersonTitle().equals(this.getPersonTitle()))
+			return true;
+
+		return false;
+	}
 }

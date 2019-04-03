@@ -1,10 +1,37 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 
-import java.util.Collection;
+import java.io.Serializable;
+
 import java.util.Objects;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.google.common.base.Strings;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.*;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
 
@@ -16,24 +43,41 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
  * manifestations (books, music, ...)
  */
 
-public class Manifestation {
+@SuppressWarnings("serial")
+@XmlRootElement(name = "Manifestation")
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@Entity
+@Table(name = "Manifestation")
+public class Manifestation implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idManifestation;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Collection<Integer> idItems;
+	@ManyToOne
+	private Expression expression;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Collection<String> titleOfTheManifestation;
+	@OneToMany(mappedBy = "manifestation", cascade = { CascadeType.ALL })
+	private List<Item> items;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Collection<ResponsibleEntity> statementOfResponsibility;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
+	private List<String> titleOfTheManifestation;
+
+	/**
+	 * Not <code>null</code>.
+	 */
+	@Transient
+	private List<ResponsibleEntity> statementOfResponsibility;
 
 	/**
 	 * Not <code>null</code>, empty if unknown.
@@ -43,22 +87,43 @@ public class Manifestation {
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Collection<Integer> placeOfPublicationDistribution;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
+	private List<Integer> placeOfPublicationDistribution;
+
+	/**
+	 * Not <code>null</code>. Adapted for the parsing from mods to java object
+	 */
+	@Transient
+	private List<Place> lblPlaceOfPublication;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Collection<ResponsibleEntity> publisherDistributer;
+
+	@Transient
+	private List<Person> publisherDistributer;
+
+	@Transient
+	private List<ResponsibleEntity> publisherDistributerResponsibleEntity;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	private Collection<TimeStampedDescription> dateOfPublicationDistribution;
+	@Transient
+	private List<TimeStampedDescription> dateOfPublicationDistribution;
+
+	/**
+	 * Not <code>null</code>. Adapted for the parsing from mods to java object
+	 */
+	@Transient
+	private OriginInfo originInfo;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	public String manifestationIdentifier;
+	@Column(name = "manifestationIdentifier")
+	private String manifestationIdentifier;
 
 	/**
 	 * This function is the constructor of manifestation entity
@@ -88,13 +153,13 @@ public class Manifestation {
 	 *                                       the manifestation to identify it
 	 */
 
-	public Manifestation(int idManifestation, Collection<Integer> idItems, Collection<String> titleOfTheManifestation,
-			Collection<ResponsibleEntity> statementOfResponsibility, String editionDesignation,
-			Collection<Integer> placeOfPublicationDistribution, Collection<ResponsibleEntity> publisherDistributer,
-			Collection<TimeStampedDescription> dateOfPublicationDistribution, String manifestationIdentifier) {
+	public Manifestation(int idManifestation, List<Item> itemsList, List<String> titleOfTheManifestation,
+			List<ResponsibleEntity> statementOfResponsibility, String editionDesignation,
+			List<Integer> placeOfPublicationDistribution, List<Person> publisherDistributer,
+			List<TimeStampedDescription> dateOfPublicationDistribution, String manifestationIdentifier) {
 
 		this.idManifestation = idManifestation;
-		this.idItems = Objects.requireNonNull(idItems);
+		this.items = Objects.requireNonNull(itemsList);
 		this.titleOfTheManifestation = Objects.requireNonNull(titleOfTheManifestation);
 		this.statementOfResponsibility = Objects.requireNonNull(statementOfResponsibility);
 		this.editionDesignation = Objects.requireNonNull(editionDesignation);
@@ -103,6 +168,17 @@ public class Manifestation {
 		this.dateOfPublicationDistribution = Objects.requireNonNull(dateOfPublicationDistribution);
 		this.manifestationIdentifier = Objects.requireNonNull(manifestationIdentifier);
 
+	}
+
+	public Manifestation() {
+		this.items = new ArrayList<>();
+		this.titleOfTheManifestation = new ArrayList<>();
+		this.statementOfResponsibility = new ArrayList<>();
+		this.editionDesignation = "";
+		this.placeOfPublicationDistribution = new ArrayList<>();
+		this.publisherDistributer = new ArrayList<>();
+		this.dateOfPublicationDistribution = new ArrayList<>();
+		this.manifestationIdentifier = "";
 	}
 
 	public int getIdManifestation() {
@@ -116,21 +192,23 @@ public class Manifestation {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<Integer> getIdItems() {
-		return idItems;
+	public List<Item> getItems() {
+		return items;
 	}
 
 	/**
 	 * @param idItems not <code>null</code>
 	 */
-	public void setIdItems(Collection<Integer> idItems) {
-		this.idItems = Objects.requireNonNull(idItems);
+	public void setItems(List<Item> items) {
+		this.items = Objects.requireNonNull(items);
 	}
 
 	/**
 	 * @return not <code>null</code>.
-	 */
-	public Collection<String> getTitleOfTheManifestation() {
+	 **/
+	@XmlElementWrapper(name = "titleInfo")
+	@XmlElement(name = "title")
+	public List<String> getTitleOfTheManifestation() {
 		return titleOfTheManifestation;
 	}
 
@@ -138,14 +216,14 @@ public class Manifestation {
 	 * 
 	 * @param titleOfTheManifestation not <code>null</code>
 	 */
-	public void setTitleOfTheManifestation(Collection<String> titleOfTheManifestation) {
+	public void setTitleOfTheManifestation(List<String> titleOfTheManifestation) {
 		this.titleOfTheManifestation = Objects.requireNonNull(titleOfTheManifestation);
 	}
 
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<ResponsibleEntity> getStatementOfResponsibility() {
+	public List<ResponsibleEntity> getStatementOfResponsibility() {
 		return statementOfResponsibility;
 	}
 
@@ -153,7 +231,7 @@ public class Manifestation {
 	 * 
 	 * @param statementOfResponsibility not <code>null</code>
 	 */
-	public void setStatementOfResponsibility(Collection<ResponsibleEntity> statementOfResponsibility) {
+	public void setStatementOfResponsibility(List<ResponsibleEntity> statementOfResponsibility) {
 		this.statementOfResponsibility = Objects.requireNonNull(statementOfResponsibility);
 	}
 
@@ -176,7 +254,7 @@ public class Manifestation {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<Integer> getPlaceOfPublicationDistribution() {
+	public List<Integer> getPlaceOfPublicationDistribution() {
 		return placeOfPublicationDistribution;
 	}
 
@@ -184,29 +262,33 @@ public class Manifestation {
 	 * 
 	 * @param placeOfPublicationDistribution not <code>null</code>
 	 */
-	public void setPlaceOfPublicationDistribution(Collection<Integer> placeOfPublicationDistribution) {
+	public void setPlaceOfPublicationDistribution(List<Integer> placeOfPublicationDistribution) {
 		this.placeOfPublicationDistribution = Objects.requireNonNull(placeOfPublicationDistribution);
 	}
 
 	/**
-	 * @return not <code>null</code>.
+	 * @return not <code>null</code>. Adapted to objects parsed from mods to java
 	 */
-	public Collection<ResponsibleEntity> getPublisherDistributer() {
-		return publisherDistributer;
+	public List<Person> getPublisherDistributer() {
+		if (originInfo != null) {
+			return originInfo.getPublisher();
+		}
+		return this.publisherDistributer;
 	}
 
 	/**
 	 * 
 	 * @param publisherDistributer not <code>null</code>
 	 */
-	public void setPublisherDistributer(Collection<ResponsibleEntity> publisherDistributer) {
+	public void setPublisherDistributer(List<Person> publisherDistributer) {
+		originInfo.setPublisher(Objects.requireNonNull(publisherDistributer));
 		this.publisherDistributer = Objects.requireNonNull(publisherDistributer);
 	}
 
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<TimeStampedDescription> getDateOfPublicationDistribution() {
+	public List<TimeStampedDescription> getDateOfPublicationDistribution() {
 		return dateOfPublicationDistribution;
 	}
 
@@ -214,8 +296,32 @@ public class Manifestation {
 	 * 
 	 * @param dateOfPublicationDistribution not <code>null</code>
 	 */
-	public void setDateOfPublicationDistribution(Collection<TimeStampedDescription> dateOfPublicationDistribution) {
+	public void setDateOfPublicationDistribution(List<TimeStampedDescription> dateOfPublicationDistribution) {
 		this.dateOfPublicationDistribution = Objects.requireNonNull(dateOfPublicationDistribution);
+	}
+
+	/**
+	 * @return not <code>null</code>.
+	 */
+	public List<Place> getPlaceOfPublication() {
+		if (originInfo != null) {
+			return originInfo.getPlace();
+		}
+		return this.lblPlaceOfPublication;
+	}
+
+	public void setPlaceOfPublication(List<Place> placeOfPublication) {
+		originInfo.setPlace(Objects.requireNonNull(placeOfPublication));
+		this.lblPlaceOfPublication = Objects.requireNonNull(placeOfPublication);
+	}
+
+	@XmlElement(name = "originInfo", type = OriginInfo.class)
+	public OriginInfo getOriginInfo() {
+		return originInfo;
+	}
+
+	public void setOriginInfo(OriginInfo originInfo) {
+		this.originInfo = Objects.requireNonNull(originInfo);
 	}
 
 }

@@ -3,6 +3,13 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities;
 import java.util.Objects;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.google.common.base.Strings;
 
@@ -13,31 +20,41 @@ import com.google.common.base.Strings;
  * later to include attributes related to other types of items (books, music,
  * ...)
  */
-@JsonbPropertyOrder({ "idItem", "idManifestation", "itemIdentifier", "fingerprint", "provenanceOfTheItem" })
+
+@Entity
+@Table(name = "Item")
+@JsonbPropertyOrder({ "idItem", "manifestation", "itemIdentifier", "fingerprint", "provenanceOfTheItem" })
 public class Item {
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Id
+	@Column(name = "idItem")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int idItem;
 
 	/**
 	 * Not <code>null</code>.
 	 */
-	private int idManifestation;
+	@ManyToOne
+	private Manifestation manifestation;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "itemIdentifier")
 	private String itemIdentifier;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "fingerprint")
 	private String fingerprint;
 
 	/**
 	 * Not <code>null</code>.
 	 */
+	@Column(name = "provenanceOfTheItem")
 	private String provenanceOfTheItem;
 
 	/**
@@ -109,12 +126,12 @@ public class Item {
 		this.provenanceOfTheItem = Strings.nullToEmpty(provenanceOfTheItem);
 	}
 
-	public int getIdManifestation() {
-		return idManifestation;
+	public Manifestation getManifestation() {
+		return manifestation;
 	}
 
-	public void setIdManifestation(int idManifestation) {
-		this.idManifestation = idManifestation;
+	public void setManifestation(Manifestation manifestation) {
+		this.manifestation = manifestation;
 	}
 
 }

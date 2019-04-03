@@ -1,9 +1,27 @@
-language: java
+
+
+    language: java
 git:
   depth: 1
-dist: xenial
+jdk:
+  - openjdk8
+dist: trusty
 cache:
   directories:
-    - $HOME/.m2
+  - "$HOME/.m2"
+deploy:
+  provider: bluemixcloudfoundry
+  skip_cleanup: true
+  username: vima.haddad@dauphine.eu
+  password: $BLUEMIX_PASSWORD
+  organization: vima.haddad@dauphine.eu
+  space: dev
+  region: eu-gb
+ 
+ on:
+   branch: ibmCloud
+  
  notifications:
     slack: j-biblio:YdhU5ex8QRZKFvG2EdCCMM3p
+
+    

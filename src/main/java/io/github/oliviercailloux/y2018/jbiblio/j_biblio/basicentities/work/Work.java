@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +52,7 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@OneToMany(mappedBy = "work", cascade = { CascadeType.ALL })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "work", cascade = { CascadeType.ALL })
 	@XmlElementWrapper(name = "expressions")
 	@XmlElement(name = "expression")
 	private List<Expression> expressions;

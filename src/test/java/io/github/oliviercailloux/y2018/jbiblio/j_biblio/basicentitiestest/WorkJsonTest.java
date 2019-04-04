@@ -1,34 +1,55 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentitiestest;
 
-import java.io.StringWriter;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import java.io.BufferedReader;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 
 import org.junit.jupiter.api.Test;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 
 class WorkJsonTest {
 
 	@Test
-	void test() throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(Work.class);
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+	public void testConvertJsonToWorkObject() throws Exception {
+
+		try (Jsonb jsonb = JsonbBuilder.create();) {
+			try (BufferedReader reader = new BufferedReader(new StringReader("{\"formOfWork\":\"toto\"}"));) {
+
+				Work work = jsonb.fromJson(reader, Work.class);
+				assertEquals(work.getFormOfWork(), "toto");
+
+			}
+		}
+
+	}
+
+	@Test
+	void testConvertManifestationToJson() throws Exception {
+
+		List<Work> listJsonManifestation = new ArrayList<>();
+		String jsonRepresentation = "[{\"dateOfPublicationDistribution\":[],\"editionDesignation\":\"larousse\",\"idManifestation\":0,\"items\":[],\"placeOfPublicationDistribution\":[],\"publisherDistributer\":[],\"statementOfResponsibility\":[],\"titleOfTheManifestation\":[]}]";
+
 		Work work = new Work();
-		work.setContextForTheWork("toto");
-		
-		// Print JSON String to Console
-		StringWriter sw = new StringWriter();
-		jaxbMarshaller.marshal(work, sw);
-		System.out.println(sw.toString());
-		Work catalog = JAXB.unmarshal(sw.toString(), Work.class);
-		
-		
-		System.out.println(catalog.toString());
-		
+		work.setFormOfWork("toto");
+
+		listJsonManifestation.add(work);
+
+		try (Jsonb jsonb = JsonbBuilder.create();) {
+
+			String jsonManifestation = jsonb.toJson(listJsonManifestation);
+			System.out.println(jsonManifestation);
+
+		}
 	}
 
 }

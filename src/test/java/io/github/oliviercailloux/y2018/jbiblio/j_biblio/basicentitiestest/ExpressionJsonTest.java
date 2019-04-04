@@ -26,11 +26,10 @@ public class ExpressionJsonTest {
 				Expression expression = jsonb.fromJson(reader, Expression.class);
 				assertEquals(expression.getFormOfExpression(), "writing");
 				assertEquals(expression.getLanguageOfExpression(), "FR");
-				;
+
 			}
 		}
 
 	}
-
 
 }

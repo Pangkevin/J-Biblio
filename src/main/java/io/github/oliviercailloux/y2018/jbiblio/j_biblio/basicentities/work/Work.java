@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -33,12 +34,10 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  */
 
+@XmlRootElement(name = "Work")
+@XmlAccessorType(XmlAccessType.NONE)
 @Entity
 @Table(name = "Work")
-@JsonbPropertyOrder({ "idWork", "titleOfWork", "formOfWork", "dateOfWork", "otherDistinguishingCharacteristic",
-		"intendedTermination", "intendedAudience", "contextForTheWork" })
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
 public class Work {
 
 	/**
@@ -53,8 +52,7 @@ public class Work {
 	 * Not <code>null</code>.
 	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "work", cascade = { CascadeType.ALL })
-	@XmlElementWrapper(name = "expressions")
-	@XmlElement(name = "expression")
+	@XmlTransient
 	private List<Expression> expressions;
 
 	/**
@@ -62,8 +60,7 @@ public class Work {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	@XmlElementWrapper(name = "titles")
-	@XmlElement(name = "title")
+	@XmlElement
 	private List<String> titleOfWork;
 
 	/**
@@ -84,8 +81,7 @@ public class Work {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	@XmlElementWrapper(name = "characteristics")
-	@XmlElement(name = "characteristic")
+	@XmlElement
 	private List<String> otherDistinguishingCharacteristic;
 
 	/**
@@ -100,8 +96,8 @@ public class Work {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	@XmlElementWrapper(name = "audiences")
-	@XmlElement(name = "adience")
+
+	@XmlElement
 	private List<String> intendedAudience;
 
 	/**

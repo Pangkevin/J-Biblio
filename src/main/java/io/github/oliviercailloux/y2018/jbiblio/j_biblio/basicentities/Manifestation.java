@@ -180,6 +180,7 @@ public class Manifestation implements Serializable {
 		this.publisherDistributer = new ArrayList<>();
 		this.dateOfPublicationDistribution = new ArrayList<>();
 		this.manifestationIdentifier = "";
+
 	}
 
 	public int getIdManifestation() {

@@ -29,7 +29,6 @@ class ManifestationJsonTest {
 
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 
-			;
 			String jsonManifestation = jsonb.toJson(listJsonManifestation);
 			System.out.println(jsonManifestation);
 			assertEquals(jsonManifestation, jsonRepresentation);

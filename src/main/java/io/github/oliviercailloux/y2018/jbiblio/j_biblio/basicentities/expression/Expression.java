@@ -1,5 +1,6 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +16,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -29,14 +36,19 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  * 
  */
+@SuppressWarnings("serial")
+@XmlRootElement(name = "Expression")
+@XmlAccessorType(XmlAccessType.NONE)
 @Entity
-public class Expression {
+@Table(name = "Expression")
+public class Expression implements Serializable {
 
 	/**
 	 * Not <code>null</code>.
 	 */
 
 	@ManyToOne
+	@XmlElement
 	private Work work;
 	/**
 	 * Not <code>null</code>.
@@ -44,38 +56,45 @@ public class Expression {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@XmlElement
 	private int idExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
-	@OneToMany(fetch=FetchType.EAGER, mappedBy = "expression", cascade = { CascadeType.ALL })
+	@XmlTransient
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "expression", cascade = { CascadeType.ALL })
 	private List<Manifestation> manifestations;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
+	@XmlElement
 	private List<String> titleOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Column(name = "formOfExpression")
+	@XmlElement
 	private String formOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Transient
+	@XmlElement
 	private List<TimeStampedDescription> dateOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Column(name = "languageOfExpression")
+	@XmlElement
 	private String languageOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
+	@XmlElement
 	private List<String> otherDistinguishingCharacteristic;
 
 	/*

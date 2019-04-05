@@ -17,13 +17,8 @@ import javax.xml.validation.SchemaFactory;
 import org.xml.sax.SAXException;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.OriginInfo;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.ModsCollectionDefinition;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.ModsDefinition;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.NameBaseDefinition;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.NameDefinition;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.TitleInfoBaseDefinition;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.TitleInfoTypeAttributeDefinition;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.XsString;
 
 /**
@@ -68,6 +63,7 @@ public class ModsToJava {
          while(it.hasNext()) {
  		    Object obj = (Object)it.next();
 
+ 		    
  		 	 if(obj instanceof TitleInfoBaseDefinition ) {
  		 	
  		 		String type = ((TitleInfoBaseDefinition) obj).getType();

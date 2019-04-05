@@ -1,0 +1,4 @@
+# J-Biblio
+Logiciel d’amélioration collaborative de notices bibliographiques
+
+image:https://travis-ci.org/Pangkevin/J-Biblio.svg?branch=master["Build Status", link="https://travis-ci.org/Pangkevin/J-Biblio"]

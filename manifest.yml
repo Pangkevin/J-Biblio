@@ -1,6 +1,6 @@
 applications:
  - name: jbiblio
-   path: dauphine-open-data/target/jbiblio.war
+   path: J-biblio/target/jbiblio.war
    instances: 1
    memory: 256M
    Disk_quota : 1G

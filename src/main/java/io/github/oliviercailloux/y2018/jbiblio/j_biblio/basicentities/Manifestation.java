@@ -125,6 +125,7 @@ public class Manifestation implements Serializable {
 	@Column(name = "manifestationIdentifier")
 	private String manifestationIdentifier;
 
+
 	/**
 	 * This function is the constructor of manifestation entity
 	 * 
@@ -179,6 +180,10 @@ public class Manifestation implements Serializable {
 		this.publisherDistributer = new ArrayList<>();
 		this.dateOfPublicationDistribution = new ArrayList<>();
 		this.manifestationIdentifier = "";
+	}
+
+	public Manifestation(List<String> title) {
+		this.titleOfTheManifestation = title;
 	}
 
 	public int getIdManifestation() {

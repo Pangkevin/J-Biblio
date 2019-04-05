@@ -4,23 +4,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Iterables;
 
+import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.ModsCollectionDefinition;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.ModsDefinition;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.OriginInfoDefinition;
 
 
-class ModsTest {
+class ModsToJavaTest {
 
 	// https://www.loc.gov/standards/mods/userguide/examples.html
 	// https://www.loc.gov/standards/mods/v3/mods-userguide-examples.html Archive website
 
 	@Test
-	void marshalling() {
+	void testModsToJava() {
 		String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
 				"\n" + 
 				"<modsCollection xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.loc.gov/mods/v3\" xsi:schemaLocation=\"http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd\">\n" + 
@@ -80,11 +82,13 @@ class ModsTest {
 				"</modsCollection>";
 				
 
-		ManifestationUnmarshalling marsh = new ManifestationUnmarshalling();
+		ModsToJava marsh = new ModsToJava();
 
-		Object manifestationCollection = marsh.unmarshal(xml);
+		 List<Manifestation> manifestationCollection = marsh.unmarshal(xml);
+		
+		assertEquals(manifestationCollection.get(0).getTitleOfTheManifestation().get(0),"FranUlmer.com -- Home Page");	
+		assertEquals(manifestationCollection.get(0).getTitleOfTheManifestation().get(1),"Fran Ulmer, Democratic candidate for Governor, Alaska, 2002");	
 
-		ModsDefinition manifestation = (ModsDefinition) ((ModsCollectionDefinition) manifestationCollection).getMods().get(0);
-
+		
 		}
 }

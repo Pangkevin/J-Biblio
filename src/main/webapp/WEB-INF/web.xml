@@ -10,6 +10,10 @@
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	<!-- Specifically index.html at the root -->
+		<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/index.html</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>/SearchItem.html</url-pattern>

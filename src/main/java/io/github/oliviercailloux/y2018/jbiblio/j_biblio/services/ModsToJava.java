@@ -27,77 +27,71 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods.XsSt
  */
 public class ModsToJava {
 
-	public List<Manifestation> unmarshal(String xml) {
+	public List<Manifestation> unmarshal(String xml) throws JAXBException, SAXException {
 
 		String xsdFile = "mods-3-4.xsd";
 
 		JAXBContext jaxbContext;
 
-		try {
-			List<Manifestation> manifestations = new ArrayList<Manifestation>();
-			// Get JAXBContext
-			jaxbContext = JAXBContext.newInstance(ModsCollectionDefinition.class);
+		List<Manifestation> manifestations = new ArrayList<Manifestation>();
+		// Get JAXBContext
+		jaxbContext = JAXBContext.newInstance(ModsCollectionDefinition.class);
 
-			// Create Unmarshaller
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		// Create Unmarshaller
+		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-			// Setup schema validator
-			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema employeeSchema = sf.newSchema(new File(xsdFile));
-			jaxbUnmarshaller.setSchema(employeeSchema);
+		// Setup schema validator
+		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema employeeSchema = sf.newSchema(new File(xsdFile));
+		jaxbUnmarshaller.setSchema(employeeSchema);
 
-			// Unmarshal xml file
-			@SuppressWarnings("unchecked")
-			JAXBElement<ModsCollectionDefinition> jaxbElement = (JAXBElement<ModsCollectionDefinition>) jaxbUnmarshaller
-					.unmarshal(new StringReader(xml));
-			ModsCollectionDefinition modsCollection = (ModsCollectionDefinition) jaxbElement.getValue();
+		// Unmarshal xml file
+		@SuppressWarnings("unchecked")
+		JAXBElement<ModsCollectionDefinition> jaxbElement = (JAXBElement<ModsCollectionDefinition>) jaxbUnmarshaller
+				.unmarshal(new StringReader(xml));
+		ModsCollectionDefinition modsCollection = (ModsCollectionDefinition) jaxbElement.getValue();
 
-			for (int j = 0; j < modsCollection.getMods().size(); j++) {
+		for (int j = 0; j < modsCollection.getMods().size(); j++) {
 
-				// On retrive the list of components (title, name, genre...)
-				ArrayList<Object> modsDefinitions = (ArrayList<Object>) modsCollection.getMods().get(j).getModsGroup();
+			// On retrive the list of components (title, name, genre...)
+			ArrayList<Object> modsDefinitions = (ArrayList<Object>) modsCollection.getMods().get(j).getModsGroup();
 
-				// We iterate on these components
-				Iterator<Object> it = modsDefinitions.iterator();
+			// We iterate on these components
+			Iterator<Object> it = modsDefinitions.iterator();
 
-				List<String> names = new ArrayList<String>();
+			List<String> names = new ArrayList<String>();
 
-				while (it.hasNext()) {
-					// For each component
-					Object obj = (Object) it.next();
+			while (it.hasNext()) {
+				// For each component
+				Object obj = (Object) it.next();
 
-					// We decided to only retrive the titles for our Manifestation object 
-					// however the logic is always the same
-					if (obj instanceof TitleInfoBaseDefinition) {
+				// We decided to only retrive the titles for our Manifestation object
+				// however the logic is always the same
+				if (obj instanceof TitleInfoBaseDefinition) {
 
-						String type = ((TitleInfoBaseDefinition) obj).getType();
-						if (type == "simple") {
+					String type = ((TitleInfoBaseDefinition) obj).getType();
+					if (type == "simple") {
 
-							List<JAXBElement<XsString>> name = ((TitleInfoBaseDefinition) obj)
-									.getTitleOrSubTitleOrPartNumber();
-							if (!name.isEmpty()) {
+						List<JAXBElement<XsString>> name = ((TitleInfoBaseDefinition) obj)
+								.getTitleOrSubTitleOrPartNumber();
+						if (!name.isEmpty()) {
 
-								XsString displayName = name.get(0).getValue();
-								names.add(displayName.getValue());
-
-							}
+							XsString displayName = name.get(0).getValue();
+							names.add(displayName.getValue());
 
 						}
+
 					}
-
 				}
-				// We create the object with the informations we retrieve
-				Manifestation m = new Manifestation(names);
-				// We add the object to the list
-				manifestations.add(m);
+
 			}
-
-			return manifestations;
-
-		} catch (JAXBException | SAXException e) {
-			e.printStackTrace();
+			// We create the object with the informations we retrieve
+			Manifestation m = new Manifestation(names);
+			// We add the object to the list
+			manifestations.add(m);
 		}
-		return null;
+
+		return manifestations;
 
 	}
 

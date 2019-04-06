@@ -22,7 +22,6 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ItemService;
 
 @RequestScoped

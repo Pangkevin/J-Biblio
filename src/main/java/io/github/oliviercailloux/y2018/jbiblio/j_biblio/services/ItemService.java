@@ -14,7 +14,6 @@ import javax.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Item;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 
 @RequestScoped
 public class ItemService {

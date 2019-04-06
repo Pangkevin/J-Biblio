@@ -19,9 +19,8 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ManifestationService;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.WorkService;
+
 
 @RequestScoped
 @Path("manifestation")

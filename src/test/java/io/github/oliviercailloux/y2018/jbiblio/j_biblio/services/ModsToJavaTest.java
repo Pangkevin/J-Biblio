@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import javax.xml.bind.JAXBException;
 
+import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 
@@ -16,7 +18,7 @@ class ModsToJavaTest {
 	// website
 
 	@Test
-	void testModsToJava() {
+	void testModsToJava() throws JAXBException, SAXException {
 		String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "\n"
 				+ "<modsCollection xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.loc.gov/mods/v3\" xsi:schemaLocation=\"http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd\">\n"
 				+ "\n" + "<mods version=\"3.4\">\n" + "\n" + "<titleInfo>\n"

@@ -20,7 +20,7 @@ class ManifestationJsonTest {
 	void testConvertManifestationToJson() throws Exception {
 
 		List<Manifestation> listJsonManifestation = new ArrayList<>();
-		String jsonRepresentation = "[{\"dateOfPublicationDistribution\":[],\"editionDesignation\":\"larousse\",\"idManifestation\":0,\"items\":[],\"placeOfPublicationDistribution\":[],\"publisherDistributer\":[],\"statementOfResponsibility\":[],\"titleOfTheManifestation\":[]}]";
+		String jsonRepresentation = "[{\"idManifestation\":0,\"titleOfTheManifestation\":[],\"statementOfResponsibility\":[],\"editionDesignation\":\"larousse\",\"placeOfPublicationDistribution\":[],\"publisherDistributer\":[],\"dateOfPublicationDistribution\":[],\"items\":[]}]";
 
 		Manifestation manifestation = new Manifestation();
 		manifestation.setEditionDesignation("larousse");

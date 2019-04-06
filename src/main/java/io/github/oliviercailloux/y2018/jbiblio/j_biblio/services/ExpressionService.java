@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
 
 @RequestScoped

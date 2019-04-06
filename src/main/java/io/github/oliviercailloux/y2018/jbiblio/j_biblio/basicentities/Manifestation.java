@@ -13,6 +13,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.xml.bind.annotation.XmlAccessorType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
 
 @SuppressWarnings("serial")
 @XmlRootElement(name = "Manifestation")
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @JsonbPropertyOrder({ "idManifestation", "expression", "titleOfTheManifestation", "statementOfResponsibility",
 		"editionDesignation", "placeOfPublicationDistribution", "publisherDistributer",
 		"publisherDistributerResponsibleEntity", "manifestationIdentifier", "dateOfPublicationDistribution" })
@@ -103,7 +104,6 @@ public class Manifestation implements Serializable {
 	 */
 	@Transient
 	private List<Place> lblPlaceOfPublication;
-
 	/**
 	 * Not <code>null</code>.
 	 */
@@ -123,7 +123,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>. Adapted for the parsing from mods to java object
 	 */
-	@Transient
+	
 	private OriginInfo originInfo;
 
 	/**
@@ -131,6 +131,7 @@ public class Manifestation implements Serializable {
 	 */
 	@Column(name = "manifestationIdentifier")
 	private String manifestationIdentifier;
+
 
 	/**
 	 * This function is the constructor of manifestation entity
@@ -187,6 +188,10 @@ public class Manifestation implements Serializable {
 		this.dateOfPublicationDistribution = new ArrayList<>();
 		this.manifestationIdentifier = "";
 
+	}
+
+	public Manifestation(List<String> title) {
+		this.titleOfTheManifestation = title;
 	}
 
 	public int getIdManifestation() {

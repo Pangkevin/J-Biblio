@@ -3,6 +3,7 @@ package io.github.oliviercailloux.y2018.jbiblio.j_biblio.servlets;
 import java.util.List;
 import java.util.logging.Logger;
 
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

@@ -16,16 +16,16 @@ public class MarcSortedRecord extends MarcRecordImplementation {
 	 */
 	@Override
 	public void addVariableField(final VariableField field) {
-		final int cfSize = controlFields.size();
+		final int cfSize = controlFieldList.size();
 
 		// Let the class we extend do the work...
 		super.addVariableField(field);
 
 		// If a control field was added, sort them; else, sort the data fields
-		if (cfSize != controlFields.size()) {
-			Collections.sort(controlFields);
+		if (cfSize != controlFieldList.size()) {
+			Collections.sort(controlFieldList);
 		} else {
-			Collections.sort(dataFields);
+			Collections.sort(dataFieldList);
 		}
 	}
 

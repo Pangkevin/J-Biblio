@@ -18,7 +18,7 @@ public class MarcDataField extends MarcVariableField implements DataField {
 
 	private char mySecondInd;
 
-	private final List<Subfield> mySubfields = new ArrayList<Subfield>();
+	private final List<Subfield> mySFList = new ArrayList<Subfield>();
 
 	/**
 	 * Creates a new <code>DataField</code>.
@@ -30,12 +30,12 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	 * Creates a new <code>DataField</code> and sets the tag name and the first and
 	 * second indicator.
 	 *
-	 * @param aTag       The tag name
+	 * @param tagDF       The tag name
 	 * @param aFirstInd  The first indicator
 	 * @param aSecondInd The second indicator
 	 */
-	MarcDataField(final String aTag, final char aFirstInd, final char aSecondInd) {
-		setTag(aTag);
+	MarcDataField(final String tagDF, final char aFirstInd, final char aSecondInd) {
+		setTag(tagDF);
 		setIndicator1(aFirstInd);
 		setIndicator2(aSecondInd);
 	}
@@ -43,22 +43,22 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	/**
 	 * Sets the tag of a <code>DataField</code>.
 	 *
-	 * @param aTag The tag of a <code>DataField</code>
+	 * @param tagDF The tag of a <code>DataField</code>
 	 */
 	@Override
-	public void setTag(final String aTag) {
-		super.setTag(aTag);
+	public void setTag(final String tagDF) {
+		super.setTag(tagDF);
 
-		if (aTag.length() == 3) {
+		if (tagDF.length() == 3) {
 			try {
-				if (Integer.parseInt(aTag) < 10) {
-					throw new InvalidMARCException(aTag + " is not a valid DataField tag");
+				if (Integer.parseInt(tagDF) < 10) {
+					throw new InvalidMARCException(tagDF + " is not a valid DataField tag");
 				}
 			} catch (final NumberFormatException details) {
-				throw new InvalidMARCException(aTag + " is not a number");
+				throw new InvalidMARCException(tagDF + " is not a number");
 			}
 		} else {
-			throw new InvalidMARCException(aTag + " is not a three digit tag");
+			throw new InvalidMARCException(tagDF + " is not a three digit tag");
 		}
 	}
 
@@ -105,14 +105,14 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	/**
 	 * Adds a <code>Subfield</code>.
 	 *
-	 * @param aSubfield The <code>Subfield</code> of a <code>DataField</code>
+	 * @param subfield The <code>Subfield</code> of a <code>DataField</code>
 	 * @throws IllegalAddException when the parameter is not an instance of
 	 *                             <code>SubfieldImpl</code>
 	 */
 	@Override
-	public void addSubfield(final Subfield aSubfield) {
-		if (aSubfield instanceof MarcSubfield) {
-			mySubfields.add(aSubfield);
+	public void addSubfield(final Subfield subfield) {
+		if (subfield instanceof MarcSubfield) {
+			mySFList.add(subfield);
 		} else {
 			throw new IllegalAddException("Supplied Subfield isn't an instance of SubfieldImpl");
 		}
@@ -121,24 +121,24 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	/**
 	 * Inserts a <code>Subfield</code> at the specified position.
 	 *
-	 * @param aIndex    The subfield's position within the list
-	 * @param aSubfield The <code>Subfield</code> object
+	 * @param sfIndex    The subfield's position within the list
+	 * @param subfield The <code>Subfield</code> object
 	 * @throws IllegalAddException when supplied Subfield isn't an instance of
 	 *                             <code>SubfieldImpl</code>
 	 */
 	@Override
-	public void addSubfield(final int aIndex, final Subfield aSubfield) {
-		mySubfields.add(aIndex, aSubfield);
+	public void addSubfield(final int sfIndex, final Subfield subfield) {
+		mySFList.add(sfIndex, subfield);
 	}
 
 	/**
 	 * Removes a <code>Subfield</code> from the field.
 	 *
-	 * @param aSubfield The subfield to remove from the field.
+	 * @param subfield The subfield to remove from the field.
 	 */
 	@Override
-	public void removeSubfield(final Subfield aSubfield) {
-		mySubfields.remove(aSubfield);
+	public void removeSubfield(final Subfield subfield) {
+		mySFList.remove(subfield);
 	}
 
 	/**
@@ -149,21 +149,21 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	@Override
 	public List<Subfield> getSubfields() {
 		// TODO: consistent result/expectation as getSubfields(char)?
-		return mySubfields;
+		return mySFList;
 	}
 
 	/**
 	 * Returns the {@link Subfield}s with the supplied <code>char</code> code.
 	 *
-	 * @param aCode A subfield code
+	 * @param code A subfield code
 	 * @return A {@link List} of {@link Subfield}s
 	 */
 	@Override
-	public List<Subfield> getSubfields(final char aCode) {
+	public List<Subfield> getSubfields(final char code) {
 		final List<Subfield> subfields = new ArrayList<Subfield>();
 
-		for (final Subfield subfield : mySubfields) {
-			if (subfield.getCode() == aCode) {
+		for (final Subfield subfield : mySFList) {
+			if (subfield.getCode() == code) {
 				subfields.add(subfield);
 			}
 		}
@@ -178,7 +178,7 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	 */
 	@Override
 	public int countSubfields() {
-		return mySubfields != null ? mySubfields.size() : 0;
+		return mySFList != null ? mySFList.size() : 0;
 	}
 
 	/**
@@ -224,13 +224,13 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	}
 
 	@Override
-	public String getSubfieldsAsString(final String aPattern) {
-		return getSubfieldsAsString(aPattern, '\u0000');
+	public String getSubfieldsAsString(final String sPattern) {
+		return getSubfieldsAsString(sPattern, '\u0000');
 	}
 
 	@Override
-	public String getSubfieldsAsString(final String aPattern, final char aPaddingChar) {
-		final List<Subfield> sfList = this.getSubfields(aPattern);
+	public String getSubfieldsAsString(final String sPattern, final char paddingChar) {
+		final List<Subfield> sfList = this.getSubfields(sPattern);
 
 		if (sfList.isEmpty()) {
 			return null;
@@ -241,7 +241,7 @@ public class MarcDataField extends MarcVariableField implements DataField {
 		for (final Subfield sf : sfList) {
 			buf.append(sf.getData());
 
-			if (aPaddingChar != '\u0000') {
+			if (paddingChar != '\u0000') {
 				buf.append(sf.getData());
 			}
 		}
@@ -253,12 +253,12 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	 * Returns the first {@link Subfield} matching the supplied <code>char</code>
 	 * code.
 	 *
-	 * @param aCode A code for the subfield to be returned
+	 * @param code A code for the subfield to be returned
 	 */
 	@Override
-	public Subfield getSubfield(final char aCode) {
-		for (final Subfield subfield : mySubfields) {
-			if (subfield.getCode() == aCode) {
+	public Subfield getSubfield(final char code) {
+		for (final Subfield subfield : mySFList) {
+			if (subfield.getCode() == code) {
 				return subfield;
 			}
 		}
@@ -270,12 +270,12 @@ public class MarcDataField extends MarcVariableField implements DataField {
 	 * Returns <code>true</code> if a match is found for the supplied regular
 	 * expression pattern; else, <code>false</code>.
 	 *
-	 * @param aPattern A regular expression pattern to find in the subfields
+	 * @param sfPattern A regular expression pattern to find in the subfields
 	 */
 	@Override
-	public boolean find(final String aPattern) {
-		for (final Subfield subfield : mySubfields) {
-			if (subfield.find(aPattern)) {
+	public boolean find(final String sfPattern) {
+		for (final Subfield subfield : mySFList) {
+			if (subfield.find(sfPattern)) {
 				return true;
 			}
 		}
@@ -302,7 +302,7 @@ public class MarcDataField extends MarcVariableField implements DataField {
 		sb.append(getIndicator1());
 		sb.append(getIndicator2());
 
-		for (final Subfield subfield : mySubfields) {
+		for (final Subfield subfield : mySFList) {
 			sb.append(subfield.toString());
 		}
 

@@ -19,9 +19,9 @@ public class MarcRecordImplementation implements Record {
 
 	private Leader leader;
 
-	protected List<ControlField> controlFields;
+	protected List<ControlField> controlFieldList;
 
-	protected List<DataField> dataFields;
+	protected List<DataField> dataFieldList;
 
 	private String type;
 
@@ -29,8 +29,8 @@ public class MarcRecordImplementation implements Record {
 	     * Creates a new <code>Record</code>.
 	     */
 	    public MarcRecordImplementation() {
-	        controlFields = new ArrayList<ControlField>();
-	        dataFields = new ArrayList<DataField>();
+	        controlFieldList = new ArrayList<ControlField>();
+	        dataFieldList = new ArrayList<DataField>();
 	    }
 
 	/**
@@ -90,15 +90,15 @@ public class MarcRecordImplementation implements Record {
 
 			if (field.getTag().equals("001")) {
 				if (getControlNumberField() == null) {
-					controlFields.add(0, controlField);
+					controlFieldList.add(0, controlField);
 				} else {
-					controlFields.set(0, controlField);
+					controlFieldList.set(0, controlField);
 				}
 			} else {
-				controlFields.add(controlField);
+				controlFieldList.add(controlField);
 			}
 		} else {
-			dataFields.add((DataField) field);
+			dataFieldList.add((DataField) field);
 		}
 	}
 
@@ -108,9 +108,9 @@ public class MarcRecordImplementation implements Record {
 	@Override
 	public void removeVariableField(final VariableField field) {
 		if (field instanceof ControlField) {
-			controlFields.remove(field);
+			controlFieldList.remove(field);
 		} else {
-			dataFields.remove(field);
+			dataFieldList.remove(field);
 		}
 	}
 
@@ -122,8 +122,8 @@ public class MarcRecordImplementation implements Record {
 	 */
 	@Override
 	public ControlField getControlNumberField() {
-		for (int index = 0; index < controlFields.size(); index++) {
-			final ControlField field = controlFields.get(index);
+		for (int index = 0; index < controlFieldList.size(); index++) {
+			final ControlField field = controlFieldList.get(index);
 
 			if (field.getTag().equals("001")) {
 				return field;
@@ -138,7 +138,7 @@ public class MarcRecordImplementation implements Record {
 	 */
 	@Override
 	public List<ControlField> getControlFields() {
-		return controlFields;
+		return controlFieldList;
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class MarcRecordImplementation implements Record {
 	 */
 	@Override
 	public List<DataField> getDataFields() {
-		return dataFields;
+		return dataFieldList;
 	}
 
 	/**
@@ -194,13 +194,13 @@ public class MarcRecordImplementation implements Record {
 	@Override
 	public List<VariableField> getVariableFields() {
 		final List<VariableField> fields = new ArrayList<VariableField>();
-		Iterator<? extends VariableField> iterator = controlFields.iterator();
+		Iterator<? extends VariableField> iterator = controlFieldList.iterator();
 
 		while (iterator.hasNext()) {
 			fields.add(iterator.next());
 		}
 
-		iterator = dataFields.iterator();
+		iterator = dataFieldList.iterator();
 
 		while (iterator.hasNext()) {
 			fields.add(iterator.next());
@@ -294,7 +294,7 @@ public class MarcRecordImplementation implements Record {
 	@Override
 	public List<VariableField> find(final String pattern) {
 		final List<VariableField> result = new ArrayList<VariableField>();
-		Iterator<? extends VariableField> i = controlFields.iterator();
+		Iterator<? extends VariableField> i = controlFieldList.iterator();
 
 		while (i.hasNext()) {
 			final VariableField field = i.next();
@@ -304,7 +304,7 @@ public class MarcRecordImplementation implements Record {
 			}
 		}
 
-		i = dataFields.iterator();
+		i = dataFieldList.iterator();
 
 		while (i.hasNext()) {
 			final VariableField field = i.next();
@@ -380,9 +380,9 @@ public class MarcRecordImplementation implements Record {
 				tag = Integer.parseInt(aTag);
 
 				if (tag > 0 && tag < 10) {
-					return controlFields.iterator();
+					return controlFieldList.iterator();
 				} else if (tag >= 10 && tag <= 999) {
-					return dataFields.iterator();
+					return dataFieldList.iterator();
 				}
 			} catch (final NumberFormatException details) {
 				// Log warning below...

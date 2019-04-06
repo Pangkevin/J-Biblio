@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 import org.marc4j.Constants;
 import org.marc4j.marc.ControlField;
 import org.marc4j.marc.InvalidMARCException;
-import org.marc4j.marc.VariableField;
+
 
 @SuppressWarnings("serial")
-public class MarcControlField extends MarcVariableField implements ControlField {
+public class MarcControlField extends MarcVariableField implements ControlField{
 
-	private String myData;
+	private String myCFData;
 
 	/**
 	 * Creates a new <code>ControlField</code>.
@@ -22,46 +22,46 @@ public class MarcControlField extends MarcVariableField implements ControlField 
 	/**
 	 * Creates a new <code>ControlField</code> and sets the tag name.
 	 * 
-	 * @param aTag The field tag for the <code>ControlField</code>
+	 * @param tagCF The field tag for the <code>ControlField</code>
 	 */
-	MarcControlField(final String aTag) {
-		setTag(aTag);
+	MarcControlField(final String tagCF) {
+		setTag(tagCF);
 	}
 
 	/**
 	 * Creates a new <code>ControlField</code> and sets the tag name and the data
 	 * element.
 	 * 
-	 * @param aTag  The tag for the <code>ControlField</code>
-	 * @param aData The data for the <code>ControlField</code>
+	 * @param tagCF  The tag for the <code>ControlField</code>
+	 * @param dataCF The data for the <code>ControlField</code>
 	 */
-	MarcControlField(final String aTag, final String aData) {
-		setTag(aTag);
-		setData(aData);
+	MarcControlField(final String tagCF, final String dataCF) {
+		setTag(tagCF);
+		setData(dataCF);
 	}
 
 	/**
 	 * Sets the tag of a <code>ControlField</code>.
 	 * 
-	 * @param aTag The tag of a <code>ControlField</code>
+	 * @param tagCF The tag of a <code>ControlField</code>
 	 */
 	@Override
-	public void setTag(final String aTag) {
-		super.setTag(aTag);
+	public void setTag(final String tagCF) {
+		super.setTag(tagCF);
 
-		if (!Constants.CF_TAG_PATTERN.matcher(aTag).find()) {
-			throw new InvalidMARCException(aTag + " is not a valid ControlField tag");
+		if (!Constants.CF_TAG_PATTERN.matcher(tagCF).find()) {
+			throw new InvalidMARCException(tagCF + " is not a valid ControlField tag");
 		}
 	}
 
 	/**
 	 * Sets the {@link ControlField} data.
 	 * 
-	 * @param aData The data for the <code>ControlField</code>
+	 * @param dataCF The data for the <code>ControlField</code>
 	 */
 	@Override
-	public void setData(final String aData) {
-		myData = aData;
+	public void setData(final String dataCF) {
+		myCFData = dataCF;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class MarcControlField extends MarcVariableField implements ControlField 
 	 */
 	@Override
 	public String getData() {
-		return myData;
+		return myCFData;
 	}
 
 	/**
@@ -95,39 +95,16 @@ public class MarcControlField extends MarcVariableField implements ControlField 
 	 * Finds a match to a regular expression pattern in the {@link ControlField} 's
 	 * data.
 	 * 
-	 * @param aPattern The regular expression pattern to compare against the
+	 * @param patternCF The regular expression pattern to compare against the
 	 *                 <code>ControlField</code>'s data
 	 */
 	@Override
-	public boolean find(final String aPattern) {
-		final Pattern pattern = Pattern.compile(aPattern);
+	public boolean find(final String patternCF) {
+		final Pattern pattern = Pattern.compile(patternCF);
 		final Matcher matcher = pattern.matcher(getData());
 
 		return matcher.find();
 	}
 
-	@Override
-	public void setId(Long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getTag() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int compareTo(VariableField o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

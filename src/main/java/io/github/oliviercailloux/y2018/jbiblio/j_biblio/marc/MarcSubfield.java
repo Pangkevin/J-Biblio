@@ -79,10 +79,10 @@ public class MarcSubfield implements Subfield {
 	 */
 	@Override
 	public boolean find(final String pattern) {
-		final Pattern p = Pattern.compile(pattern);
-		final Matcher m = p.matcher(getData());
+		final Pattern ptrn = Pattern.compile(pattern);
+		final Matcher matcher = ptrn.matcher(getData());
 
-		return m.find();
+		return matcher.find();
 	}
 
 	/**

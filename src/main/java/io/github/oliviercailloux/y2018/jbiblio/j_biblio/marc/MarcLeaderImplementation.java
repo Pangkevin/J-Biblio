@@ -47,10 +47,10 @@ public class MarcLeaderImplementation implements  Leader {
 	    /**
 	     * Creates a new leader from a String object.
 	     * 
-	     * @param ldr the leader string value
+	     * @param leader the leader string value
 	     */
-	    public MarcLeaderImplementation(final String ldr) {
-	        unmarshal(ldr);
+	    public MarcLeaderImplementation(final String leader) {
+	        unmarshal(leader);
 	    }
 
 	    /**
@@ -265,42 +265,42 @@ public class MarcLeaderImplementation implements  Leader {
 	     * not integer values.
 	     * </p>
 	     * 
-	     * @param ldr the leader
+	     * @param leader 
 	     */
 	    @Override
-	    public void unmarshal(final String ldr) {
+	    public void unmarshal(final String leader) {
 	        try {
 	            String s;
-	            s = ldr.substring(0, 5);
+	            s = leader.substring(0, 5);
 	            if (isInteger(s)) {
 	                setRecordLength(Integer.parseInt(s));
 	            } else {
 	                setRecordLength(0);
 	            }
-	            setRecordStatus(ldr.charAt(5));
-	            setTypeOfRecord(ldr.charAt(6));
-	            setImplDefined1(ldr.substring(7, 9).toCharArray());
-	            setCharCodingScheme(ldr.charAt(9));
-	            s = String.valueOf(ldr.charAt(10));
+	            setRecordStatus(leader.charAt(5));
+	            setTypeOfRecord(leader.charAt(6));
+	            setImplDefined1(leader.substring(7, 9).toCharArray());
+	            setCharCodingScheme(leader.charAt(9));
+	            s = String.valueOf(leader.charAt(10));
 	            if (isInteger(s)) {
 	                setIndicatorCount(Integer.parseInt(s));
 	            } else {
 	                setIndicatorCount(2);
 	            }
-	            s = String.valueOf(ldr.charAt(11));
+	            s = String.valueOf(leader.charAt(11));
 	            if (isInteger(s)) {
 	                setSubfieldCodeLength(Integer.parseInt(s));
 	            } else {
 	                setSubfieldCodeLength(2);
 	            }
-	            s = ldr.substring(12, 17);
+	            s = leader.substring(12, 17);
 	            if (isInteger(s)) {
 	                setBaseAddressOfData(Integer.parseInt(s));
 	            } else {
 	                setBaseAddressOfData(0);
 	            }
-	            setImplDefined2(ldr.substring(17, 20).toCharArray());
-	            setEntryMap(ldr.substring(20, 24).toCharArray());
+	            setImplDefined2(leader.substring(17, 20).toCharArray());
+	            setEntryMap(leader.substring(20, 24).toCharArray());
 	        } catch (final NumberFormatException e) {
 	            throw new RuntimeException("Unable to parse leader", e);
 	        }

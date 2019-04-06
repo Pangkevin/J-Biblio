@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -17,6 +18,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -47,6 +49,9 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.responsibleentity.*;
 @SuppressWarnings("serial")
 @XmlRootElement(name = "Manifestation")
 @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@JsonbPropertyOrder({ "idManifestation", "expression", "titleOfTheManifestation", "statementOfResponsibility",
+		"editionDesignation", "placeOfPublicationDistribution", "publisherDistributer",
+		"publisherDistributerResponsibleEntity", "manifestationIdentifier", "dateOfPublicationDistribution" })
 @Entity
 @Table(name = "Manifestation")
 public class Manifestation implements Serializable {
@@ -65,6 +70,7 @@ public class Manifestation implements Serializable {
 	 * Not <code>null</code>.
 	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "manifestation", cascade = { CascadeType.ALL })
+	@XmlTransient
 	private List<Item> items;
 
 	/**

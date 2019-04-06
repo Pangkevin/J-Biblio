@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -36,12 +37,14 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  * 
  */
-@SuppressWarnings("serial")
+
 @XmlRootElement(name = "Expression")
 @XmlAccessorType(XmlAccessType.NONE)
+@JsonbPropertyOrder({ "idExpression", "work", "titleOfExpression", "formOfExpression", "languageOfExpression",
+		"otherDistinguishingCharacteristic" })
 @Entity
 @Table(name = "Expression")
-public class Expression implements Serializable {
+public class Expression {
 
 	/**
 	 * Not <code>null</code>.

@@ -13,7 +13,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+
+import org.apache.commons.lang3.StringUtils;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.Manifestation;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
@@ -21,7 +24,7 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ManifestationSe
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.WorkService;
 
 @RequestScoped
-@Path("Manifestation")
+@Path("manifestation")
 public class ManifestationServlet {
 
 	private static final Logger LOGGER = Logger.getLogger(WorkJsonServlet.class.getCanonicalName());
@@ -35,10 +38,21 @@ public class ManifestationServlet {
 	@GET
 	@Transactional
 	@Produces({ "application/json" })
-	public List<Manifestation> getManifestationsServlet() {
+	public List<Manifestation> getManifestationsServlet(@QueryParam("editionDesignation") String editionDesignation,
+			@QueryParam("manifestationIdentifier") String manifestationIdentifier) {
 
-		List<Manifestation> manifestations = manifestationService.getAll();
-		return manifestations;
+		final List<Manifestation> manifestationsList;
+		/**
+		 * Checks if both parameters are empty otherwise we select all work in the
+		 * work's table
+		 */
+		if (!StringUtils.isBlank(editionDesignation) || !StringUtils.isBlank(manifestationIdentifier)) {
+			manifestationsList = manifestationService.findByField(editionDesignation, manifestationIdentifier);
+		} else {
+			manifestationsList = manifestationService.getAll();
+		}
+
+		return manifestationsList;
 	}
 
 	@POST

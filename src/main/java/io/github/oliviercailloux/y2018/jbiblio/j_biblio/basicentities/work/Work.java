@@ -1,5 +1,6 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,6 +37,8 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 
 @XmlRootElement(name = "Work")
 @XmlAccessorType(XmlAccessType.NONE)
+@JsonbPropertyOrder({ "idWork", "titleOfWork", "formOfWork", "dateOfWork", "otherDistinguishingCharacteristic",
+		"intendedTermination", "contextForTheWork", "intendedAudience" })
 @Entity
 @Table(name = "Work")
 public class Work {

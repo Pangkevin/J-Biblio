@@ -51,7 +51,6 @@ public class ItemJsonTest {
 
 		try (Jsonb jsonb = JsonbBuilder.create();) {
 
-			;
 			String jsonItem = jsonb.toJson(itemList);
 
 			assertEquals(jsonItem, listJsonItem);

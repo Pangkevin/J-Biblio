@@ -13,15 +13,16 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.StringUtils;
+
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression.Expression;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.ExpressionService;
-import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.WorkService;
 
 @RequestScoped
-@Path("Expression")
+@Path("expression")
 public class ExpressionServlet {
 
 	private static final Logger LOGGER = Logger.getLogger(ExpressionServlet.class.getCanonicalName());
@@ -35,10 +36,21 @@ public class ExpressionServlet {
 	@GET
 	@Transactional
 	@Produces({ "application/json" })
-	public List<Expression> getExpressionsServlet() {
+	public List<Expression> getExpressionsServlet(@QueryParam("formOfExpression") String formOfExpression,
+			@QueryParam("languageOfExpression") String languageOfExpression) {
 
-		List<Expression> expressions = expressionService.getAll();
-		return expressions;
+		final List<Expression> expressionsList;
+		/**
+		 * Checks if both parameters are empty otherwise we select all work in the
+		 * work's table
+		 */
+		if (!StringUtils.isBlank(formOfExpression) || !StringUtils.isBlank(languageOfExpression)) {
+			expressionsList = expressionService.findByField(formOfExpression, languageOfExpression);
+		} else {
+			expressionsList = expressionService.getAll();
+		}
+
+		return expressionsList;
 	}
 
 	@POST

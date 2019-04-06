@@ -6,10 +6,15 @@ import java.io.BufferedReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,25 +36,6 @@ class WorkJsonTest {
 			}
 		}
 
-	}
-
-	@Test
-	void testConvertManifestationToJson() throws Exception {
-
-		List<Work> listJsonManifestation = new ArrayList<>();
-		String jsonRepresentation = "[{\"dateOfPublicationDistribution\":[],\"editionDesignation\":\"larousse\",\"idManifestation\":0,\"items\":[],\"placeOfPublicationDistribution\":[],\"publisherDistributer\":[],\"statementOfResponsibility\":[],\"titleOfTheManifestation\":[]}]";
-
-		Work work = new Work();
-		work.setFormOfWork("toto");
-
-		listJsonManifestation.add(work);
-
-		try (Jsonb jsonb = JsonbBuilder.create();) {
-
-			String jsonManifestation = jsonb.toJson(listJsonManifestation);
-			System.out.println(jsonManifestation);
-
-		}
 	}
 
 }

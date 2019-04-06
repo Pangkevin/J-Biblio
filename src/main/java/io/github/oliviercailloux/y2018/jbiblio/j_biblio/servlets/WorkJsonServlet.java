@@ -13,8 +13,13 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.apache.commons.lang3.StringUtils;
 
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.work.Work;
 import io.github.oliviercailloux.y2018.jbiblio.j_biblio.services.WorkService;
@@ -33,11 +38,23 @@ public class WorkJsonServlet {
 
 	@GET
 	@Transactional
+	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces({ "application/json" })
-	public List<Work> getWorksServlet() {
+	public List<Work> getWorksServlet(@QueryParam("formOfWork") String formOfWork,
+			@QueryParam("contextForTheWork") String contextForTheWork) {
 
-		List<Work> works = workService.getAll();
-		return works;
+		final List<Work> worksList;
+		/**
+		 * Checks if both parameters are empty otherwise we select all work in the
+		 * work's table
+		 */
+		if (!StringUtils.isBlank(formOfWork) || !StringUtils.isBlank(contextForTheWork)) {
+			worksList = workService.findByField(formOfWork, contextForTheWork);
+		} else {
+			worksList = workService.getAll();
+		}
+
+		return worksList;
 	}
 
 	@POST

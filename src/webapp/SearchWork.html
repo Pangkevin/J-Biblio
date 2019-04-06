@@ -2,33 +2,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript">
-  function sendJson(){
-
-  var formData = JSON.stringify($("#myForm").serializeArray());
-$.ajax({
-  type: "POST",
-  url: "http://localhost:8080/jbiblio/work",
-  data: formData,
-  success: function(){},
-  dataType: "json",
-  contentType : "application/json"
-});
-
-  }
-
-
-</script>
-<title>Basic interface</title>
+ <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Search Work</title>
 </head>
 <body>
-    <form method="POST" action="http://localhost:8080/jbiblio/work" name="myForm">
-        <div>
-            <h1>Search Work</h1>
-            <input type="text" name="formOfWork" placeholder="formOfWork" /> <input
-                type="text" name="contextForTheWork" placeholder="contextForTheWork" />
-            <input onclick="sendJson();" type="submit" value="Submit"></input>
-        </div>
-    </form>
+<div class="container">
+  <p class="h2">Search Work</p>
+  <form  method="GET" action="http://localhost:8080/jbiblio/work" name="myForm">
+  <div class="form-group">
+    <label for="formOfWork">Form Of Work</label>
+    <input type="text" name="formOfWork" class="form-control" placeholder="form Of Work">
+  </div>
+  <div class="form-group">
+    <label for="formOfWork">Context For The Work</label>
+    <input type="text" name="contextForTheWork" class="form-control" placeholder="Context For The Work">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div>
 </body>
 </html>
+

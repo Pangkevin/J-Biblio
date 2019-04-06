@@ -123,7 +123,7 @@ public class Manifestation implements Serializable {
 	/**
 	 * Not <code>null</code>. Adapted for the parsing from mods to java object
 	 */
-	
+	@Transient
 	private OriginInfo originInfo;
 
 	/**

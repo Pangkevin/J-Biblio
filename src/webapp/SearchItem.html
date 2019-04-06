@@ -2,15 +2,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Search Item</title>
 </head>
 <body>
-    <form method="GET" action="http://localhost:8080/jbiblio/item" name="myForm">
-        <div>
-            <h1>Search Item</h1>
-            <input type="text" name="itemIdentifier" placeholder="itemIdentifier" /> <input
-                type="text" name="fingerprint" placeholder="fingerprint" />
-            <input type="submit" value="Submit"></input>
-        </div>
-    </form>
+<div class="container">
+  <p class="h2">Search Item</p>
+  <form  method="GET" action="http://localhost:8080/jbiblio/item" name="myForm">
+  <div class="form-group">
+    <label for="itemIdentifier">Item Identifier</label>
+    <input type="text" name="itemIdentifier" class="form-control" placeholder="Item Identifier">
+  </div>
+  <div class="form-group">
+    <label for="fingerprint">Fingerprint</label>
+    <input type="text" name="fingerprint" class="form-control" placeholder="Fingerprint">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div>
 </body>
 </html>
+

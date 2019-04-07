@@ -17,9 +17,6 @@ deploy:
   organization: vima.haddad@dauphine.eu
   space: dev
   region: eu-gb
- 
- on:
-   branch: dev
   
  notifications:
     slack: j-biblio:YdhU5ex8QRZKFvG2EdCCMM3p

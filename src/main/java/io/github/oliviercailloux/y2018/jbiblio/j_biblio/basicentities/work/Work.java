@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,8 +19,9 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -32,12 +34,12 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  */
 
+@XmlRootElement(name = "Work")
+@XmlAccessorType(XmlAccessType.NONE)
+@JsonbPropertyOrder({ "idWork", "titleOfWork", "formOfWork", "dateOfWork", "otherDistinguishingCharacteristic",
+		"intendedTermination", "contextForTheWork", "intendedAudience" })
 @Entity
 @Table(name = "Work")
-@JsonbPropertyOrder({ "idWork", "titleOfWork", "formOfWork", "dateOfWork", "otherDistinguishingCharacteristic",
-		"intendedTermination", "intendedAudience", "contextForTheWork" })
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
 public class Work {
 
 	/**
@@ -51,9 +53,8 @@ public class Work {
 	/**
 	 * Not <code>null</code>.
 	 */
-	@OneToMany(mappedBy = "work", cascade = { CascadeType.ALL })
-	@XmlElementWrapper(name = "expressions")
-	@XmlElement(name = "expression")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "work", cascade = { CascadeType.ALL })
+	@XmlTransient
 	private List<Expression> expressions;
 
 	/**
@@ -61,8 +62,7 @@ public class Work {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	@XmlElementWrapper(name = "titles")
-	@XmlElement(name = "title")
+	@XmlElement
 	private List<String> titleOfWork;
 
 	/**
@@ -83,8 +83,7 @@ public class Work {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	@XmlElementWrapper(name = "characteristics")
-	@XmlElement(name = "characteristic")
+	@XmlElement
 	private List<String> otherDistinguishingCharacteristic;
 
 	/**
@@ -99,8 +98,8 @@ public class Work {
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	@XmlElementWrapper(name = "audiences")
-	@XmlElement(name = "adience")
+
+	@XmlElement
 	private List<String> intendedAudience;
 
 	/**

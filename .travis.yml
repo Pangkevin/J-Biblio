@@ -19,7 +19,7 @@ deploy:
   region: eu-gb
  
  on:
-   branch: ibmCloud
+   branch: dev
   
  notifications:
     slack: j-biblio:YdhU5ex8QRZKFvG2EdCCMM3p

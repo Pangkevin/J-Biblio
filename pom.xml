@@ -90,6 +90,14 @@
 			<version>3.5.6-Final</version>
 		</dependency>
 
+		<!-- This is used for Marc21 -->
+
+		<dependency>
+			<groupId>info.freelibrary</groupId>
+			<artifactId>freelib-marc4j</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>

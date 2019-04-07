@@ -1,0 +1,8 @@
+applications:
+ - name: J-biblio
+   path: target/jbiblio.war
+   instances: 1
+   memory: 256M
+   Disk_quota : 1G
+   env:
+      JBP_CONFIG_LIBERTY: 'app_archive: {implicit_cdi: true, features: [webProfile-8.0]}'

@@ -1,20 +1,28 @@
 package io.github.oliviercailloux.y2018.jbiblio.j_biblio.basicentities.expression;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -28,7 +36,13 @@ import io.github.oliviercailloux.y2018.jbiblio.j_biblio.commonstructures.TimeSta
 /**
  * 
  */
+
+@XmlRootElement(name = "Expression")
+@XmlAccessorType(XmlAccessType.NONE)
+@JsonbPropertyOrder({ "idExpression", "work", "titleOfExpression", "formOfExpression", "languageOfExpression",
+		"otherDistinguishingCharacteristic" })
 @Entity
+@Table(name = "Expression")
 public class Expression {
 
 	/**
@@ -36,6 +50,7 @@ public class Expression {
 	 */
 
 	@ManyToOne
+	@XmlElement
 	private Work work;
 	/**
 	 * Not <code>null</code>.
@@ -43,39 +58,46 @@ public class Expression {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@XmlElement
 	private int idExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
-	@OneToMany(mappedBy = "expression", cascade = { CascadeType.ALL })
-	private Collection<Manifestation> manifestations;
+	@XmlTransient
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "expression", cascade = { CascadeType.ALL })
+	private List<Manifestation> manifestations;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	private Collection<String> titleOfExpression;
+	@XmlElement
+	private List<String> titleOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Column(name = "formOfExpression")
+	@XmlElement
 	private String formOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Transient
-	private Collection<TimeStampedDescription> dateOfExpression;
+	@XmlElement
+	private List<TimeStampedDescription> dateOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@Column(name = "languageOfExpression")
+	@XmlElement
 	private String languageOfExpression;
 	/**
 	 * Not <code>null</code>.
 	 */
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
-	private Collection<String> otherDistinguishingCharacteristic;
+	@XmlElement
+	private List<String> otherDistinguishingCharacteristic;
 
 	/*
 	 * Attributs qui ne seront pas développés private String
@@ -98,7 +120,7 @@ public class Expression {
 	}
 
 	public Expression(Work work, int idExpression, String formOfExpression,
-			Collection<TimeStampedDescription> dateOfExpression, String languageOfExpression) {
+			List<TimeStampedDescription> dateOfExpression, String languageOfExpression) {
 		this.work = Objects.requireNonNull(work);
 		this.idExpression = Objects.requireNonNull(idExpression);
 		this.formOfExpression = Objects.requireNonNull(formOfExpression);
@@ -138,22 +160,22 @@ public class Expression {
 		this.idExpression = idExpression;
 	}
 
-	public Collection<Manifestation> getManifestations() {
+	public List<Manifestation> getManifestations() {
 		return manifestations;
 	}
 
-	public void setIdManifestations(Collection<Manifestation> manifestations) {
+	public void setIdManifestations(List<Manifestation> manifestations) {
 		this.manifestations = Objects.requireNonNull(manifestations);
 	}
 
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<String> getTitleOfExpression() {
+	public List<String> getTitleOfExpression() {
 		return titleOfExpression;
 	}
 
-	public void setTitleOfExpression(Collection<String> titleOfExpression) {
+	public void setTitleOfExpression(List<String> titleOfExpression) {
 		this.titleOfExpression = Objects.requireNonNull(titleOfExpression);
 	}
 
@@ -171,14 +193,14 @@ public class Expression {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<TimeStampedDescription> getDateOfExpression() {
+	public List<TimeStampedDescription> getDateOfExpression() {
 		return dateOfExpression;
 	}
 
 	/**
 	 * @param dateOfExpression not <code>null</code>.
 	 */
-	public void setDateOfExpression(Collection<TimeStampedDescription> dateOfExpression) {
+	public void setDateOfExpression(List<TimeStampedDescription> dateOfExpression) {
 		this.dateOfExpression = Objects.requireNonNull(dateOfExpression);
 	}
 
@@ -200,14 +222,14 @@ public class Expression {
 	/**
 	 * @return not <code>null</code>.
 	 */
-	public Collection<String> getOtherDistinguishingCharacteristic() {
+	public List<String> getOtherDistinguishingCharacteristic() {
 		return otherDistinguishingCharacteristic;
 	}
 
 	/**
 	 * @param otherDistinguishingCharacteristic not <code>null</code>.
 	 */
-	public void setOtherDistinguishingCharacteristic(Collection<String> otherDistinguishingCharacteristic) {
+	public void setOtherDistinguishingCharacteristic(List<String> otherDistinguishingCharacteristic) {
 		this.otherDistinguishingCharacteristic = Objects.requireNonNull(otherDistinguishingCharacteristic);
 	}
 

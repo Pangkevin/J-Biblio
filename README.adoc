@@ -1,4 +1,18 @@
-# J-Biblio
+= J-Biblio
+:gitHubUserName: oliviercailloux
+:groupId: io.github.{gitHubUserName}
+:artifactId: j-biblio
+:repository: J-Biblio
+
+image:https://travis-ci.com/{gitHubUserName}/{repository}.svg?branch=master["Build Status", link="https://travis-ci.com/{gitHubUserName}/{repository}"]
+
 Logiciel d’amélioration collaborative de notices bibliographiques
 
-image:https://travis-ci.org/Pangkevin/J-Biblio.svg?branch=master["Build Status", link="https://travis-ci.org/Pangkevin/J-Biblio"]
+A Java project developed during several sessions of the https://github.com/oliviercailloux/java-course[Java course] taught at Université Paris-Dauphine (in http://www.mido.dauphine.fr/[MIDO] L3 and M2 MIAGE).
+
+The code is hereby published under the MIT License, with the permission of the contributors.
+
+== Doc
+NB: missing imports XML for recent JRE.
+
+Classes generated using `xjc -d src -p main.java.io.github.oliviercailloux.y2018.jbiblio.j_biblio.javaobjectsfrommods mods.xsd`.
